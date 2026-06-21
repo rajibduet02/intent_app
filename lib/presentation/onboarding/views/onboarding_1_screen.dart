@@ -140,7 +140,7 @@ class _Onboarding1ScreenState extends ConsumerState<Onboarding1Screen> {
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           isLoading: isLoading,
           onPressed: () => unawaited(
@@ -155,7 +155,7 @@ class _Onboarding1ScreenState extends ConsumerState<Onboarding1Screen> {
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _onboardingPinnedFooterHeight,
         ),
         child: Form(
@@ -167,7 +167,7 @@ class _Onboarding1ScreenState extends ConsumerState<Onboarding1Screen> {
                 alignment: Alignment.centerLeft,
                 child: IntentBackButton(onPressed: notifier.onBack),
               ),
-              const SizedBox(height: AppSpacing.sm),
+              const SizedBox(height: AppSpacing.xs),
               Text(
                 "Let's start with the \nbasics",
                 textAlign: TextAlign.center,

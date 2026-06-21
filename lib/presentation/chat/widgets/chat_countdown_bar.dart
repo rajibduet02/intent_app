@@ -17,7 +17,7 @@ class ChatCountdownBar extends StatelessWidget {
     final progress = currentDay / totalDays;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 14, 20, 0),
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

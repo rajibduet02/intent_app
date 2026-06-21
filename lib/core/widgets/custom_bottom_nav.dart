@@ -56,7 +56,7 @@ class DiscoverBottomNav extends StatelessWidget {
             ),
           ),
           _NavItem(
-            label: 'Compatibility',
+            label: 'Matches',
             isSelected: selectedTab == CustomBottomNavTab.compatibility,
             onTap: () => onTabSelected(CustomBottomNavTab.compatibility),
             icon: const Icon(Icons.favorite_border, size: 20),

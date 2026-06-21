@@ -73,6 +73,7 @@ class _SplashScreenState extends State<SplashScreen>
                 scale: _scale,
                 child: IntentBrandMark(
                   logoSize: 80,
+                  title: 'Intent',
                   spacing: 0,
                   // titleStyle: IntentLoginStyles.brandTitle.copyWith(fontSize: 42),
                   titleStyle: IntentLoginStyles.brandTitle,

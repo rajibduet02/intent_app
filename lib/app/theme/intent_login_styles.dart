@@ -304,7 +304,7 @@ abstract final class IntentLoginStyles {
       );
 
   static TextStyle get onboardingHelper => GoogleFonts.inter(
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: FontWeight.w400,
         fontStyle: FontStyle.italic,
         color: AppColors.intentTextSoft,

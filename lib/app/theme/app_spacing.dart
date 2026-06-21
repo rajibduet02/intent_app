@@ -42,7 +42,10 @@ abstract final class AppSpacing {
   static const double gapOtpToResend = xl;
 
   // --- Layout ---
-  static const EdgeInsets authScrollPadding = EdgeInsets.fromLTRB(24, 8, 24, 24);
+  /// Standard horizontal inset for all screen scroll/content areas.
+  static const double screenHorizontal = md;
+  static const EdgeInsets authScrollPadding =
+      EdgeInsets.fromLTRB(screenHorizontal, 8, screenHorizontal, lg);
   static const double inputBorderRadius = 12;
   /// Standard height for text inputs and dropdown/select fields.
   static const double inputFieldHeight = 48;

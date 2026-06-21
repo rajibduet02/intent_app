@@ -12,15 +12,14 @@ enum OnboardingDealbreakerType {
 
 class Onboarding4State {
   const Onboarding4State({
-    required this.selectedDealbreaker,
+    this.selectedDealbreaker,
     required this.isLoading,
   });
 
-  final OnboardingDealbreakerType selectedDealbreaker;
+  final OnboardingDealbreakerType? selectedDealbreaker;
   final bool isLoading;
 
   factory Onboarding4State.initial() => const Onboarding4State(
-        selectedDealbreaker: OnboardingDealbreakerType.relationshipIntention,
         isLoading: false,
       );
 

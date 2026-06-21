@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/theme/app_colors.dart';
+import 'package:intent_app/core/utils/auth_snackbar.dart';
 import 'package:intent_app/presentation/onboarding/providers/onboarding_4_state.dart';
 
 final onboarding4Provider =
@@ -77,6 +78,10 @@ class Onboarding4Notifier extends Notifier<Onboarding4State> {
   }
 
   Future<void> submit() async {
+    if (state.selectedDealbreaker == null) {
+      AuthSnackbar.error('Please choose a dealbreaker.');
+      return;
+    }
     state = state.copyWith(isLoading: true);
     try {
       appRouter.go(AppRoutes.mbtiAssessment);

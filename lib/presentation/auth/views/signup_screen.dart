@@ -26,18 +26,23 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _phoneFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
+  final FocusNode _confirmPasswordFocus = FocusNode();
 
   @override
   void dispose() {
     _emailFocus.dispose();
     _phoneFocus.dispose();
     _passwordFocus.dispose();
+    _confirmPasswordFocus.dispose();
     _emailController.dispose();
     _phoneController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -52,7 +57,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
         child: Form(
           key: _formKey,
           child: Column(
@@ -92,19 +97,26 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 passwordFocus: _passwordFocus,
                 signupNotifier: signupNotifier,
               ),
+              const SizedBox(height: 16),
+              _SignupConfirmPasswordField(
+                passwordController: _passwordController,
+                confirmPasswordController: _confirmPasswordController,
+                confirmPasswordFocus: _confirmPasswordFocus,
+                signupNotifier: signupNotifier,
+              ),
               const SizedBox(height: AppSpacing.sm),
               SignupTermsRow(
                 accepted: termsAccepted,
                 onChanged: signupNotifier.setTermsAccepted,
               ),
               const SizedBox(height: 24),
-                          _SignupCreateButton(
-                            formKey: _formKey,
-                            emailController: _emailController,
-                            phoneController: _phoneController,
-                            passwordController: _passwordController,
-                            signupNotifier: signupNotifier,
-                          ),
+              _SignupCreateButton(
+                formKey: _formKey,
+                emailController: _emailController,
+                phoneController: _phoneController,
+                passwordController: _passwordController,
+                signupNotifier: signupNotifier,
+              ),
               const SizedBox(height: 24),
               const SignupSafetyCard(),
               const SizedBox(height: 24),
@@ -148,6 +160,45 @@ class _SignupPasswordField extends ConsumerWidget {
             ? Icons.visibility_outlined
             : Icons.visibility_off_outlined,
         onPressed: signupNotifier.toggleObscurePassword,
+      ),
+    );
+  }
+}
+
+class _SignupConfirmPasswordField extends ConsumerWidget {
+  const _SignupConfirmPasswordField({
+    required this.passwordController,
+    required this.confirmPasswordController,
+    required this.confirmPasswordFocus,
+    required this.signupNotifier,
+  });
+
+  final TextEditingController passwordController;
+  final TextEditingController confirmPasswordController;
+  final FocusNode confirmPasswordFocus;
+  final SignupNotifier signupNotifier;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final obscureConfirmPassword = ref.watch(
+      signupProvider.select((s) => s.obscureConfirmPassword),
+    );
+
+    return SignupLabeledField(
+      label: 'Confirm Password',
+      hintText: '••••••••••••',
+      prefixIcon: Icons.lock_outline,
+      controller: confirmPasswordController,
+      focusNode: confirmPasswordFocus,
+      obscureText: obscureConfirmPassword,
+      validator: (value) =>
+          Validators.confirmPassword(value, passwordController.text),
+      autofillHints: const [AutofillHints.newPassword],
+      suffixIcon: AuthFormInputSuffixAction(
+        icon: obscureConfirmPassword
+            ? Icons.visibility_outlined
+            : Icons.visibility_off_outlined,
+        onPressed: signupNotifier.toggleObscureConfirmPassword,
       ),
     );
   }

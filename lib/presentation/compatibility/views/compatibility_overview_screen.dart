@@ -9,7 +9,7 @@ import 'package:intent_app/presentation/compatibility/widgets/compatibility_ai_i
 import 'package:intent_app/presentation/compatibility/widgets/compatibility_alignments_card.dart';
 import 'package:intent_app/presentation/compatibility/widgets/compatibility_dealbreaker_card.dart';
 import 'package:intent_app/presentation/compatibility/widgets/compatibility_difference_card.dart';
-import 'package:intent_app/presentation/compatibility/widgets/compatibility_preview_header.dart';
+import 'package:intent_app/presentation/compatibility/widgets/compatibility_overview_header.dart';
 import 'package:intent_app/presentation/compatibility/widgets/compatibility_profiles_section.dart';
 import 'package:intent_app/presentation/compatibility/widgets/compatibility_score_card.dart';
 import 'package:intent_app/presentation/discover/widgets/discover_action_button.dart';
@@ -28,7 +28,7 @@ class CompatibilityPreviewScreen extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -100,7 +100,7 @@ class CompatibilityPreviewScreen extends StatelessWidget {
             const SizedBox(height: 12),
             Center(
               child: GestureDetector(
-                onTap: () => context.go(AppRoutes.profilePreview),
+                onTap: () => context.go(AppRoutes.profile),
                 child: Text(
                   'Not ready yet? Return to profile',
                   style: IntentLoginStyles.onboardingSubtitle.copyWith(

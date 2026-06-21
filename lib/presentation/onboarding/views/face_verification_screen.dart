@@ -142,7 +142,7 @@ class _FaceVerificationScreenState extends ConsumerState<FaceVerificationScreen>
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -168,26 +168,26 @@ class _FaceVerificationScreenState extends ConsumerState<FaceVerificationScreen>
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _pinnedFooterHeight(state.canContinue),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _FaceVerificationHeader(onBack: () => unawaited(_handleBack())),
-            const SizedBox(height: 20),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Confirm it\'s you',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingTitle,
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Follow the guide to take a quick selfie.',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingSubtitle,
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.lg),
             _FaceScanPreview(
               controller: scanSession?.controller,
               selfiePath: state.selfiePath,
@@ -195,7 +195,7 @@ class _FaceVerificationScreenState extends ConsumerState<FaceVerificationScreen>
               phase: state.phase,
               statusLabel: state.statusLabel,
             ),
-            const SizedBox(height: 22),
+            const SizedBox(height: AppSpacing.lg),
             const _VerificationTipsRow(),
           ],
         ),
@@ -687,7 +687,7 @@ class _VerificationTip extends StatelessWidget {
           label,
           textAlign: TextAlign.center,
           style: IntentLoginStyles.onboardingSubtitle.copyWith(
-            fontSize: 11,
+            fontSize: 12,
             color: AppColors.intentText,
           ),
         ),
@@ -783,11 +783,11 @@ class _EncryptedFooterNote extends StatelessWidget {
             size: 14,
             color: AppColors.intentTextSoft.withValues(alpha: 0.9),
           ),
-          const SizedBox(width: 6),
+          const SizedBox(width: AppSpacing.xs),
           Text(
             'Your data is encrypted and secure',
             style: IntentLoginStyles.onboardingSubtitle.copyWith(
-              fontSize: 11,
+              fontSize: 12,
             ),
           ),
         ],

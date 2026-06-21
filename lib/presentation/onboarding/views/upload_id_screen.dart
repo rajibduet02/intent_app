@@ -28,7 +28,7 @@ class _UploadIdScreenState extends ConsumerState<UploadIdScreen> {
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           label: 'Submit ID',
           showArrow: false,
@@ -38,26 +38,26 @@ class _UploadIdScreenState extends ConsumerState<UploadIdScreen> {
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _pinnedFooterHeight,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _UploadIdHeader(onBack: notifier.onBack),
-            const SizedBox(height: 20),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Upload your ID',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingTitle,
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'To maintain our community\'s integrity, we require a quick identity check. Your data is encrypted and used only for verification.',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingSubtitle,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: AppSpacing.lg),
             _IdUploadCard(
               documentPath: state.documentPath,
               documentName: state.documentName,
@@ -322,7 +322,7 @@ class _EmptyIdUploadZone extends StatelessWidget {
             height: 300,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -498,7 +498,7 @@ class _SecureProcessingNote extends StatelessWidget {
             size: 14,
             color: AppColors.intentTextSoft.withValues(alpha: 0.9),
           ),
-          const SizedBox(width: 6),
+          const SizedBox(width: AppSpacing.xs),
           Text(
             'SECURE PROCESSING',
             style: IntentLoginStyles.onboardingAssessmentCategory.copyWith(

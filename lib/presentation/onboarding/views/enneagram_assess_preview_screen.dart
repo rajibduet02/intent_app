@@ -13,7 +13,7 @@ class EnneagramAssessPreviewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           showArrow: true,
           arrowColor: AppColors.intentGold,
@@ -22,20 +22,20 @@ class EnneagramAssessPreviewScreen extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _previewPinnedFooterHeight,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: const [
             _PreviewHeader(),
-            SizedBox(height: 24),
+            SizedBox(height: AppSpacing.xs),
             _TopIntro(),
-            SizedBox(height: 20),
+            SizedBox(height: 16),
             _ResultCard(),
             SizedBox(height: 16),
             _ConnectionPlusCard(),
-            SizedBox(height: 18),
+            SizedBox(height: 16),
             _CompatibilityNote(),
           ],
         ),
@@ -69,25 +69,14 @@ class _TopIntro extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        DecoratedBox(
-          decoration: BoxDecoration(
-            color: AppColors.intentForest,
-            borderRadius: BorderRadius.circular(14),
-            boxShadow: AppShadows.intentInput,
-          ),
-          child: const SizedBox(
-            width: 54,
-            height: 54,
-            child: Center(child: IntentLogo(size: 28)),
-          ),
-        ),
-        const SizedBox(height: 18),
+        const Center(child: IntentLogo()),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           'Your Enneagram style',
           textAlign: TextAlign.center,
           style: IntentLoginStyles.onboardingTitle,
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           'A glimpse into your relationship patterns helps us suggest more aligned matches.',
           textAlign: TextAlign.center,

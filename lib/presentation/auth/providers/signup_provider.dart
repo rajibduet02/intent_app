@@ -25,6 +25,12 @@ class SignupNotifier extends Notifier<SignupState> {
     state = state.copyWith(obscurePassword: !state.obscurePassword);
   }
 
+  void toggleObscureConfirmPassword() {
+    state = state.copyWith(
+      obscureConfirmPassword: !state.obscureConfirmPassword,
+    );
+  }
+
   void setTermsAccepted(bool value) {
     state = state.copyWith(termsAccepted: value);
   }

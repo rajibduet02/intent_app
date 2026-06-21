@@ -10,7 +10,7 @@ class ChatProposeDateCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 14, 20, 16),
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
       child: Material(
         color: Colors.transparent,
         child: InkWell(

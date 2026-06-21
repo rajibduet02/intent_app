@@ -22,7 +22,7 @@ class Onboarding4Screen extends ConsumerWidget {
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -46,7 +46,7 @@ class Onboarding4Screen extends ConsumerWidget {
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _onboarding4PinnedFooterHeight,
         ),
         child: Column(
@@ -59,7 +59,7 @@ class Onboarding4Screen extends ConsumerWidget {
               showProgressDots: false,
               onBack: notifier.onBack,
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Choose your dealbreaker',
               style: IntentLoginStyles.onboardingTitle,

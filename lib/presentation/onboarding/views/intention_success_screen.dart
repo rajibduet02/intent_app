@@ -25,7 +25,7 @@ class IntentionSuccessScreen extends ConsumerWidget {
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           label: 'Start Discovering',
           showArrow: true,
@@ -36,22 +36,22 @@ class IntentionSuccessScreen extends ConsumerWidget {
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _pinnedFooterHeight,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _IntentionSuccessHeader(onBack: notifier.onBack),
-            const SizedBox(height: 20),
+            const SizedBox(height: AppSpacing.sm),
             const _SuccessHeroIcon(),
-            const SizedBox(height: 20),
+            const SizedBox(height: AppSpacing.sm),
             const _SuccessHeroCopy(),
-            const SizedBox(height: 22),
+            const SizedBox(height: AppSpacing.lg),
             const _CompatibilityPreviewCard(),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppSpacing.md),
             _ProfileIncludesCard(items: _profileIncludes),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppSpacing.md),
             const _SettingsNote(),
           ],
         ),
@@ -173,11 +173,11 @@ class _SuccessHeroCopy extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "You're ready to meet with intention",
+          "You're ready to meet with \nintention",
           textAlign: TextAlign.center,
           style: IntentLoginStyles.onboardingTitle,
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           'Your profile is built around who you are, not just how you look.',
           textAlign: TextAlign.center,
@@ -567,7 +567,7 @@ class _SettingsNote extends StatelessWidget {
             size: 16,
             color: AppColors.intentGold.withValues(alpha: 0.95),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: AppSpacing.xs),
           Expanded(
             child: Text(
               'You can update your answers anytime from your profile settings.',

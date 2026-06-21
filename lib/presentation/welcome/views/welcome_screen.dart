@@ -19,7 +19,7 @@ class WelcomeScreen extends StatelessWidget {
           const Positioned.fill(child: LoginBackgroundDecor()),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
               child: Column(
                 children: [
                   const SizedBox(height: AppSpacing.lg),

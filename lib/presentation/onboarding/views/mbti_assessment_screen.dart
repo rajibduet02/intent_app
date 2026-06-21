@@ -24,7 +24,7 @@ class MbtiAssessmentScreen extends ConsumerWidget {
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -58,7 +58,7 @@ class MbtiAssessmentScreen extends ConsumerWidget {
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _mbtiPinnedFooterHeight,
         ),
         child: Column(
@@ -67,9 +67,9 @@ class MbtiAssessmentScreen extends ConsumerWidget {
             MbtiAssessmentHeader(
               onBack: notifier.onBack,
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.xs),
             const _Intro(),
-            const SizedBox(height: 18),
+            const SizedBox(height: 16),
             for (var i = 0; i < questions.length; i++) ...[
               if (i > 0) const SizedBox(height: 16),
               MbtiQuestionCard(
@@ -97,7 +97,7 @@ class _Intro extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Align(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.center,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
             decoration: BoxDecoration(
@@ -114,7 +114,7 @@ class _Intro extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 14),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           'MBTI Assessment',
           textAlign: TextAlign.center,
@@ -142,7 +142,7 @@ class _Intro extends StatelessWidget {
                 color: AppColors.intentGold.withValues(alpha: 0.9),
                 size: 20,
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: AppSpacing.xs),
               Expanded(
                 child: Text(
                   'Choose the answer that feels most like you. There are no right or wrong answers. Your responses help Intent personalize your experience.',

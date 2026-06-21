@@ -7,10 +7,10 @@ import 'package:intent_app/core/widgets/custom_bottom_nav.dart';
 import 'package:intent_app/core/utils/custom_tab_navigation.dart';
 import 'package:intent_app/presentation/discover/widgets/discover_action_button.dart';
 import 'package:intent_app/presentation/discover/widgets/discover_scaffold.dart';
-import 'package:intent_app/presentation/profile/widgets/profile_photo_privacy_banner.dart';
-import 'package:intent_app/presentation/profile/widgets/profile_preview_header.dart';
-import 'package:intent_app/presentation/profile/widgets/profile_section_card.dart';
-import 'package:intent_app/presentation/profile/widgets/profile_summary_card.dart';
+import 'package:intent_app/presentation/profile_preview/widgets/profile_photo_privacy_banner.dart';
+import 'package:intent_app/presentation/profile_preview/widgets/profile_preview_header.dart';
+import 'package:intent_app/presentation/profile_preview/widgets/profile_section_card.dart';
+import 'package:intent_app/presentation/profile_preview/widgets/profile_summary_card.dart';
 
 class ProfilePreviewScreen extends StatelessWidget {
   const ProfilePreviewScreen({super.key});
@@ -25,12 +25,18 @@ class ProfilePreviewScreen extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ProfilePreviewHeader(
-              onBack: () => context.go(AppRoutes.discover),
+              onBack: () {
+                if (context.canPop()) {
+                  context.pop();
+                } else {
+                  context.go(AppRoutes.discover);
+                }
+              },
             ),
             const SizedBox(height: 12),
             Text(

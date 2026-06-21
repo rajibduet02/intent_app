@@ -34,7 +34,7 @@ class _ChoosePreviewPhotosScreenState
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           label: 'Save Preview Photo',
           showArrow: true,
@@ -47,33 +47,28 @@ class _ChoosePreviewPhotosScreenState
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _pinnedFooterHeight,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _ChoosePreviewHeader(onBack: notifier.onBackFromPreview),
-            const SizedBox(height: 12),
-            Divider(
-              height: 1,
-              color: AppColors.intentInputBorder.withValues(alpha: 0.7),
-            ),
-            const SizedBox(height: 20),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Choose your preview photo',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingTitle,
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'This is the one photo you can release when a date is proposed.',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingSubtitle,
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppSpacing.md),
             const _PreviewBadge(),
-            const SizedBox(height: 20),
+            const SizedBox(height: AppSpacing.lg),
             _PreviewPhotoGrid(
               uploadedPhotos: uploadedPhotos,
               selectedSlotIndex: state.previewPhotoSlotIndex,
@@ -139,7 +134,7 @@ class _PreviewBadge extends StatelessWidget {
               size: 14,
               color: AppColors.intentTextSoft,
             ),
-            const SizedBox(width: 6),
+            const SizedBox(width: AppSpacing.xs),
             Text(
               'ONLY ONE PREVIEW PHOTO UNLOCKS FIRST',
               style: IntentLoginStyles.onboardingAssessmentCategory.copyWith(
@@ -309,7 +304,7 @@ class _PreviewPrivacyBox extends StatelessWidget {
             size: 18,
             color: AppColors.intentGold.withValues(alpha: 0.95),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: AppSpacing.xs),
           Expanded(
             child: RichText(
               text: TextSpan(

@@ -9,7 +9,7 @@ void navigateCustomBottomNavTab(BuildContext context, CustomBottomNavTab tab) {
     case CustomBottomNavTab.discover:
       context.go(AppRoutes.discover);
     case CustomBottomNavTab.profile:
-      context.go(AppRoutes.profilePreview);
+      context.go(AppRoutes.profile);
     case CustomBottomNavTab.compatibility:
       context.go(AppRoutes.compatibilityPreview);
     case CustomBottomNavTab.messages:

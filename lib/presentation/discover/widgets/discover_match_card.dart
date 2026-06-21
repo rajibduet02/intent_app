@@ -36,26 +36,99 @@ class DiscoverMatchCard extends StatelessWidget {
         label: 'Aligned faith importance',
       ),
     ],
+    this.onTap,
   });
 
   final String name;
   final int age;
   final int matchPercent;
   final List<DiscoverMatchHighlight> highlights;
+  final VoidCallback? onTap;
+
+  static const List<DiscoverMatchCard> sampleCards = [
+    DiscoverMatchCard(
+      name: 'Julian',
+      age: 31,
+      matchPercent: 94,
+      highlights: [
+        DiscoverMatchHighlight(
+          icon: Icons.diamond_outlined,
+          label: 'Both marriage-minded',
+        ),
+        DiscoverMatchHighlight(
+          icon: Icons.home_outlined,
+          label: 'Shared value: family',
+        ),
+        DiscoverMatchHighlight(
+          icon: Icons.chat_bubble_outline,
+          label: 'Similar communication rhythm',
+        ),
+        DiscoverMatchHighlight(
+          icon: Icons.favorite,
+          label: 'Aligned faith importance',
+        ),
+      ],
+    ),
+    DiscoverMatchCard(
+      name: 'Maya',
+      age: 29,
+      matchPercent: 89,
+      highlights: [
+        DiscoverMatchHighlight(
+          icon: Icons.self_improvement_outlined,
+          label: 'Both value personal growth',
+        ),
+        DiscoverMatchHighlight(
+          icon: Icons.nightlife_outlined,
+          label: 'Balanced social energy',
+        ),
+        DiscoverMatchHighlight(
+          icon: Icons.volunteer_activism_outlined,
+          label: 'Shared community mindset',
+        ),
+      ],
+    ),
+    DiscoverMatchCard(
+      name: 'Elena',
+      age: 33,
+      matchPercent: 86,
+      highlights: [
+        DiscoverMatchHighlight(
+          icon: Icons.favorite_border,
+          label: 'Serious relationship intent',
+        ),
+        DiscoverMatchHighlight(
+          icon: Icons.menu_book_outlined,
+          label: 'Shared curiosity and depth',
+        ),
+        DiscoverMatchHighlight(
+          icon: Icons.schedule_outlined,
+          label: 'Compatible pace of connection',
+        ),
+      ],
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.intentDiscoverMatch,
+    return Material(
+      color: AppColors.intentDiscoverMatch,
+      elevation: 0,
+      shadowColor: Colors.transparent,
+      borderRadius: BorderRadius.circular(22),
+      child: InkWell(
+        onTap: onTap,
         borderRadius: BorderRadius.circular(22),
-        boxShadow: AppShadows.intentInput,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 18, 16, 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(22),
+            boxShadow: AppShadows.intentInput,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 18, 16, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -185,8 +258,43 @@ class DiscoverMatchCard extends StatelessWidget {
               ],
             ),
           ],
+            ),
+          ),
         ),
       ),
+    );
+  }
+}
+
+/// Vertical stack of discover match profile cards.
+class DiscoverMatchCardList extends StatelessWidget {
+  const DiscoverMatchCardList({
+    super.key,
+    this.cards = DiscoverMatchCard.sampleCards,
+    this.spacing = 14,
+    this.onCardTap,
+  });
+
+  final List<DiscoverMatchCard> cards;
+  final double spacing;
+  final VoidCallback? onCardTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        for (var i = 0; i < cards.length; i++) ...[
+          if (i > 0) SizedBox(height: spacing),
+          DiscoverMatchCard(
+            name: cards[i].name,
+            age: cards[i].age,
+            matchPercent: cards[i].matchPercent,
+            highlights: cards[i].highlights,
+            onTap: onCardTap,
+          ),
+        ],
+      ],
     );
   }
 }

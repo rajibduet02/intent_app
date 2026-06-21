@@ -22,7 +22,7 @@ class LoveLanguageScreen extends ConsumerWidget {
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           showArrow: true,
           arrowColor: AppColors.intentGold,
@@ -35,38 +35,38 @@ class LoveLanguageScreen extends ConsumerWidget {
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _loveLanguagePinnedFooterHeight,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             LoveLanguageHeader(onBack: notifier.onBack),
-            const SizedBox(height: 20),
-            const _LogoAccent(),
-            const SizedBox(height: 22),
+            const SizedBox(height: AppSpacing.xs),
+            const Center(child: IntentLogo()),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'How do you feel most connected?',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingTitle,
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Choose the ways you most naturally give and receive love.',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingSubtitle,
             ),
-            const SizedBox(height: 22),
+            const SizedBox(height: AppSpacing.lg),
             Text(
               'LOVE LANGUAGE',
               style: IntentLoginStyles.onboardingAssessmentCategory.copyWith(
-                fontSize: 11,
+                fontSize: 12,
                 letterSpacing: 1.4,
                 fontWeight: FontWeight.w700,
                 color: AppColors.intentText,
               ),
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Select your top 2 or rank them by priority.',
               style: IntentLoginStyles.onboardingHelper.copyWith(
@@ -74,9 +74,9 @@ class LoveLanguageScreen extends ConsumerWidget {
                 fontSize: 12,
               ),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppSpacing.md),
             for (var i = 0; i < LoveLanguageOptions.options.length; i++) ...[
-              if (i > 0) const SizedBox(height: 10),
+              if (i > 0) const SizedBox(height: AppSpacing.sm),
               LoveLanguageOptionCard(
                 option: LoveLanguageOptions.options[i],
                 rank: state.rankFor(LoveLanguageOptions.options[i].type),
@@ -85,7 +85,7 @@ class LoveLanguageScreen extends ConsumerWidget {
                 ),
               ),
             ],
-            const SizedBox(height: 28),
+            const SizedBox(height: AppSpacing.lg),
             Text(
               'Your relationship vibe',
               textAlign: TextAlign.center,
@@ -133,46 +133,6 @@ class LoveLanguageScreen extends ConsumerWidget {
   }
 }
 
-class _LogoAccent extends StatelessWidget {
-  const _LogoAccent();
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 88,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          for (final size in [88.0, 68.0, 48.0])
-            Container(
-              width: size,
-              height: size,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: AppColors.intentGoldMuted.withValues(alpha: 0.22),
-                  width: 1,
-                ),
-              ),
-            ),
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: AppColors.intentForest,
-              borderRadius: BorderRadius.circular(14),
-              boxShadow: AppShadows.intentInput,
-            ),
-            child: const SizedBox(
-              width: 54,
-              height: 54,
-              child: Center(child: IntentLogo(size: 28)),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _CompatibilityNote extends StatelessWidget {
   const _CompatibilityNote();
 
@@ -196,7 +156,7 @@ class _CompatibilityNote extends StatelessWidget {
             size: 18,
             color: AppColors.intentGold.withValues(alpha: 0.95),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: AppSpacing.xs),
           Expanded(
             child: Text(
               'Your answers help Intent understand compatibility beyond surface-level attraction.',

@@ -6,7 +6,7 @@ import 'package:intent_app/app/theme/theme.dart';
 
 /// Intent app logo from bundled asset.
 class IntentLogo extends StatelessWidget {
-  const IntentLogo({super.key, this.size = 56});
+  const IntentLogo({super.key, this.size = 64});
 
   final double size;
 
@@ -25,12 +25,14 @@ class IntentLogo extends StatelessWidget {
 class IntentBrandMark extends StatelessWidget {
   const IntentBrandMark({
     super.key,
-    this.logoSize = 56,
+    this.logoSize = 64,
+    this.title = 'Welcome to Intent',
     this.titleStyle,
     this.spacing,
   });
 
   final double logoSize;
+  final String title;
   final TextStyle? titleStyle;
   final double? spacing;
 
@@ -42,7 +44,7 @@ class IntentBrandMark extends StatelessWidget {
         IntentLogo(size: logoSize),
         SizedBox(height: spacing ?? AppSpacing.sm),
         Text(
-          'Intent',
+          title,
           style: titleStyle ?? IntentLoginStyles.signupTitle,
         ),
       ],

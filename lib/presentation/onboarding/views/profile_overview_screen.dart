@@ -13,7 +13,7 @@ class ProfileOverviewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           showArrow: true,
           arrowColor: AppColors.intentGold,
@@ -22,24 +22,24 @@ class ProfileOverviewScreen extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _previewPinnedFooterHeight,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _ProfileOverviewHeader(),
-            const SizedBox(height: 20),
+            const SizedBox(height: AppSpacing.xs),
             _HeroIcon(),
-            const SizedBox(height: 18),
+            const SizedBox(height: AppSpacing.sm),
             const _HeroCopy(),
-            const SizedBox(height: 20),
+            const SizedBox(height: AppSpacing.lg),
             const _ProfileOverviewCard(),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppSpacing.md),
             const _SummaryInfoBox(),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSpacing.md),
             const _ConnectionPlusCard(),
-            const SizedBox(height: 18),
+            const SizedBox(height: AppSpacing.md),
             const _FooterNote(),
           ],
         ),
@@ -71,40 +71,7 @@ class _HeroIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: 64,
-        height: 64,
-        child: Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.center,
-          children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: AppColors.intentForest,
-                borderRadius: BorderRadius.circular(14),
-                boxShadow: AppShadows.intentInput,
-              ),
-              child: const SizedBox(
-                width: 54,
-                height: 54,
-                child: Center(child: IntentLogo(size: 28)),
-              ),
-            ),
-            const Positioned(
-              top: -2,
-              right: 4,
-              child: IntentFourPointStar(size: 7),
-            ),
-            const Positioned(
-              bottom: 0,
-              left: 2,
-              child: IntentFourPointStar(size: 6),
-            ),
-          ],
-        ),
-      ),
-    );
+    return const Center(child: IntentLogo());
   }
 }
 
@@ -143,7 +110,7 @@ class _ProfileOverviewCard extends StatelessWidget {
         boxShadow: AppShadows.intentInput,
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 18, 16, 8),
+        padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
         child: Column(
           children: [
             Text(
@@ -296,7 +263,7 @@ class _SummaryInfoBox extends StatelessWidget {
             size: 18,
             color: AppColors.intentTextSoft,
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: AppSpacing.xs),
           Expanded(
             child: Text(
               'You can see your short compatibility summary and core profile traits.',
@@ -434,7 +401,7 @@ class _FooterNote extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 2, right: 8),
+          padding: const EdgeInsets.only(top: 0, right: AppSpacing.xs),
           child: Icon(
             Icons.shield_outlined,
             size: 16,

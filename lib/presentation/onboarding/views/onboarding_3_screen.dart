@@ -22,7 +22,7 @@ class Onboarding3Screen extends ConsumerWidget {
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           showArrow: false,
           isLoading: state.isLoading,
@@ -32,7 +32,7 @@ class Onboarding3Screen extends ConsumerWidget {
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _onboarding3PinnedFooterHeight,
         ),
         child: Column(
@@ -45,7 +45,7 @@ class Onboarding3Screen extends ConsumerWidget {
               showProgressDots: false,
               onBack: notifier.onBack,
             ),
-            const SizedBox(height: 28),
+            const SizedBox(height: AppSpacing.xs),
             Text(
               'Family goals',
               textAlign: TextAlign.center,

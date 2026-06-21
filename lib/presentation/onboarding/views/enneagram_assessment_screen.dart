@@ -24,7 +24,7 @@ class EnneagramAssessmentScreen extends ConsumerWidget {
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -58,7 +58,7 @@ class EnneagramAssessmentScreen extends ConsumerWidget {
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _enneagramPinnedFooterHeight,
         ),
         child: Column(
@@ -67,7 +67,7 @@ class EnneagramAssessmentScreen extends ConsumerWidget {
             EnneagramAssessmentHeader(
               onBack: notifier.onBack,
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.xs),
             _Intro(),
             const SizedBox(height: 18),
             for (var i = 0; i < questions.length; i++) ...[
@@ -95,7 +95,7 @@ class _Intro extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Align(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.center,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
             decoration: BoxDecoration(
@@ -112,7 +112,7 @@ class _Intro extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 14),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           'Enneagram Assessment',
           textAlign: TextAlign.center,
@@ -140,7 +140,7 @@ class _Intro extends StatelessWidget {
                 color: AppColors.intentGold.withValues(alpha: 0.9),
                 size: 20,
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: AppSpacing.xs),
               Expanded(
                 child: Text(
                   'Choose the answer that feels most like you. There are no right or wrong answers. Your responses help Intent personalize your experience.',

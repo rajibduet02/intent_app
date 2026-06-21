@@ -12,7 +12,7 @@ class PhotoUnlockIntentionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           label: 'I Understand',
           showArrow: true,
@@ -22,16 +22,16 @@ class PhotoUnlockIntentionScreen extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _pinnedFooterHeight,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: const [
             _PhotoUnlockHeader(),
-            SizedBox(height: 20),
+            SizedBox(height: AppSpacing.sm),
             _TitleSection(),
-            SizedBox(height: 28),
+            SizedBox(height: 24),
             _UnlockTimeline(),
             SizedBox(height: 24),
             _PrivacyNote(),
@@ -72,7 +72,7 @@ class _TitleSection extends StatelessWidget {
           textAlign: TextAlign.center,
           style: IntentLoginStyles.onboardingTitle,
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           'Intent prioritizes meaningful connection over surface-level attraction.',
           textAlign: TextAlign.center,
@@ -344,7 +344,7 @@ class _PrivacyNote extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 2, right: 8),
+          padding: const EdgeInsets.only(top: 0, right: AppSpacing.xs),
           child: Icon(
             Icons.verified_user_outlined,
             size: 16,

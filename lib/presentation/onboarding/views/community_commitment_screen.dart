@@ -18,7 +18,7 @@ class CommunityCommitmentScreen extends ConsumerWidget {
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           label: 'I Agree',
           showArrow: false,
@@ -28,36 +28,31 @@ class CommunityCommitmentScreen extends ConsumerWidget {
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _pinnedFooterHeight,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _CommunityCommitmentHeader(onBack: notifier.onBack),
-            const SizedBox(height: 12),
-            Divider(
-              height: 1,
-              color: AppColors.intentInputBorder.withValues(alpha: 0.7),
-            ),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Intent is built on respect',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingTitle,
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Before you continue, please agree to help keep Intent safe, honest, and intentional.',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingSubtitle,
             ),
-            const SizedBox(height: 22),
+            const SizedBox(height: AppSpacing.lg),
             _CommitmentCard(
               agreements: state.agreements,
               onToggle: notifier.toggleAgreement,
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppSpacing.md),
             const _RespectInfoBox(),
             const SizedBox(height: 18),
             const _CommitmentWaveDecor(),
@@ -236,7 +231,7 @@ class _RespectInfoBox extends StatelessWidget {
               color: AppColors.intentText,
             ),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 8),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

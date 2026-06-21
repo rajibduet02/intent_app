@@ -25,7 +25,7 @@ class ChatGentlePromptsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(12),

@@ -29,9 +29,11 @@ import 'package:intent_app/presentation/onboarding/views/face_verification_scree
 import 'package:intent_app/presentation/onboarding/views/community_commitment_screen.dart';
 import 'package:intent_app/presentation/discover/views/discover_screen.dart';
 import 'package:intent_app/presentation/chat/views/chat_screen.dart';
-import 'package:intent_app/presentation/compatibility/views/compatibility_preview_screen.dart';
+import 'package:intent_app/presentation/compatibility/views/compatibility_overview_screen.dart';
 import 'package:intent_app/presentation/messages/views/messages_screen.dart';
-import 'package:intent_app/presentation/profile/views/profile_preview_screen.dart';
+import 'package:intent_app/presentation/profile/views/edit_profile_screen.dart';
+import 'package:intent_app/presentation/profile/views/profile_screen.dart';
+import 'package:intent_app/presentation/profile_preview/views/profile_preview_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/intention_success_screen.dart';
 import 'package:intent_app/presentation/splash/views/splash_screen.dart';
 import 'package:intent_app/presentation/welcome/views/welcome_screen.dart';
@@ -215,6 +217,22 @@ final GoRouter appRouter = GoRouter(
         key: state.pageKey,
         child: const DiscoverScreen(),
       ),
+    ),
+    GoRoute(
+      path: AppRoutes.profile,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const ProfileScreen(),
+      ),
+      routes: [
+        GoRoute(
+          path: 'edit',
+          pageBuilder: (context, state) => _fadePage(
+            key: state.pageKey,
+            child: const EditProfileScreen(),
+          ),
+        ),
+      ],
     ),
     GoRoute(
       path: AppRoutes.profilePreview,

@@ -28,7 +28,7 @@ class _UploadPhotosScreenState extends ConsumerState<UploadPhotosScreen> {
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           showArrow: false,
           isLoading: state.isLoading,
@@ -39,28 +39,28 @@ class _UploadPhotosScreenState extends ConsumerState<UploadPhotosScreen> {
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _pinnedFooterHeight,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _UploadPhotosHeader(onBack: notifier.onBack),
-            const SizedBox(height: 20),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Upload your photos',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingTitle,
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'These photos stay private until the date flow unlocks them.',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingSubtitle,
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppSpacing.md),
             const _PrivateBadge(),
-            const SizedBox(height: 20),
+            const SizedBox(height: AppSpacing.lg),
             _PhotoUploadCard(
               photoPaths: state.photoPaths,
               photoCount: state.photoCount,
@@ -234,7 +234,7 @@ class _PrivateBadge extends StatelessWidget {
               size: 14,
               color: AppColors.intentForest,
             ),
-            const SizedBox(width: 6),
+            const SizedBox(width: 4),
             Text(
               'PRIVATE BY DEFAULT',
               style: IntentLoginStyles.onboardingAssessmentCategory.copyWith(
@@ -517,7 +517,7 @@ class _PrivacyInfoBox extends StatelessWidget {
             size: 18,
             color: AppColors.intentText,
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: AppSpacing.xs),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

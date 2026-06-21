@@ -12,7 +12,7 @@ class SafetyStartsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -43,37 +43,32 @@ class SafetyStartsScreen extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24).copyWith(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
           bottom: 24 + _pinnedFooterHeight,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const _SafetyStartsHeader(),
-            const SizedBox(height: 12),
-            Divider(
-              height: 1,
-              color: AppColors.intentInputBorder.withValues(alpha: 0.7),
-            ),
-            const SizedBox(height: 28),
+            const SizedBox(height: AppSpacing.sm),
             const _SafetyHeroIcon(),
-            const SizedBox(height: 22),
+            const SizedBox(height: AppSpacing.lg),
             const _SafetyHeroCopy(),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.lg),
             const _SafetyInfoCard(
               icon: Icons.visibility_off_outlined,
               title: 'Your privacy first',
               body:
                   'IDs are processed securely and never shared with other members.',
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSpacing.md),
             const _SafetyInfoCard(
               icon: Icons.verified_outlined,
               title: 'Authentic Community',
               body:
                   'Every profile you see has been vetted to ensure it\'s a real person.',
             ),
-            const SizedBox(height: 28),
+            const SizedBox(height: 16),
             const _SafetyFooterBadge(),
           ],
         ),
@@ -92,7 +87,7 @@ class SafetyStartsScreen extends StatelessWidget {
       builder: (context) {
         return SafeArea(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
+            padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -200,7 +195,7 @@ class _SafetyHeroCopy extends StatelessWidget {
           textAlign: TextAlign.center,
           style: IntentLoginStyles.onboardingTitle,
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           'Intent requires ID verification before browsing to help create a safer dating experience.',
           textAlign: TextAlign.center,
@@ -248,7 +243,7 @@ class _SafetyInfoCard extends StatelessWidget {
                 color: AppColors.intentForest,
               ),
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: AppSpacing.sm),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
