@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/core/utils/custom_tab_navigation.dart';
-import 'package:intent_app/presentation/discover/widgets/discover_action_button.dart';
 import 'package:intent_app/core/widgets/custom_bottom_nav.dart';
 import 'package:intent_app/presentation/discover/widgets/discover_focus_card.dart';
 import 'package:intent_app/presentation/discover/widgets/discover_match_card.dart';
@@ -36,27 +35,10 @@ class DiscoverScreen extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
             DiscoverMatchCardList(
               onCardTap: () => context.go(AppRoutes.profilePreview),
-            ),
-            const SizedBox(height: AppSpacing.lg),
-            DiscoverActionButton(
-              label: 'View Compatibility',
-              icon: Icons.visibility_outlined,
-              onPressed: () => context.go(AppRoutes.compatibilityPreview),
-            ),
-            const SizedBox(height: AppSpacing.md),
-            DiscoverActionButton(
-              label: 'Connect with Intention',
-              icon: Icons.favorite_border,
-              style: DiscoverActionStyle.outlined,
-              onPressed: () {},
-            ),
-            const SizedBox(height: AppSpacing.md),
-            DiscoverActionButton(
-              label: 'Pass respectfully',
-              icon: Icons.cancel_outlined,
-              style: DiscoverActionStyle.muted,
-              showChevron: false,
-              onPressed: () {},
+              onViewCompatibility: () =>
+                  context.go(AppRoutes.compatibilityPreview),
+              onConnectWithIntention: () => context.push(AppRoutes.whyMatches),
+              onPassRespectfully: () {},
             ),
             const SizedBox(height: AppSpacing.lg),
             const DiscoverFocusCard(),

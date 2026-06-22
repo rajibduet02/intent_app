@@ -11,7 +11,7 @@ void navigateCustomBottomNavTab(BuildContext context, CustomBottomNavTab tab) {
     case CustomBottomNavTab.profile:
       context.go(AppRoutes.profile);
     case CustomBottomNavTab.compatibility:
-      context.go(AppRoutes.compatibilityPreview);
+      context.go(AppRoutes.matches);
     case CustomBottomNavTab.messages:
       context.go(AppRoutes.messages);
     case CustomBottomNavTab.dates:

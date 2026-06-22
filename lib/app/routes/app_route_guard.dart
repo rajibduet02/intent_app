@@ -45,6 +45,8 @@ abstract final class AppRouteGuard {
         path == AppRoutes.notifications ||
         path == AppRoutes.profilePreview ||
         path == AppRoutes.compatibilityPreview ||
+        path == AppRoutes.matches ||
+        path == AppRoutes.whyMatches ||
         path == AppRoutes.messages ||
         path == AppRoutes.chat ||
         path == AppRoutes.mbtiAssessment ||

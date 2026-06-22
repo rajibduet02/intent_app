@@ -59,7 +59,12 @@ class DiscoverBottomNav extends StatelessWidget {
             label: 'Matches',
             isSelected: selectedTab == CustomBottomNavTab.compatibility,
             onTap: () => onTabSelected(CustomBottomNavTab.compatibility),
-            icon: const Icon(Icons.favorite_border, size: 20),
+            icon: Icon(
+              selectedTab == CustomBottomNavTab.compatibility
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+              size: 20,
+            ),
           ),
           _NavItem(
             label: 'Dates',

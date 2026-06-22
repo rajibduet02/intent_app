@@ -35,6 +35,8 @@ abstract final class AppRoutes {
   static const String profilePreview = '/profile-preview';
   static const String compatibilityPreview = '/compatibility-preview';
   static const String messages = '/messages';
+  static const String matches = '/matches';
+  static const String whyMatches = '/why-matches';
   static const String chat = '/chat';
   static const String mbtiAssessment = '/onboarding/mbti';
   static const String mbtiAssessPreview = '/onboarding/mbti/preview';

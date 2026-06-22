@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:intent_app/app/theme/theme.dart';
-
+import 'package:intent_app/presentation/discover/widgets/discover_action_button.dart';
 class DiscoverMatchHighlight {
   const DiscoverMatchHighlight({
     required this.icon,
@@ -37,6 +37,9 @@ class DiscoverMatchCard extends StatelessWidget {
       ),
     ],
     this.onTap,
+    this.onViewCompatibility,
+    this.onConnectWithIntention,
+    this.onPassRespectfully,
   });
 
   final String name;
@@ -44,6 +47,9 @@ class DiscoverMatchCard extends StatelessWidget {
   final int matchPercent;
   final List<DiscoverMatchHighlight> highlights;
   final VoidCallback? onTap;
+  final VoidCallback? onViewCompatibility;
+  final VoidCallback? onConnectWithIntention;
+  final VoidCallback? onPassRespectfully;
 
   static const List<DiscoverMatchCard> sampleCards = [
     DiscoverMatchCard(
@@ -116,156 +122,185 @@ class DiscoverMatchCard extends StatelessWidget {
       elevation: 0,
       shadowColor: Colors.transparent,
       borderRadius: BorderRadius.circular(22),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(22),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(22),
-            boxShadow: AppShadows.intentInput,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 18, 16, 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
-                  clipBehavior: Clip.none,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(22),
+          boxShadow: AppShadows.intentInput,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 18, 16, 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              InkWell(
+                onTap: onTap,
+                borderRadius: BorderRadius.circular(14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Container(
-                      width: 52,
-                      height: 52,
-                      decoration: const BoxDecoration(
-                        color: AppColors.intentForest,
-                        shape: BoxShape.circle,
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        name.isNotEmpty ? name[0].toUpperCase() : '?',
-                        style: IntentLoginStyles.onboardingContinue.copyWith(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Container(
+                              width: 52,
+                              height: 52,
+                              decoration: const BoxDecoration(
+                                color: AppColors.intentForest,
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                name.isNotEmpty ? name[0].toUpperCase() : '?',
+                                style: IntentLoginStyles.onboardingContinue
+                                    .copyWith(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: -2,
+                              right: -2,
+                              child: Container(
+                                width: 18,
+                                height: 18,
+                                decoration: BoxDecoration(
+                                  color: AppColors.intentForest,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: AppColors.intentDiscoverMatch,
+                                    width: 2,
+                                  ),
+                                ),
+                                child: const Icon(
+                                  Icons.check,
+                                  size: 11,
+                                  color: AppColors.white,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: -2,
-                      right: -2,
-                      child: Container(
-                        width: 18,
-                        height: 18,
-                        decoration: BoxDecoration(
-                          color: AppColors.intentForest,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppColors.intentDiscoverMatch,
-                            width: 2,
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    '$name, $age',
+                                    style: IntentLoginStyles
+                                        .onboardingCardFieldLabel
+                                        .copyWith(
+                                      fontSize: 16,
+                                      color: AppColors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Container(
+                                    width: 16,
+                                    height: 16,
+                                    decoration: const BoxDecoration(
+                                      color: AppColors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Icon(
+                                      Icons.check,
+                                      size: 11,
+                                      color: AppColors.intentForest,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 6),
+                              const _MetaRow(
+                                icon: Icons.location_on_outlined,
+                                label: 'Nearby',
+                              ),
+                              const SizedBox(height: 4),
+                              const _MetaRow(
+                                icon: Icons.lock_outline,
+                                label: 'Photos hidden',
+                              ),
+                            ],
                           ),
                         ),
-                        child: const Icon(
-                          Icons.check,
-                          size: 11,
-                          color: AppColors.white,
-                        ),
+                        _MatchPercentBadge(percent: matchPercent),
+                      ],
+                    ),
+                    const SizedBox(height: 18),
+                    Text(
+                      'WHY THIS MATCH STANDS OUT',
+                      style: IntentLoginStyles.onboardingAssessmentCategory
+                          .copyWith(
+                        fontSize: 9,
+                        letterSpacing: 1.2,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.white.withValues(alpha: 0.9),
                       ),
+                    ),
+                    const SizedBox(height: 10),
+                    for (final highlight in highlights) ...[
+                      _HighlightRow(highlight: highlight),
+                      if (highlight != highlights.last)
+                        const SizedBox(height: 8),
+                    ],
+                    const SizedBox(height: 14),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.lock_outline,
+                          size: 14,
+                          color: AppColors.white.withValues(alpha: 0.85),
+                        ),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: Text(
+                            'Photo preview can unlock after a date is proposed.',
+                            style: IntentLoginStyles.onboardingSubtitle.copyWith(
+                              fontSize: 11,
+                              color: AppColors.white.withValues(alpha: 0.88),
+                              height: 1.35,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            '$name, $age',
-                            style: IntentLoginStyles.onboardingCardFieldLabel
-                                .copyWith(
-                              fontSize: 16,
-                              color: AppColors.white,
-                            ),
-                          ),
-                          const SizedBox(width: 4),
-                          Container(
-                            width: 16,
-                            height: 16,
-                            decoration: const BoxDecoration(
-                              color: AppColors.white,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.check,
-                              size: 11,
-                              color: AppColors.intentForest,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 6),
-                      _MetaRow(
-                        icon: Icons.location_on_outlined,
-                        label: 'Nearby',
-                      ),
-                      const SizedBox(height: 4),
-                      _MetaRow(
-                        icon: Icons.lock_outline,
-                        label: 'Photos hidden',
-                      ),
-                    ],
-                  ),
-                ),
-                _MatchPercentBadge(percent: matchPercent),
-              ],
-            ),
-            const SizedBox(height: 18),
-            Text(
-              'WHY THIS MATCH STANDS OUT',
-              style: IntentLoginStyles.onboardingAssessmentCategory.copyWith(
-                fontSize: 9,
-                letterSpacing: 1.2,
-                fontWeight: FontWeight.w700,
-                color: AppColors.white.withValues(alpha: 0.9),
               ),
-            ),
-            const SizedBox(height: 10),
-            for (final highlight in highlights) ...[
-              _HighlightRow(highlight: highlight),
-              if (highlight != highlights.last) const SizedBox(height: 8),
+              const SizedBox(height: AppSpacing.md),
+              DiscoverActionButton(
+                label: 'View Compatibility',
+                icon: Icons.visibility_outlined,
+                onPressed: onViewCompatibility,
+              ),
+              const SizedBox(height: AppSpacing.md),
+              DiscoverActionButton(
+                label: 'Connect with Intention',
+                icon: Icons.favorite_border,
+                style: DiscoverActionStyle.outlined,
+                onPressed: onConnectWithIntention,
+              ),
+              const SizedBox(height: AppSpacing.md),
+              DiscoverActionButton(
+                label: 'Pass respectfully',
+                icon: Icons.cancel_outlined,
+                style: DiscoverActionStyle.muted,
+                showChevron: false,
+                onPressed: onPassRespectfully,
+              ),
             ],
-            const SizedBox(height: 14),
-            Row(
-              children: [
-                Icon(
-                  Icons.lock_outline,
-                  size: 14,
-                  color: AppColors.white.withValues(alpha: 0.85),
-                ),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    'Photo preview can unlock after a date is proposed.',
-                    style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                      fontSize: 11,
-                      color: AppColors.white.withValues(alpha: 0.88),
-                      height: 1.35,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-            ),
           ),
         ),
       ),
     );
   }
 }
-
 /// Vertical stack of discover match profile cards.
 class DiscoverMatchCardList extends StatelessWidget {
   const DiscoverMatchCardList({
@@ -273,11 +308,17 @@ class DiscoverMatchCardList extends StatelessWidget {
     this.cards = DiscoverMatchCard.sampleCards,
     this.spacing = 14,
     this.onCardTap,
+    this.onViewCompatibility,
+    this.onConnectWithIntention,
+    this.onPassRespectfully,
   });
 
   final List<DiscoverMatchCard> cards;
   final double spacing;
   final VoidCallback? onCardTap;
+  final VoidCallback? onViewCompatibility;
+  final VoidCallback? onConnectWithIntention;
+  final VoidCallback? onPassRespectfully;
 
   @override
   Widget build(BuildContext context) {
@@ -292,6 +333,9 @@ class DiscoverMatchCardList extends StatelessWidget {
             matchPercent: cards[i].matchPercent,
             highlights: cards[i].highlights,
             onTap: onCardTap,
+            onViewCompatibility: onViewCompatibility,
+            onConnectWithIntention: onConnectWithIntention,
+            onPassRespectfully: onPassRespectfully,
           ),
         ],
       ],

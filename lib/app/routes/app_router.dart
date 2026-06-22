@@ -32,6 +32,7 @@ import 'package:intent_app/presentation/onboarding/views/community_commitment_sc
 import 'package:intent_app/presentation/discover/views/discover_screen.dart';
 import 'package:intent_app/presentation/chat/views/chat_screen.dart';
 import 'package:intent_app/presentation/compatibility/views/compatibility_overview_screen.dart';
+import 'package:intent_app/presentation/matches/views/matches_screen.dart';
 import 'package:intent_app/presentation/messages/views/messages_screen.dart';
 import 'package:intent_app/presentation/profile/views/edit_profile_screen.dart';
 import 'package:intent_app/presentation/profile/views/profile_screen.dart';
@@ -40,6 +41,7 @@ import 'package:intent_app/presentation/onboarding/views/intention_success_scree
 import 'package:intent_app/presentation/notifications/views/notification_screen.dart';
 import 'package:intent_app/presentation/settings/views/settings_screen.dart';
 import 'package:intent_app/presentation/splash/views/splash_screen.dart';
+import 'package:intent_app/presentation/why_matches/views/why_matches_screen.dart';
 import 'package:intent_app/presentation/welcome/views/welcome_screen.dart';
 
 CustomTransitionPage<void> _fadePage({
@@ -281,6 +283,13 @@ final GoRouter appRouter = GoRouter(
       ),
     ),
     GoRoute(
+      path: AppRoutes.matches,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const MatchesScreen(),
+      ),
+    ),
+    GoRoute(
       path: AppRoutes.messages,
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
@@ -292,6 +301,13 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
         child: const ChatScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.whyMatches,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const WhyMatchesScreen(),
       ),
     ),
     GoRoute(
