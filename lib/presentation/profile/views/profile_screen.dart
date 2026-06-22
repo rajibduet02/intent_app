@@ -29,6 +29,7 @@ class ProfileScreen extends StatelessWidget {
           children: [
             ProfileScreenHeader(
               onBack: () => context.go(AppRoutes.discover),
+              onSettings: () => context.push(AppRoutes.settings),
             ),
             const SizedBox(height: 16),
             const ProfileHeroCard(),

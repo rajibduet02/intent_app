@@ -30,6 +30,8 @@ abstract final class AppRoutes {
   static const String discover = '/discover';
   static const String profile = '/profile';
   static const String editProfile = '/profile/edit';
+  static const String settings = '/settings';
+  static const String notifications = '/notifications';
   static const String profilePreview = '/profile-preview';
   static const String compatibilityPreview = '/compatibility-preview';
   static const String messages = '/messages';

@@ -28,29 +28,10 @@ class DiscoverScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const DiscoverTopBar(),
-            const SizedBox(height: AppSpacing.lg),
-            Text(
-              'Discover',
-              style: IntentLoginStyles.onboardingTitle.copyWith(fontSize: 30),
+            DiscoverTopBar(
+              onNotificationsTap: () => context.push(AppRoutes.notifications),
             ),
             const SizedBox(height: AppSpacing.sm),
-            Text(
-              'Meet with intention',
-              style: IntentLoginStyles.onboardingCardFieldLabel.copyWith(
-                fontSize: 15,
-              ),
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            Text(
-              'Profiles are shown through compatibility first. Photos unlock '
-              'only through the date flow.',
-              style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                fontSize: 13,
-                height: 1.45,
-              ),
-            ),
-            const SizedBox(height: AppSpacing.md),
             const _PhotosHiddenBadge(),
             const SizedBox(height: AppSpacing.lg),
             DiscoverMatchCardList(
@@ -110,7 +91,7 @@ class _PhotosHiddenBadge extends StatelessWidget {
               size: 13,
               color: AppColors.intentTextSoft,
             ),
-            const SizedBox(width: 6),
+            const SizedBox(width: 4),
             Text(
               'Photos hidden by default',
               style: IntentLoginStyles.onboardingSubtitle.copyWith(

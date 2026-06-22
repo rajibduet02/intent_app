@@ -31,22 +31,28 @@ class ProfileScreenHeader extends StatelessWidget {
               style: IntentLoginStyles.onboardingTitle.copyWith(fontSize: 22),
             ),
           ),
-          IconButton(
-            onPressed: onSettings,
-            padding: EdgeInsets.zero,
-            style: IconButton.styleFrom(
-              fixedSize: const Size(
-                AppSpacing.backButtonSize,
-                AppSpacing.backButtonSize,
+          if (onSettings != null)
+            IconButton(
+              onPressed: onSettings,
+              padding: EdgeInsets.zero,
+              style: IconButton.styleFrom(
+                fixedSize: const Size(
+                  AppSpacing.backButtonSize,
+                  AppSpacing.backButtonSize,
+                ),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              icon: Icon(
+                trailingIcon,
+                size: 22,
+                color: AppColors.intentForest,
+              ),
+            )
+          else
+            const SizedBox(
+              width: AppSpacing.backButtonSize,
+              height: AppSpacing.backButtonSize,
             ),
-            icon: Icon(
-              trailingIcon,
-              size: 22,
-              color: AppColors.intentForest,
-            ),
-          ),
         ],
       ),
     );

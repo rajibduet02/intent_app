@@ -3,38 +3,61 @@ import 'package:flutter/material.dart';
 import 'package:intent_app/app/theme/theme.dart';
 
 class DiscoverTopBar extends StatelessWidget {
-  const DiscoverTopBar({super.key});
+  const DiscoverTopBar({
+    super.key,
+    this.onNotificationsTap,
+    this.onFiltersTap,
+  });
+
+  final VoidCallback? onNotificationsTap;
+  final VoidCallback? onFiltersTap;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Discover',
+                style: IntentLoginStyles.onboardingTitle.copyWith(fontSize: 30),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              Text(
+                'Meet with intention',
+                style: IntentLoginStyles.onboardingCardFieldLabel.copyWith(
+                  fontSize: 15,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              Text(
+                'Profiles are shown through compatibility first. Photos unlock '
+                'only through the date flow.',
+                style: IntentLoginStyles.onboardingSubtitle.copyWith(
+                  fontSize: 13,
+                  height: 1.45,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: AppSpacing.sm),
         Row(
-          mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              'Intent',
-              style: IntentLoginStyles.brandTitle.copyWith(fontSize: 22),
+            _TopActionButton(
+              icon: Icons.tune,
+              onTap: onFiltersTap ?? () {},
             ),
-            const SizedBox(width: 6),
-            Icon(
-              Icons.favorite_border,
-              size: 18,
-              color: AppColors.intentText.withValues(alpha: 0.85),
+            const SizedBox(width: AppSpacing.sm),
+            _TopActionButton(
+              icon: Icons.notifications_none,
+              showNotificationDot: true,
+              onTap: onNotificationsTap ?? () {},
             ),
           ],
-        ),
-        const Spacer(),
-        _TopActionButton(
-          icon: Icons.tune,
-          onTap: () {},
-        ),
-        const SizedBox(width: 10),
-        _TopActionButton(
-          icon: Icons.notifications_none,
-          showNotificationDot: true,
-          onTap: () {},
         ),
       ],
     );

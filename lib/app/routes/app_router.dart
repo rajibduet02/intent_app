@@ -37,6 +37,8 @@ import 'package:intent_app/presentation/profile/views/edit_profile_screen.dart';
 import 'package:intent_app/presentation/profile/views/profile_screen.dart';
 import 'package:intent_app/presentation/profile_preview/views/profile_preview_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/intention_success_screen.dart';
+import 'package:intent_app/presentation/notifications/views/notification_screen.dart';
+import 'package:intent_app/presentation/settings/views/settings_screen.dart';
 import 'package:intent_app/presentation/splash/views/splash_screen.dart';
 import 'package:intent_app/presentation/welcome/views/welcome_screen.dart';
 
@@ -249,6 +251,20 @@ final GoRouter appRouter = GoRouter(
           ),
         ),
       ],
+    ),
+    GoRoute(
+      path: AppRoutes.notifications,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const NotificationScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.settings,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const SettingsScreen(),
+      ),
     ),
     GoRoute(
       path: AppRoutes.profilePreview,
