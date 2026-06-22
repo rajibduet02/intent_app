@@ -7,6 +7,8 @@ abstract final class AppRoutes {
   static const String auth = '/auth';
   static const String signup = '/signup';
   static const String verify = '/verify';
+  static const String forgotPassword = '/forgot-password';
+  static const String resetPassword = '/reset-password';
   static const String onboarding1 = '/onboarding/1';
   static const String onboarding2 = '/onboarding/2';
   static const String onboarding3 = '/onboarding/3';

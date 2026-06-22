@@ -74,6 +74,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               _RememberMeRow(
                 rememberMe: _rememberMe,
                 onRememberChanged: (v) => setState(() => _rememberMe = v),
+                authNotifier: authNotifier,
               ),
               const SizedBox(height: 24),
               _LoginContinueButton(
@@ -119,10 +120,12 @@ class _RememberMeRow extends StatelessWidget {
   const _RememberMeRow({
     required this.rememberMe,
     required this.onRememberChanged,
+    required this.authNotifier,
   });
 
   final bool rememberMe;
   final ValueChanged<bool> onRememberChanged;
+  final AuthNotifier authNotifier;
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +154,11 @@ class _RememberMeRow extends StatelessWidget {
           child: Text('Remember me', style: IntentLoginStyles.rememberMe),
         ),
         const Spacer(),
-        Text('Forgot password?', style: IntentLoginStyles.forgotPassword),
+        GestureDetector(
+          onTap: authNotifier.goToForgotPassword,
+          behavior: HitTestBehavior.opaque,
+          child: Text('Forgot password?', style: IntentLoginStyles.forgotPassword),
+        ),
       ],
     );
   }

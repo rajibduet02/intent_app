@@ -47,6 +47,10 @@ class AuthNotifier extends Notifier<AuthState> {
     appRouter.go(AppRoutes.signup);
   }
 
+  void goToForgotPassword() {
+    appRouter.push(AppRoutes.forgotPassword);
+  }
+
   Future<void> submit({
     required GlobalKey<FormState> formKey,
     required TextEditingController emailController,

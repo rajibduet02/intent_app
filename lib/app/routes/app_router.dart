@@ -5,7 +5,9 @@ import 'package:intent_app/app/routes/app_route_guard.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/routes/auth_refresh_listenable.dart';
 import 'package:intent_app/app/theme/app_animations.dart';
+import 'package:intent_app/presentation/auth/views/forgot_password_screen.dart';
 import 'package:intent_app/presentation/auth/views/login_screen.dart';
+import 'package:intent_app/presentation/auth/views/reset_password_screen.dart';
 import 'package:intent_app/presentation/auth/views/signup_screen.dart';
 import 'package:intent_app/presentation/auth/views/verify_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/onboarding_1_screen.dart';
@@ -87,6 +89,20 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.verify,
       pageBuilder: (context, state) =>
           _fadePage(key: state.pageKey, child: const VerifyScreen()),
+    ),
+    GoRoute(
+      path: AppRoutes.forgotPassword,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const ForgotPasswordScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.resetPassword,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const ResetPasswordScreen(),
+      ),
     ),
     GoRoute(
       path: AppRoutes.onboarding1,

@@ -18,6 +18,8 @@ abstract final class AppRouteGuard {
         path == AppRoutes.auth ||
         path == AppRoutes.signup ||
         path == AppRoutes.verify ||
+        path == AppRoutes.forgotPassword ||
+        path == AppRoutes.resetPassword ||
         path == AppRoutes.onboarding1 ||
         path == AppRoutes.onboarding2 ||
         path == AppRoutes.onboarding3 ||
