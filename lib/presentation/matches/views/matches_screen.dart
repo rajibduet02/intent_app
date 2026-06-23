@@ -54,6 +54,7 @@ class MatchesScreen extends StatelessWidget {
               MatchProfileCard(
                 match: matches[i],
                 onTap: () => context.go(AppRoutes.profilePreview),
+                onAvatarTap: () => context.push(AppRoutes.chooseIcon),
                 onMessageTap: () => context.push(AppRoutes.chat),
               ),
             ],

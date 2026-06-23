@@ -15,6 +15,6 @@ void navigateCustomBottomNavTab(BuildContext context, CustomBottomNavTab tab) {
     case CustomBottomNavTab.messages:
       context.go(AppRoutes.messages);
     case CustomBottomNavTab.dates:
-      break;
+      context.go(AppRoutes.proposeDate);
   }
 }

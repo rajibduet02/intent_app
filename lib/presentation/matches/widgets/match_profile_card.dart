@@ -8,11 +8,13 @@ class MatchProfileCard extends StatelessWidget {
     super.key,
     required this.match,
     this.onTap,
+    this.onAvatarTap,
     this.onMessageTap,
   });
 
   final MatchProfile match;
   final VoidCallback? onTap;
+  final VoidCallback? onAvatarTap;
   final VoidCallback? onMessageTap;
 
   @override
@@ -35,20 +37,23 @@ class MatchProfileCard extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Container(
-                width: 52,
-                height: 52,
-                decoration: BoxDecoration(
-                  color: AppColors.intentSegmentFill,
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: AppColors.intentInputBorder.withValues(alpha: 0.5),
+              GestureDetector(
+                onTap: onAvatarTap,
+                child: Container(
+                  width: 52,
+                  height: 52,
+                  decoration: BoxDecoration(
+                    color: AppColors.intentSegmentFill,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: AppColors.intentInputBorder.withValues(alpha: 0.5),
+                    ),
                   ),
-                ),
-                child: Icon(
-                  Icons.person_outline,
-                  size: 26,
-                  color: AppColors.intentTextSoft.withValues(alpha: 0.7),
+                  child: Icon(
+                    Icons.person_outline,
+                    size: 26,
+                    color: AppColors.intentTextSoft.withValues(alpha: 0.7),
+                  ),
                 ),
               ),
               const SizedBox(width: 12),

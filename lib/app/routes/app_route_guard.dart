@@ -47,6 +47,8 @@ abstract final class AppRouteGuard {
         path == AppRoutes.compatibilityPreview ||
         path == AppRoutes.matches ||
         path == AppRoutes.whyMatches ||
+        path == AppRoutes.chooseIcon ||
+        path == AppRoutes.proposeDate ||
         path == AppRoutes.messages ||
         path == AppRoutes.chat ||
         path == AppRoutes.mbtiAssessment ||

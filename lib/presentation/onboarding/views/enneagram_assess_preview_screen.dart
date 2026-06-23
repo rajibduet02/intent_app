@@ -238,7 +238,8 @@ class _CompatibilityNote extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 3, right: 10),
+          // padding: const EdgeInsets.only(top: 3, right: 10),
+          padding: const EdgeInsets.only(top: 0, right: 0),
           child: Icon(
             Icons.verified_user_outlined,
             size: 18,

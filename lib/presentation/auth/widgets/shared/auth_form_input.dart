@@ -24,6 +24,10 @@ class AuthFormInput extends StatelessWidget {
     this.showShadow = true,
     this.readOnly = false,
     this.onTap,
+    this.minLines = 1,
+    this.maxLines = 1,
+    this.maxLength,
+    this.hideMaxLengthCounter = false,
   });
 
   final TextEditingController controller;
@@ -40,6 +44,10 @@ class AuthFormInput extends StatelessWidget {
   final bool showShadow;
   final bool readOnly;
   final VoidCallback? onTap;
+  final int minLines;
+  final int maxLines;
+  final int? maxLength;
+  final bool hideMaxLengthCounter;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +69,7 @@ class AuthFormInput extends StatelessWidget {
           : (_) => validator!(controller.text),
       builder: (field) {
         final hasError = field.hasError;
+        final isMultiline = maxLines > 1 || minLines > 1;
         final enabledBorderColor =
             hasError ? AppColors.error : AppColors.intentInputBorder;
         final focusedBorderColor =
@@ -74,8 +83,20 @@ class AuthFormInput extends StatelessWidget {
           obscureText: obscureText,
           keyboardType: keyboardType,
           autofillHints: autofillHints,
-          maxLines: 1,
-          textAlignVertical: TextAlignVertical.center,
+          minLines: isMultiline ? minLines : 1,
+          maxLines: isMultiline ? maxLines : 1,
+          maxLength: maxLength,
+          buildCounter: hideMaxLengthCounter
+              ? (
+                  context, {
+                  required currentLength,
+                  required isFocused,
+                  maxLength,
+                }) =>
+                  null
+              : null,
+          textAlignVertical:
+              isMultiline ? TextAlignVertical.top : TextAlignVertical.center,
           style: IntentLoginStyles.fieldHint.copyWith(
             color: AppColors.intentText,
           ),
@@ -90,12 +111,23 @@ class AuthFormInput extends StatelessWidget {
             hintStyle: IntentLoginStyles.fieldHint,
             filled: true,
             fillColor: fillColor,
-            contentPadding: AppSpacing.inputFieldPrefixContentPadding,
+            contentPadding: isMultiline
+                ? const EdgeInsets.only(
+                    top: 12,
+                    bottom: 12,
+                    right: AppSpacing.md,
+                  )
+                : AppSpacing.inputFieldPrefixContentPadding,
             prefixIconConstraints: AppSpacing.inputFieldIconConstraints,
             suffixIconConstraints: const BoxConstraints(
               minWidth: AppSpacing.inputFieldHeight,
               minHeight: AppSpacing.inputFieldHeight,
             ),
+            constraints: isMultiline
+                ? BoxConstraints(
+                    minHeight: minLines * 16 * 1.4 + 24,
+                  )
+                : AppSpacing.inputFieldBoxConstraints,
             prefixIcon: Padding(
               padding: const EdgeInsets.only(
                 left: AppSpacing.inputFieldLeadingInset,
@@ -118,10 +150,12 @@ class AuthFormInput extends StatelessWidget {
 
         final fieldBox = ClipRRect(
           borderRadius: radius,
-          child: SizedBox(
-            height: AppSpacing.inputFieldHeight,
-            child: input,
-          ),
+          child: isMultiline
+              ? input
+              : SizedBox(
+                  height: AppSpacing.inputFieldHeight,
+                  child: input,
+                ),
         );
 
         return Column(

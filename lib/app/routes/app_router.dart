@@ -36,11 +36,13 @@ import 'package:intent_app/presentation/matches/views/matches_screen.dart';
 import 'package:intent_app/presentation/messages/views/messages_screen.dart';
 import 'package:intent_app/presentation/profile/views/edit_profile_screen.dart';
 import 'package:intent_app/presentation/profile/views/profile_screen.dart';
+import 'package:intent_app/presentation/propose_date/views/propose_date_screen.dart';
 import 'package:intent_app/presentation/profile_preview/views/profile_preview_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/intention_success_screen.dart';
 import 'package:intent_app/presentation/notifications/views/notification_screen.dart';
 import 'package:intent_app/presentation/settings/views/settings_screen.dart';
 import 'package:intent_app/presentation/splash/views/splash_screen.dart';
+import 'package:intent_app/presentation/choose_icon/views/choose_icon_screen.dart';
 import 'package:intent_app/presentation/why_matches/views/why_matches_screen.dart';
 import 'package:intent_app/presentation/welcome/views/welcome_screen.dart';
 
@@ -301,6 +303,20 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
         child: const ChatScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.proposeDate,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const ProposeDateScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.chooseIcon,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const ChooseIconScreen(),
       ),
     ),
     GoRoute(

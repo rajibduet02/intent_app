@@ -69,12 +69,6 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 24),
-                  Text(
-                    'PHOTOS UNLOCK ONLY WHEN REAL INTENTION IS SHOWN.',
-                    textAlign: TextAlign.center,
-                    style: IntentLoginStyles.welcomeFooter,
-                  ),
                 ],
               ),
             ),

@@ -1,0 +1,80 @@
+import 'package:flutter/material.dart';
+
+import 'package:intent_app/app/theme/theme.dart';
+
+class ProposeDateHeader extends StatelessWidget {
+  const ProposeDateHeader({
+    super.key,
+    required this.onBack,
+    this.onCalendarTap,
+  });
+
+  final VoidCallback onBack;
+  final VoidCallback? onCalendarTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 48,
+      child: Row(
+        children: [
+          _CircleHeaderButton(
+            onTap: onBack,
+            child: const Icon(
+              Icons.chevron_left,
+              color: AppColors.intentForest,
+              size: AppSpacing.backIconSize,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              'Propose a date',
+              textAlign: TextAlign.center,
+              style: IntentLoginStyles.onboardingTitle.copyWith(fontSize: 24),
+            ),
+          ),
+          _CircleHeaderButton(
+            onTap: onCalendarTap,
+            child: const Icon(
+              Icons.calendar_today_outlined,
+              size: 20,
+              color: AppColors.intentForest,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CircleHeaderButton extends StatelessWidget {
+  const _CircleHeaderButton({
+    required this.child,
+    this.onTap,
+  });
+
+  final Widget child;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        width: AppSpacing.backButtonSize,
+        height: AppSpacing.backButtonSize,
+        decoration: BoxDecoration(
+          color: AppColors.white.withValues(alpha: 0.95),
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: AppColors.intentInputBorder.withValues(alpha: 0.65),
+          ),
+          boxShadow: AppShadows.intentInput,
+        ),
+        alignment: Alignment.center,
+        child: child,
+      ),
+    );
+  }
+}
