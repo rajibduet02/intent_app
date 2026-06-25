@@ -32,47 +32,44 @@ class ProposeDateMatchSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const _MatchAvatar(initial: 'Y'),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: CustomPaint(
-                      painter: _DottedLinePainter(),
-                      child: const SizedBox(height: 2),
-                    ),
-                  ),
-                  Container(
-                    width: 26,
-                    height: 26,
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: AppColors.intentInputBorder.withValues(alpha: 0.7),
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.favorite_border,
-                      size: 13,
-                      color: AppColors.intentForest.withValues(alpha: 0.85),
-                    ),
-                  ),
-                  Expanded(
-                    child: CustomPaint(
-                      painter: _DottedLinePainter(),
-                      child: const SizedBox(height: 2),
-                    ),
-                  ),
-                ],
+        Center(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const _MatchAvatar(initial: 'Y'),
+              SizedBox(
+                width: 36,
+                child: CustomPaint(
+                  painter: _DottedLinePainter(),
+                  child: const SizedBox(height: 2),
+                ),
               ),
-            ),
-            const _MatchAvatar(initial: 'J'),
-          ],
+              Container(
+                width: 26,
+                height: 26,
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: AppColors.intentInputBorder.withValues(alpha: 0.7),
+                  ),
+                ),
+                child: Icon(
+                  Icons.favorite_border,
+                  size: 13,
+                  color: AppColors.intentForest.withValues(alpha: 0.85),
+                ),
+              ),
+              SizedBox(
+                width: 36,
+                child: CustomPaint(
+                  painter: _DottedLinePainter(),
+                  child: const SizedBox(height: 2),
+                ),
+              ),
+              const _MatchAvatar(initial: 'J'),
+            ],
+          ),
         ),
         const SizedBox(height: 12),
         Text(
@@ -604,6 +601,7 @@ class ProposeDateSuggestedIdeas extends StatelessWidget {
     _DateIdea(label: 'Go to a bar', icon: Icons.bar_chart_outlined),
     _DateIdea(label: 'Go to a concert', icon: Icons.music_note_outlined),
     _DateIdea(label: 'Go to a movie', icon: Icons.movie_outlined),
+    _DateIdea(label: 'Go to a coffee shop', icon: Icons.coffee_outlined),
     _DateIdea(label: 'Go to a park', icon: Icons.park_outlined),
   ];
 
@@ -639,14 +637,14 @@ class ProposeDateSuggestedIdeas extends StatelessWidget {
                   children: [
                     Icon(
                       idea.icon,
-                      size: 15,
+                      size: 18,
                       color: AppColors.intentForest,
                     ),
-                    const SizedBox(width: 6),
+                    const SizedBox(width: 4),
                     Text(
                       idea.label,
                       style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                        fontSize: 12,
+                        fontSize: 14,
                         fontWeight: FontWeight.w500,
                         color: AppColors.intentText,
                       ),
@@ -714,7 +712,7 @@ class ProposeDateSafetyCard extends StatelessWidget {
                     Text(
                       'Safety reminder',
                       style: IntentLoginStyles.onboardingCardFieldLabel
-                          .copyWith(fontSize: 14),
+                          .copyWith(fontSize: 16),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -722,7 +720,7 @@ class ProposeDateSafetyCard extends StatelessWidget {
                       'plans inside Intent until both people feel comfortable. '
                       'You can report or update plans anytime.',
                       style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                        fontSize: 12,
+                        fontSize: 14,
                         height: 1.45,
                       ),
                     ),
@@ -841,14 +839,14 @@ class ProposeDateSendButton extends StatelessWidget {
                   color: AppColors.white,
                 ),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 4),
               Text(
                 'SEND DATE PROPOSAL',
                 style: IntentLoginStyles.onboardingContinue.copyWith(
                   letterSpacing: 0.6,
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 4),
               const Icon(
                 Icons.arrow_forward,
                 color: AppColors.intentGold,

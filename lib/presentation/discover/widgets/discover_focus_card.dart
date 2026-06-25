@@ -41,7 +41,7 @@ class DiscoverFocusCard extends StatelessWidget {
                   color: AppColors.intentForest,
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: 8),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +49,7 @@ class DiscoverFocusCard extends StatelessWidget {
                     Text(
                       "Today's discovery focus",
                       style: IntentLoginStyles.onboardingCardFieldLabel.copyWith(
-                        fontSize: 13,
+                        fontSize: 16,
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -57,8 +57,8 @@ class DiscoverFocusCard extends StatelessWidget {
                       'Intent is prioritizing matches with aligned goals, '
                       'family values, and communication style.',
                       style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                        fontSize: 12,
-                        height: 1.4,
+                        fontSize: 14,
+                        height: 1.2,
                       ),
                     ),
                   ],

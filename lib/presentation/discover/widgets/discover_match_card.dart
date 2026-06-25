@@ -156,7 +156,7 @@ class DiscoverMatchCard extends StatelessWidget {
                                 name.isNotEmpty ? name[0].toUpperCase() : '?',
                                 style: IntentLoginStyles.onboardingContinue
                                     .copyWith(
-                                  fontSize: 22,
+                                  fontSize: 24,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -216,7 +216,7 @@ class DiscoverMatchCard extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 6),
+                              const SizedBox(height: 4),
                               const _MetaRow(
                                 icon: Icons.location_on_outlined,
                                 label: 'Nearby',
@@ -232,18 +232,18 @@ class DiscoverMatchCard extends StatelessWidget {
                         _MatchPercentBadge(percent: matchPercent),
                       ],
                     ),
-                    const SizedBox(height: 18),
+                    const SizedBox(height: 16),
                     Text(
                       'WHY THIS MATCH STANDS OUT',
                       style: IntentLoginStyles.onboardingAssessmentCategory
                           .copyWith(
-                        fontSize: 9,
+                        fontSize: 12,
                         letterSpacing: 1.2,
                         fontWeight: FontWeight.w700,
                         color: AppColors.white.withValues(alpha: 0.9),
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 8),
                     for (final highlight in highlights) ...[
                       _HighlightRow(highlight: highlight),
                       if (highlight != highlights.last)
@@ -257,12 +257,12 @@ class DiscoverMatchCard extends StatelessWidget {
                           size: 14,
                           color: AppColors.white.withValues(alpha: 0.85),
                         ),
-                        const SizedBox(width: 6),
+                        const SizedBox(width: 4),
                         Expanded(
                           child: Text(
                             'Photo preview can unlock after a date is proposed.',
                             style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                              fontSize: 11,
+                              fontSize: 12,
                               color: AppColors.white.withValues(alpha: 0.88),
                               height: 1.35,
                             ),
@@ -403,7 +403,7 @@ class _MatchPercentBadge extends StatelessWidget {
           Text(
             'MATCH',
             style: IntentLoginStyles.onboardingAssessmentCategory.copyWith(
-              fontSize: 7,
+              fontSize: 8,
               letterSpacing: 0.8,
               color: AppColors.white.withValues(alpha: 0.9),
             ),
@@ -447,7 +447,7 @@ class _HighlightRow extends StatelessWidget {
             child: Text(
               highlight.label,
               style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                fontSize: 12,
+                fontSize: 14,
                 color: AppColors.white,
                 fontWeight: FontWeight.w500,
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:intent_app/app/theme/theme.dart';
+import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 
 class ProposeDateHeader extends StatelessWidget {
   const ProposeDateHeader({
@@ -18,14 +19,7 @@ class ProposeDateHeader extends StatelessWidget {
       height: 48,
       child: Row(
         children: [
-          _CircleHeaderButton(
-            onTap: onBack,
-            child: const Icon(
-              Icons.chevron_left,
-              color: AppColors.intentForest,
-              size: AppSpacing.backIconSize,
-            ),
-          ),
+          IntentBackButton(onPressed: onBack),
           Expanded(
             child: Text(
               'Propose a date',

@@ -448,8 +448,9 @@ class _StatusBadge extends StatelessWidget {
 Rect faceScanOvalRect(Size frameSize) {
   return Rect.fromCenter(
     center: Offset(frameSize.width * 0.5, frameSize.height * 0.5),
-    width: frameSize.width * 0.8,
-    height: frameSize.height * 0.8,
+    width: frameSize.width * 0.56,
+    // height: frameSize.height * 0.8,
+    height: frameSize.height * 0.74,
   );
 }
 

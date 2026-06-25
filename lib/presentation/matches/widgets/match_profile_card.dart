@@ -73,7 +73,7 @@ class MatchProfileCard extends StatelessWidget {
                     Text(
                       match.location,
                       style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                        fontSize: 11,
+                        fontSize: 12,
                         color: AppColors.intentTextSoft,
                       ),
                     ),
@@ -93,7 +93,7 @@ class MatchProfileCard extends StatelessWidget {
                             '${match.compatibilityPercent}% COMPATIBLE',
                             style: IntentLoginStyles.onboardingSubtitle
                                 .copyWith(
-                              fontSize: 9,
+                              fontSize: 10,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 0.3,
                               color: AppColors.intentForest,

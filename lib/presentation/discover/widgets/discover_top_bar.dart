@@ -23,13 +23,13 @@ class DiscoverTopBar extends StatelessWidget {
             children: [
               Text(
                 'Discover',
-                style: IntentLoginStyles.onboardingTitle.copyWith(fontSize: 30),
+                style: IntentLoginStyles.onboardingTitle.copyWith(fontSize: 32),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
                 'Meet with intention',
                 style: IntentLoginStyles.onboardingCardFieldLabel.copyWith(
-                  fontSize: 15,
+                  fontSize: 16,
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -37,7 +37,7 @@ class DiscoverTopBar extends StatelessWidget {
                 'Profiles are shown through compatibility first. Photos unlock '
                 'only through the date flow.',
                 style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                  fontSize: 13,
+                  fontSize: 14,
                   height: 1.45,
                 ),
               ),

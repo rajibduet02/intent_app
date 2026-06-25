@@ -36,6 +36,12 @@ import 'package:intent_app/presentation/matches/views/matches_screen.dart';
 import 'package:intent_app/presentation/messages/views/messages_screen.dart';
 import 'package:intent_app/presentation/profile/views/edit_profile_screen.dart';
 import 'package:intent_app/presentation/profile/views/profile_screen.dart';
+import 'package:intent_app/presentation/date_proposed/views/date_proposed_screen.dart';
+import 'package:intent_app/presentation/date_set_confirmed/views/date_set_confirmed_screen.dart';
+import 'package:intent_app/presentation/date_reminder/views/date_reminder_screen.dart';
+import 'package:intent_app/presentation/date_happen/views/date_happen_screen.dart';
+import 'package:intent_app/presentation/full_gallery_unlocked/views/full_gallery_unlocked_screen.dart';
+import 'package:intent_app/presentation/preview_photo/views/preview_photo_screen.dart';
 import 'package:intent_app/presentation/propose_date/views/propose_date_screen.dart';
 import 'package:intent_app/presentation/profile_preview/views/profile_preview_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/intention_success_screen.dart';
@@ -310,6 +316,48 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
         child: const ProposeDateScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.dateProposed,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const DateProposedScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.previewPhoto,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const PreviewPhotoScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.dateSetConfirmed,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const DateSetConfirmedScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.dateReminder,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const DateReminderScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.dateHappen,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const DateHappenScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.fullGalleryUnlocked,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const FullGalleryUnlockedScreen(),
       ),
     ),
     GoRoute(

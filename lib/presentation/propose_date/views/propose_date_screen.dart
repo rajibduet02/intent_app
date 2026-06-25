@@ -171,7 +171,9 @@ class _ProposeDateScreenState extends State<ProposeDateScreen> {
             const SizedBox(height: 12),
             const ProposeDateInfoNote(),
             const SizedBox(height: 18),
-            ProposeDateSendButton(onPressed: () {}),
+            ProposeDateSendButton(
+              onPressed: () => context.push(AppRoutes.dateProposed),
+            ),
           ],
         ),
       ),

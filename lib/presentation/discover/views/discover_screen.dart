@@ -70,14 +70,14 @@ class _PhotosHiddenBadge extends StatelessWidget {
           children: [
             Icon(
               Icons.lock_outline,
-              size: 13,
+              size: 14,
               color: AppColors.intentTextSoft,
             ),
             const SizedBox(width: 4),
             Text(
               'Photos hidden by default',
               style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                fontSize: 11,
+                fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
             ),

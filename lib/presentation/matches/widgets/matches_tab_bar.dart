@@ -74,7 +74,7 @@ class _MatchesTabItem extends StatelessWidget {
               '$label $count',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                fontSize: 11,
+                fontSize: 14,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 0.6,
                 color: color,

@@ -49,6 +49,12 @@ abstract final class AppRouteGuard {
         path == AppRoutes.whyMatches ||
         path == AppRoutes.chooseIcon ||
         path == AppRoutes.proposeDate ||
+        path == AppRoutes.dateProposed ||
+        path == AppRoutes.previewPhoto ||
+        path == AppRoutes.dateSetConfirmed ||
+        path == AppRoutes.dateReminder ||
+        path == AppRoutes.dateHappen ||
+        path == AppRoutes.fullGalleryUnlocked ||
         path == AppRoutes.messages ||
         path == AppRoutes.chat ||
         path == AppRoutes.mbtiAssessment ||

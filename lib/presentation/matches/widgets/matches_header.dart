@@ -25,7 +25,7 @@ class MatchesHeader extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 6),
+        const SizedBox(height: 8),
         Text(
           'Real people. Real connections. Real intention.',
           style: IntentLoginStyles.onboardingSubtitle.copyWith(

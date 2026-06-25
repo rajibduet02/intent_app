@@ -39,6 +39,12 @@ abstract final class AppRoutes {
   static const String whyMatches = '/why-matches';
   static const String chooseIcon = '/choose-icon';
   static const String proposeDate = '/propose-date';
+  static const String dateProposed = '/date-proposed';
+  static const String previewPhoto = '/preview-photo';
+  static const String dateSetConfirmed = '/date-set-confirmed';
+  static const String dateReminder = '/date-reminder';
+  static const String dateHappen = '/date-happen';
+  static const String fullGalleryUnlocked = '/full-gallery-unlocked';
   static const String chat = '/chat';
   static const String mbtiAssessment = '/onboarding/mbti';
   static const String mbtiAssessPreview = '/onboarding/mbti/preview';
