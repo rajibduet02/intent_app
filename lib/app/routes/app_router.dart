@@ -41,6 +41,9 @@ import 'package:intent_app/presentation/date_set_confirmed/views/date_set_confir
 import 'package:intent_app/presentation/date_reminder/views/date_reminder_screen.dart';
 import 'package:intent_app/presentation/date_happen/views/date_happen_screen.dart';
 import 'package:intent_app/presentation/full_gallery_unlocked/views/full_gallery_unlocked_screen.dart';
+import 'package:intent_app/presentation/date_feedback/views/date_feedback_screen.dart';
+import 'package:intent_app/presentation/people_notice/views/people_notice_screen.dart';
+import 'package:intent_app/presentation/safety_center/views/safety_center_screen.dart';
 import 'package:intent_app/presentation/preview_photo/views/preview_photo_screen.dart';
 import 'package:intent_app/presentation/propose_date/views/propose_date_screen.dart';
 import 'package:intent_app/presentation/profile_preview/views/profile_preview_screen.dart';
@@ -358,6 +361,27 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
         child: const FullGalleryUnlockedScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.dateFeedback,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const DateFeedbackScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.peopleNotice,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const PeopleNoticeScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.safetyCenter,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const SafetyCenterScreen(),
       ),
     ),
     GoRoute(

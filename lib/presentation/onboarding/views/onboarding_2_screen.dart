@@ -27,7 +27,6 @@ class Onboarding2Screen extends ConsumerWidget {
           children: [
             OnboardingContinueButton(
               isLoading: isLoading,
-              showArrow: false,
               onPressed: () => unawaited(notifier.submit()),
             ),
             const SizedBox(height: 16),

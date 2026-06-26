@@ -694,37 +694,11 @@ class DateSetConfirmedBackToChatButton extends StatelessWidget {
               ),
             ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Container(
-              //   width: 28,
-              //   height: 28,
-              //   decoration: BoxDecoration(
-              //     color: AppColors.white.withValues(alpha: 0.15),
-              //     borderRadius: BorderRadius.circular(8),
-              //   ),
-              //   child: const Icon(
-              //     Icons.chat_bubble_outline,
-              //     size: 16,
-              //     color: AppColors.white,
-              //   ),
-              // ),
-              const SizedBox(width: 10),
-              Text(
-                // 'Back to Chat',
-                'Continue',
-                style: IntentLoginStyles.onboardingContinue.copyWith(
-                  letterSpacing: 0.6,
-                ),
-              ),
-              const SizedBox(width: 8),
-              const Icon(
-                Icons.chevron_right,
-                color: AppColors.white,
-                size: 22,
-              ),
-            ],
+          child: Text(
+            'Continue',
+            style: IntentLoginStyles.onboardingContinue.copyWith(
+              letterSpacing: 0.6,
+            ),
           ),
         ),
       ),

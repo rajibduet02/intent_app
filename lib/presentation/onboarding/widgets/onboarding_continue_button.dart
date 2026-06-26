@@ -7,16 +7,12 @@ class OnboardingContinueButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     this.isLoading = false,
-    this.showArrow = true,
     this.label = 'CONTINUE',
-    this.arrowColor = AppColors.intentGold,
   });
 
   final VoidCallback? onPressed;
   final bool isLoading;
-  final bool showArrow;
   final String label;
-  final Color arrowColor;
 
   @override
   Widget build(BuildContext context) {
@@ -43,21 +39,7 @@ class OnboardingContinueButton extends StatelessWidget {
                   color: AppColors.white,
                 ),
               )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(label, style: IntentLoginStyles.onboardingContinue),
-                  if (showArrow) ...[
-                    const SizedBox(width: AppSpacing.xs),
-                    Icon(
-                      Icons.arrow_forward,
-                      color: arrowColor,
-                      size: 20,
-                    ),
-                  ],
-                ],
-              ),
+            : Text(label, style: IntentLoginStyles.onboardingContinue),
       ),
     );
   }

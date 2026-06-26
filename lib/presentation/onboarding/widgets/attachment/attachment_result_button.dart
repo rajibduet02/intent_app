@@ -38,24 +38,12 @@ class AttachmentResultButton extends StatelessWidget {
                   color: AppColors.white,
                 ),
               )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'View Attachment Result',
-                    style: IntentLoginStyles.mbtiSubmit.copyWith(
-                      letterSpacing: 0.4,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.xs),
-                  const Icon(
-                    Icons.arrow_forward,
-                    color: AppColors.white,
-                    size: 20,
-                  ),
-                ],
+            : Text(
+                'View Attachment Result',
+                style: IntentLoginStyles.mbtiSubmit.copyWith(
+                  letterSpacing: 0.4,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
       ),
     );

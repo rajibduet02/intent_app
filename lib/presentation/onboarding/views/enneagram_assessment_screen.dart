@@ -145,6 +145,7 @@ class _Intro extends StatelessWidget {
                 child: Text(
                   'Choose the answer that feels most like you. There are no right or wrong answers. Your responses help Intent personalize your experience.',
                   style: IntentLoginStyles.onboardingSubtitle.copyWith(
+                    fontSize: 14,
                     height: 1.45,
                   ),
                 ),

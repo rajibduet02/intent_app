@@ -28,8 +28,6 @@ class Onboarding4Screen extends ConsumerWidget {
           children: [
             OnboardingContinueButton(
               label: 'BEGIN',
-              showArrow: true,
-              arrowColor: AppColors.white,
               isLoading: state.isLoading,
               onPressed: () => unawaited(notifier.submit()),
             ),

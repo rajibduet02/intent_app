@@ -37,8 +37,6 @@ class _ChoosePreviewPhotosScreenState
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           label: 'Save Preview Photo',
-          showArrow: true,
-          arrowColor: AppColors.intentGold,
           isLoading: state.isLoading,
           onPressed: state.canSavePreview
               ? () => unawaited(notifier.savePreviewPhoto())

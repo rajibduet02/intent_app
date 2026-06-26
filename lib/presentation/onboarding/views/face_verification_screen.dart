@@ -155,8 +155,6 @@ class _FaceVerificationScreenState extends ConsumerState<FaceVerificationScreen>
             if (state.canContinue) ...[
               const SizedBox(height: 10),
               OnboardingContinueButton(
-                showArrow: true,
-                arrowColor: AppColors.intentGold,
                 isLoading: state.isLoading,
                 onPressed: () => unawaited(notifier.submit()),
               ),

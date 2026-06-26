@@ -28,8 +28,6 @@ class IntentionSuccessScreen extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           label: 'Start Discovering',
-          showArrow: true,
-          arrowColor: AppColors.white,
           isLoading: state.isLoading,
           onPressed: () => unawaited(notifier.startDiscovering()),
         ),

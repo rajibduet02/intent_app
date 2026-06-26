@@ -577,18 +577,12 @@ class DateProposedAcceptButton extends StatelessWidget {
                   color: AppColors.white,
                 ),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 4),
               Text(
                 'Accept',
                 style: IntentLoginStyles.onboardingContinue.copyWith(
                   letterSpacing: 0.6,
                 ),
-              ),
-              const SizedBox(width: 8),
-              const Icon(
-                Icons.chevron_right,
-                color: AppColors.white,
-                size: 22,
               ),
             ],
           ),
@@ -625,27 +619,22 @@ class DateProposedSuggestTimeButton extends StatelessWidget {
           ),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               Icons.schedule_outlined,
               size: 20,
               color: AppColors.intentText.withValues(alpha: 0.85),
             ),
-            const SizedBox(width: AppSpacing.xs),
-            Expanded(
-              child: Text(
-                'Suggest another time',
-                style: IntentLoginStyles.onboardingContinue.copyWith(
-                  color: AppColors.intentText,
-                  letterSpacing: 0.2,
-                  fontWeight: FontWeight.w600,
-                ),
+            const SizedBox(width: 4),
+            Text(
+              'Suggest another time',
+              style: IntentLoginStyles.onboardingContinue.copyWith(
+                color: AppColors.intentText,
+                letterSpacing: 0.2,
+                fontWeight: FontWeight.w600,
               ),
-            ),
-            Icon(
-              Icons.chevron_right,
-              size: 22,
-              color: AppColors.intentTextSoft,
             ),
           ],
         ),

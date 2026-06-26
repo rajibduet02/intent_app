@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:intent_app/app/theme/theme.dart';
 
-/// Full-width forest-green Continue button with gold arrow.
+/// Full-width forest-green Continue button.
 class LoginContinueButton extends StatelessWidget {
   const LoginContinueButton({
     super.key,
@@ -40,19 +40,7 @@ class LoginContinueButton extends StatelessWidget {
                   color: AppColors.white,
                 ),
               )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(label, style: IntentLoginStyles.onboardingContinue),
-                  const SizedBox(width: AppSpacing.xs),
-                  const Icon(
-                    Icons.arrow_forward,
-                    color: AppColors.intentGold,
-                    size: 20,
-                  ),
-                ],
-              ),
+            : Text(label, style: IntentLoginStyles.onboardingContinue),
       ),
     );
   }

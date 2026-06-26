@@ -9,7 +9,6 @@ import 'package:intent_app/presentation/onboarding/providers/attachment_style_pr
 import 'package:intent_app/presentation/onboarding/widgets/attachment/attachment_question_card.dart';
 import 'package:intent_app/presentation/onboarding/widgets/attachment/attachment_result_button.dart';
 import 'package:intent_app/presentation/onboarding/widgets/attachment/attachment_style_header.dart';
-import 'package:intent_app/presentation/onboarding/widgets/attachment/attachment_wavy_divider.dart';
 
 class AttachmentStyleScreen extends ConsumerWidget {
   const AttachmentStyleScreen({super.key});
@@ -68,8 +67,6 @@ class AttachmentStyleScreen extends ConsumerWidget {
             AttachmentStyleHeader(onBack: notifier.onBack),
             const SizedBox(height: AppSpacing.xs),
             const _Intro(),
-            const SizedBox(height: 16),
-            const AttachmentWavyDivider(),
             const SizedBox(height: 16),
             for (var i = 0; i < questions.length; i++) ...[
               if (i > 0) const SizedBox(height: 16),
@@ -151,6 +148,7 @@ class _Intro extends StatelessWidget {
                 child: Text(
                   'Choose the answer that feels most like you. There are no right or wrong answers.',
                   style: IntentLoginStyles.onboardingSubtitle.copyWith(
+                    fontSize: 14,
                     height: 1.45,
                   ),
                 ),

@@ -31,7 +31,6 @@ class _UploadIdScreenState extends ConsumerState<UploadIdScreen> {
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           label: 'Submit ID',
-          showArrow: false,
           isLoading: state.isLoading,
           onPressed: state.canSubmit ? () => unawaited(notifier.submit()) : null,
         ),

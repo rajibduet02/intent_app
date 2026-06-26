@@ -705,19 +705,19 @@ class FullGalleryUnlockedViewProfileButton extends StatelessWidget {
                   color: AppColors.white,
                 ),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 4),
               Text(
                 'View Full Profile',
                 style: IntentLoginStyles.onboardingContinue.copyWith(
                   letterSpacing: 0.6,
                 ),
               ),
-              const SizedBox(width: 8),
-              const Icon(
-                Icons.chevron_right,
-                color: AppColors.white,
-                size: 22,
-              ),
+              // const SizedBox(width: 4),
+              // const Icon(
+              //   Icons.chevron_right,
+              //   color: AppColors.white,
+              //   size: 22,
+              // ),
             ],
           ),
         ),

@@ -846,12 +846,6 @@ class ProposeDateSendButton extends StatelessWidget {
                   letterSpacing: 0.6,
                 ),
               ),
-              const SizedBox(width: 4),
-              const Icon(
-                Icons.arrow_forward,
-                color: AppColors.intentGold,
-                size: 20,
-              ),
             ],
           ),
         ),

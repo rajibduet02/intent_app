@@ -47,7 +47,7 @@ class FullGalleryUnlockedScreen extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             FullGalleryUnlockedContinueChatLink(
-              onTap: () => context.push(AppRoutes.chat),
+              onTap: () => context.push(AppRoutes.dateFeedback),
             ),
           ],
         ),

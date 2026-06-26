@@ -21,7 +21,6 @@ class CommunityCommitmentScreen extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           label: 'I Agree',
-          showArrow: false,
           isLoading: state.isLoading,
           onPressed: state.canAgree ? () => unawaited(notifier.submit()) : null,
         ),

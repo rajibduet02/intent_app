@@ -450,7 +450,7 @@ abstract final class IntentLoginStyles {
       );
 
   static TextStyle get mbtiSubmit => GoogleFonts.inter(
-        fontSize: 15,
+        fontSize: 16,
         fontWeight: FontWeight.w600,
         color: AppColors.white,
         height: 1.2,

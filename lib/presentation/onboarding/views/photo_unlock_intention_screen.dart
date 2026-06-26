@@ -15,8 +15,6 @@ class PhotoUnlockIntentionScreen extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           label: 'I Understand',
-          showArrow: true,
-          arrowColor: AppColors.intentGold,
           onPressed: () => appRouter.go(AppRoutes.uploadPhotos),
         ),
       ),

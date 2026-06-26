@@ -839,19 +839,19 @@ class EditProfileSaveButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Container(
-              width: 22,
-              height: 22,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: AppColors.white, width: 1.5),
-              ),
-              child: const Icon(
-                Icons.check,
-                size: 13,
-                color: AppColors.white,
-              ),
-            ),
+            // Container(
+            //   width: 22,
+            //   height: 22,
+            //   decoration: BoxDecoration(
+            //     shape: BoxShape.circle,
+            //     border: Border.all(color: AppColors.white, width: 1.5),
+            //   ),
+            //   child: const Icon(
+            //     Icons.check,
+            //     size: 13,
+            //     color: AppColors.white,
+            //   ),
+            // ),
             Expanded(
               child: Text(
                 'Save Changes',
@@ -859,11 +859,11 @@ class EditProfileSaveButton extends StatelessWidget {
                 style: IntentLoginStyles.onboardingContinue,
               ),
             ),
-            const Icon(
-              Icons.chevron_right,
-              size: 22,
-              color: AppColors.intentGold,
-            ),
+            // const Icon(
+            //   Icons.chevron_right,
+            //   size: 22,
+            //   color: AppColors.intentGold,
+            // ),
           ],
         ),
       ),

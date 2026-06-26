@@ -15,8 +15,6 @@ class MbtiAssessPreviewScreen extends StatelessWidget {
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
-          showArrow: true,
-          arrowColor: AppColors.white,
           onPressed: () => appRouter.go(AppRoutes.enneagramAssessment),
         ),
       ),

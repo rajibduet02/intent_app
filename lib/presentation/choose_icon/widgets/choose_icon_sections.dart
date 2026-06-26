@@ -704,7 +704,7 @@ class ChooseIconActionButtons extends StatelessWidget {
                   size: 18,
                   color: AppColors.white,
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 4),
                 Text(
                   'START CHAT',
                   style: IntentLoginStyles.onboardingContinue,
@@ -761,7 +761,7 @@ class ChooseIconActionButtons extends StatelessWidget {
                     size: 18,
                     color: AppColors.intentText.withValues(alpha: 0.9),
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: 4),
                   Text(
                     'PROPOSE DATE',
                     style: IntentLoginStyles.onboardingContinue.copyWith(
@@ -786,7 +786,7 @@ class ChooseIconActionButtons extends StatelessWidget {
                   size: 16,
                   color: AppColors.intentTextSoft,
                 ),
-                const SizedBox(width: 6),
+                const SizedBox(width: 4),
                 Text(
                   'Save For Later',
                   style: IntentLoginStyles.onboardingSubtitle.copyWith(

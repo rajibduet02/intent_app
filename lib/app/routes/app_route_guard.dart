@@ -55,6 +55,9 @@ abstract final class AppRouteGuard {
         path == AppRoutes.dateReminder ||
         path == AppRoutes.dateHappen ||
         path == AppRoutes.fullGalleryUnlocked ||
+        path == AppRoutes.dateFeedback ||
+        path == AppRoutes.peopleNotice ||
+        path == AppRoutes.safetyCenter ||
         path == AppRoutes.messages ||
         path == AppRoutes.chat ||
         path == AppRoutes.mbtiAssessment ||

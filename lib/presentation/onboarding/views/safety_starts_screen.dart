@@ -18,7 +18,6 @@ class SafetyStartsScreen extends StatelessWidget {
           children: [
             OnboardingContinueButton(
               label: 'Verify ID',
-              showArrow: false,
               onPressed: () => appRouter.go(AppRoutes.faceVerification),
             ),
             const SizedBox(height: 12),

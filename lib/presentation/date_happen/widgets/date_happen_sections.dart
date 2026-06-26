@@ -533,22 +533,11 @@ class DateHappenContinueButton extends StatelessWidget {
               ),
             ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Continue',
-                style: IntentLoginStyles.onboardingContinue.copyWith(
-                  letterSpacing: 0.6,
-                ),
-              ),
-              const SizedBox(width: 8),
-              const Icon(
-                Icons.chevron_right,
-                color: AppColors.white,
-                size: 22,
-              ),
-            ],
+          child: Text(
+            'Continue',
+            style: IntentLoginStyles.onboardingContinue.copyWith(
+              letterSpacing: 0.6,
+            ),
           ),
         ),
       ),

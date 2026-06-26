@@ -45,6 +45,9 @@ abstract final class AppRoutes {
   static const String dateReminder = '/date-reminder';
   static const String dateHappen = '/date-happen';
   static const String fullGalleryUnlocked = '/full-gallery-unlocked';
+  static const String dateFeedback = '/date-feedback';
+  static const String peopleNotice = '/people-notice';
+  static const String safetyCenter = '/safety-center';
   static const String chat = '/chat';
   static const String mbtiAssessment = '/onboarding/mbti';
   static const String mbtiAssessPreview = '/onboarding/mbti/preview';
