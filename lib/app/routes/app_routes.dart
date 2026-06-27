@@ -48,6 +48,9 @@ abstract final class AppRoutes {
   static const String dateFeedback = '/date-feedback';
   static const String peopleNotice = '/people-notice';
   static const String safetyCenter = '/safety-center';
+  static const String reportUser = '/report-user';
+  static const String connectionPlus = '/connection-plus';
+  static const String premiumIcon = '/premium-icon';
   static const String chat = '/chat';
   static const String mbtiAssessment = '/onboarding/mbti';
   static const String mbtiAssessPreview = '/onboarding/mbti/preview';

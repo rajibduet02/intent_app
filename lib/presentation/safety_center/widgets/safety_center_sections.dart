@@ -622,13 +622,13 @@ class SafetyCenterBackButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.chevron_left,
-                color: AppColors.white,
-                size: 22,
-              ),
+              // const Icon(
+              //   Icons.chevron_left,
+              //   color: AppColors.white,
+              //   size: 22,
+              // ),
               Text(
-                'Back',
+                'CONTINUE',
                 style: IntentLoginStyles.onboardingContinue.copyWith(
                   letterSpacing: 0.6,
                 ),

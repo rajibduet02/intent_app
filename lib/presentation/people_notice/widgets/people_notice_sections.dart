@@ -605,7 +605,7 @@ class PeopleNoticeContinueButton extends StatelessWidget {
                 size: 18,
                 color: AppColors.white,
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 4),
               Text(
                 'Continue',
                 style: IntentLoginStyles.onboardingContinue.copyWith(

@@ -58,6 +58,9 @@ abstract final class AppRouteGuard {
         path == AppRoutes.dateFeedback ||
         path == AppRoutes.peopleNotice ||
         path == AppRoutes.safetyCenter ||
+        path == AppRoutes.reportUser ||
+        path == AppRoutes.connectionPlus ||
+        path == AppRoutes.premiumIcon ||
         path == AppRoutes.messages ||
         path == AppRoutes.chat ||
         path == AppRoutes.mbtiAssessment ||

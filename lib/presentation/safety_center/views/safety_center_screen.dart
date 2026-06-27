@@ -45,7 +45,7 @@ class SafetyCenterScreen extends StatelessWidget {
             const SafetyCenterEmergencyNoteCard(),
             const SizedBox(height: 20),
             SafetyCenterBackButton(
-              onPressed: () => _onBack(context),
+              onPressed: () => context.push(AppRoutes.reportUser),
             ),
           ],
         ),

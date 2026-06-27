@@ -44,6 +44,9 @@ import 'package:intent_app/presentation/full_gallery_unlocked/views/full_gallery
 import 'package:intent_app/presentation/date_feedback/views/date_feedback_screen.dart';
 import 'package:intent_app/presentation/people_notice/views/people_notice_screen.dart';
 import 'package:intent_app/presentation/safety_center/views/safety_center_screen.dart';
+import 'package:intent_app/presentation/report_user/views/report_user_screen.dart';
+import 'package:intent_app/presentation/connection_plus/views/connection_plus_screen.dart';
+import 'package:intent_app/presentation/premium_icon/views/premium_icon_screen.dart';
 import 'package:intent_app/presentation/preview_photo/views/preview_photo_screen.dart';
 import 'package:intent_app/presentation/propose_date/views/propose_date_screen.dart';
 import 'package:intent_app/presentation/profile_preview/views/profile_preview_screen.dart';
@@ -382,6 +385,27 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
         child: const SafetyCenterScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.reportUser,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const ReportUserScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.connectionPlus,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const ConnectionPlusScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.premiumIcon,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const PremiumIconScreen(),
       ),
     ),
     GoRoute(
