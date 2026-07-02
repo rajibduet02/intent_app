@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
+import 'package:intent_app/core/utils/auth_snackbar.dart';
 import 'package:intent_app/presentation/onboarding/data/love_language_options.dart';
 import 'package:intent_app/presentation/onboarding/providers/love_language_state.dart';
 
@@ -39,6 +40,15 @@ class LoveLanguageNotifier extends Notifier<LoveLanguageState> {
 
   Future<void> submit() async {
     if (!state.canContinue) {
+      if (state.selectedLanguages.isEmpty) {
+        AuthSnackbar.info(
+          'Please select your top 2 love languages before continuing.',
+        );
+      } else {
+        AuthSnackbar.info(
+          'Please select one more love language. You need 2 total.',
+        );
+      }
       return;
     }
     state = state.copyWith(isLoading: true);

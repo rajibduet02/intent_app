@@ -48,20 +48,21 @@ class Onboarding2Screen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Center(child: OnboardingIntentAccent()),
-            const SizedBox(height: 16),
+            // const SizedBox(height: 16),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'What are you looking for?',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingTitle,
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Help Intent understand your values, lifestyle, and '
               'relationship direction so we can show more meaningful matches.',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingSubtitle,
             ),
-            const SizedBox(height: 28),
+            const SizedBox(height: AppSpacing.lg),
             DecoratedBox(
               decoration: BoxDecoration(
                 color: AppColors.intentCreamDeep,

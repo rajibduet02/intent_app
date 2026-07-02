@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
+import 'package:intent_app/core/utils/auth_snackbar.dart';
 import 'package:intent_app/presentation/onboarding/data/mbti_questions.dart';
 import 'package:intent_app/presentation/onboarding/providers/mbti_assessment_state.dart';
 
@@ -25,6 +26,17 @@ class MbtiAssessmentNotifier extends Notifier<MbtiAssessmentState> {
 
   Future<void> submit() async {
     if (state.answeredCount < MbtiQuestions.totalSections) {
+      if (state.answeredCount == 0) {
+        AuthSnackbar.info(
+          'Please answer the MBTI questions before viewing your result.',
+        );
+      } else {
+        final remaining = MbtiQuestions.totalSections - state.answeredCount;
+        AuthSnackbar.info(
+          'Please answer all sections before viewing your result. '
+          '$remaining remaining.',
+        );
+      }
       return;
     }
     state = state.copyWith(isLoading: true);

@@ -1,3 +1,4 @@
+import 'package:intent_app/app/providers/local_auth_store_provider.dart';
 import 'package:intent_app/app/providers/auth_repository_provider.dart';
 import 'package:intent_app/app/providers/provider_bootstrap.dart';
 import 'package:intent_app/app/providers/storage_service_provider.dart';
@@ -17,6 +18,7 @@ abstract final class AuthStateBootstrap {
     authRefreshListenable.attach(
       authRepository: () => appProviderContainer.read(authRepositoryProvider),
       storageService: () => appProviderContainer.read(storageServiceProvider),
+      localAuthStore: () => appProviderContainer.read(localAuthStoreProvider),
     );
   }
 

@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/providers/auth_repository_provider.dart';
+import 'package:intent_app/app/routes/auth_refresh_listenable.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/core/constants/app_constants.dart';
@@ -62,16 +62,23 @@ class VerifyNotifier extends Notifier<VerifyState> {
     final otp = value.replaceAll(RegExp(r'\D'), '');
     state = state.copyWith(otp: otp);
     if (otp.length == 6) {
-      unawaited(_verifyCode(otp));
+      unawaited(submitOtp());
     }
+  }
+
+  Future<void> submitOtp() async {
+    final otp = state.otp.replaceAll(RegExp(r'\D'), '');
+    if (otp.length != 6) {
+      AuthSnackbar.info('Enter the full 6-digit code to continue.');
+      return;
+    }
+    await _verifyCode(otp);
   }
 
   bool _isDemoCode(String code) => code == AppConstants.demoVerificationCode;
 
-  void _goToOnboarding() {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      appRouter.go(AppRoutes.onboarding1);
-    });
+  void _markVerificationSucceeded() {
+    state = state.copyWith(verificationSucceeded: true, isLoading: false);
   }
 
   Future<void> _verifyCode(String code) async {
@@ -79,9 +86,24 @@ class VerifyNotifier extends Notifier<VerifyState> {
       return;
     }
     _isVerifying = true;
+    state = state.copyWith(isLoading: true);
     try {
       if (_isDemoCode(code)) {
-        _goToOnboarding();
+        final args = state.args;
+        if (args == null) {
+          AuthSnackbar.error('Missing signup details. Please start again.');
+          return;
+        }
+        await _authRepository.registerLocalAccount(
+          email: args.email,
+          password: args.password,
+        );
+        await authRefreshListenable.notifyLocalSessionChanged();
+        AuthSnackbar.success(
+          title: 'Verified',
+          message: 'Your account has been created.',
+        );
+        _markVerificationSucceeded();
         return;
       }
       final args = state.args;
@@ -94,18 +116,26 @@ class VerifyNotifier extends Notifier<VerifyState> {
         code: code,
       );
       if (result.success && result.data != null) {
+        await _authRepository.persistSignupCredentials(
+          email: args.email,
+          password: args.password,
+        );
         AuthSnackbar.success(
           title: 'Verified',
           message: 'Your account has been created.',
         );
-        appRouter.go(AppRoutes.onboarding1);
+        _markVerificationSucceeded();
       } else if (AuthRepository.isSignupOtpAlreadyUsedResponse(result)) {
         final recovery = await _authRepository.ensureSignedInAfterSignupOtp(
           email: args.email,
           password: args.password,
         );
         if (recovery.success) {
-          appRouter.go(AppRoutes.onboarding1);
+          await _authRepository.persistSignupCredentials(
+            email: args.email,
+            password: args.password,
+          );
+          _markVerificationSucceeded();
         } else {
           AuthSnackbar.error(recovery.message ?? 'Verification failed.');
         }
@@ -114,6 +144,9 @@ class VerifyNotifier extends Notifier<VerifyState> {
       }
     } finally {
       _isVerifying = false;
+      if (!state.verificationSucceeded) {
+        state = state.copyWith(isLoading: false);
+      }
     }
   }
 

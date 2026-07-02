@@ -20,7 +20,6 @@ class EnneagramAssessmentScreen extends ConsumerWidget {
     final questions = EnneagramQuestions.questions;
     final total = EnneagramQuestions.totalQuestions;
     final progress = total == 0 ? 0.0 : state.answeredCount / total;
-    final isComplete = state.answeredCount >= total;
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
@@ -49,8 +48,7 @@ class EnneagramAssessmentScreen extends ConsumerWidget {
             const SizedBox(height: 12),
             EnneagramResultButton(
               isLoading: state.isLoading,
-              onPressed:
-                  isComplete ? () => unawaited(notifier.submit()) : null,
+              onPressed: () => unawaited(notifier.submit()),
             ),
           ],
         ),

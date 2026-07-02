@@ -11,4 +11,11 @@ abstract final class StorageKeys {
 
   /// Home / search — persisted list of query strings (order: newest first).
   static const String recentSearches = 'recent_searches';
+
+  /// Active local-only session (demo / offline accounts without Firebase).
+  static const String localSessionEmail = 'local_session_email';
+
+  /// Remember-me login (email in prefs; password in secure storage).
+  static const String rememberedEmail = 'remembered_email';
+  static const String rememberMeEnabled = 'remember_me_enabled';
 }

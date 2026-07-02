@@ -19,6 +19,7 @@ import 'package:intent_app/core/constants/google_sign_in_constants.dart';
 import 'package:intent_app/core/error/exceptions.dart';
 import 'package:intent_app/core/firebase/firebase_api_logger.dart';
 import 'package:intent_app/core/network/api_client.dart';
+import 'package:intent_app/core/services/local_auth_store.dart';
 import 'package:intent_app/core/services/storage_service.dart';
 import 'package:intent_app/data/models/response_model.dart';
 import 'package:intent_app/data/models/user_model.dart';
@@ -40,7 +41,8 @@ class AuthRepository {
 
   AuthRepository(
     this._api,
-    this._storage, {
+    this._storage,
+    this._localAuthStore, {
     FirebaseAuth? auth,
     FirebaseFirestore? firestore,
     FirebaseFunctions? functions,
@@ -50,6 +52,7 @@ class AuthRepository {
 
   final ApiClient _api;
   final StorageService _storage;
+  final LocalAuthStore _localAuthStore;
   final FirebaseAuth? _authOverride;
   final FirebaseFirestore? _firestoreOverride;
   final FirebaseFunctions? _functionsOverride;
@@ -97,10 +100,19 @@ class AuthRepository {
   bool? _memoryOnboardingComplete;
 
   bool get isLoggedIn {
+    if (_localAuthStore.hasActiveSession) {
+      return true;
+    }
     if (Firebase.apps.isEmpty) {
       return false;
     }
     return _auth.currentUser != null;
+  }
+
+  bool _shouldFallbackToLocalLogin(String code) {
+    return code == 'user-not-found' ||
+        code == 'wrong-password' ||
+        code == 'invalid-credential';
   }
 
   String _mapError(Object e) {
@@ -270,40 +282,131 @@ class AuthRepository {
     }
   }
 
-  Future<ResponseModel<UserModel>> login(String email, String password) async {
-    try {
-      final cred = await FirebaseApiLogger.traceAuth(
-        operation: 'signInWithEmailAndPassword',
-        context: 'email: ${email.trim()}',
-        action: () => _auth.signInWithEmailAndPassword(
-          email: email.trim(),
-          password: password,
-        ),
+  Future<void> _persistLoginCredentials({
+    required String email,
+    required String password,
+    required bool rememberMe,
+    String? existingUserId,
+  }) async {
+    if (rememberMe) {
+      await _localAuthStore.saveRememberedCredentials(
+        email: email,
+        password: password,
       );
-      final user = cred.user;
-      if (user == null) {
-        return ResponseModel.failure('Sign-in failed.');
-      }
-      await FirebaseApiLogger.traceFirestore(
-        operation: 'set(merge)',
-        path: 'users/${user.uid}',
-        action: () => _firestore.collection('users').doc(user.uid).set({
-          'lastLoginAt': FieldValue.serverTimestamp(),
-        }, SetOptions(merge: true)),
-      );
-      await _syncStorageFromUser(user);
-      return ResponseModel.success(
-        UserModel(
-          id: user.uid,
-          email: user.email ?? email.trim(),
-          name: user.displayName,
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      return ResponseModel.failure(_firebaseAuthMessage(e));
-    } catch (e) {
-      return ResponseModel.failure(_mapError(e));
+    } else {
+      await _localAuthStore.clearRememberedCredentials();
     }
+    await _localAuthStore.registerAccount(
+      email: email,
+      password: password,
+      existingUserId: existingUserId,
+    );
+  }
+
+  Future<({String? email, String? password, bool rememberMe})>
+  getRememberedCredentials() {
+    return _localAuthStore.readRememberedCredentials();
+  }
+
+  Future<void> persistSignupCredentials({
+    required String email,
+    required String password,
+  }) async {
+    String? existingUserId;
+    if (Firebase.apps.isNotEmpty) {
+      existingUserId = _auth.currentUser?.uid;
+    } else {
+      existingUserId = await _localAuthStore.userIdForEmail(email);
+    }
+    await _persistLoginCredentials(
+      email: email,
+      password: password,
+      rememberMe: true,
+      existingUserId: existingUserId,
+    );
+  }
+
+  Future<void> registerLocalAccount({
+    required String email,
+    required String password,
+  }) async {
+    await _localAuthStore.registerAccount(email: email, password: password);
+    await _localAuthStore.signIn(email, password);
+    await _localAuthStore.saveRememberedCredentials(
+      email: email,
+      password: password,
+    );
+  }
+
+  Future<ResponseModel<UserModel>> login(
+    String email,
+    String password, {
+    bool rememberMe = true,
+  }) async {
+    final trimmed = email.trim();
+    ResponseModel<UserModel>? firebaseFailure;
+
+    if (Firebase.apps.isNotEmpty) {
+      try {
+        final cred = await FirebaseApiLogger.traceAuth(
+          operation: 'signInWithEmailAndPassword',
+          context: 'email: $trimmed',
+          action: () => _auth.signInWithEmailAndPassword(
+            email: trimmed,
+            password: password,
+          ),
+        );
+        final user = cred.user;
+        if (user == null) {
+          return ResponseModel.failure('Sign-in failed.');
+        }
+        await FirebaseApiLogger.traceFirestore(
+          operation: 'set(merge)',
+          path: 'users/${user.uid}',
+          action: () => _firestore.collection('users').doc(user.uid).set({
+            'lastLoginAt': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true)),
+        );
+        await _syncStorageFromUser(user);
+        await _persistLoginCredentials(
+          email: trimmed,
+          password: password,
+          rememberMe: rememberMe,
+          existingUserId: user.uid,
+        );
+        return ResponseModel.success(
+          UserModel(
+            id: user.uid,
+            email: user.email ?? trimmed,
+            name: user.displayName,
+          ),
+        );
+      } on FirebaseAuthException catch (e) {
+        if (!_shouldFallbackToLocalLogin(e.code)) {
+          return ResponseModel.failure(_firebaseAuthMessage(e));
+        }
+        firebaseFailure = ResponseModel.failure(_firebaseAuthMessage(e));
+      } catch (e) {
+        return ResponseModel.failure(_mapError(e));
+      }
+    }
+
+    final signedIn = await _localAuthStore.signIn(trimmed, password);
+    if (signedIn) {
+      final userId = await _localAuthStore.userIdForEmail(trimmed) ?? '';
+      await _persistLoginCredentials(
+        email: trimmed,
+        password: password,
+        rememberMe: rememberMe,
+        existingUserId: userId,
+      );
+      return ResponseModel.success(
+        UserModel(id: userId, email: trimmed, name: null),
+      );
+    }
+
+    return firebaseFailure ??
+        ResponseModel.failure('Invalid email or password.');
   }
 
   /// Signs in with Google (Firebase Auth). Ensures `users` / `profiles` docs exist.
@@ -740,23 +843,63 @@ class AuthRepository {
   /// True when [profiles.onboardingComplete] is true or a username was saved
   /// (identity step done); handles profiles created before the flag was written.
   Future<bool> isProfileOnboardingComplete({bool forceRefresh = false}) async {
-    final uid = _auth.currentUser?.uid;
-    if (uid == null) {
+    if (Firebase.apps.isNotEmpty) {
+      final uid = _auth.currentUser?.uid;
+      if (uid != null) {
+        if (!forceRefresh) {
+          final cached = _readCachedOnboardingComplete(uid);
+          if (cached != null) {
+            return cached;
+          }
+        }
+        try {
+          final snap = await _firestore.collection('profiles').doc(uid).get();
+          final done = _profileDataIndicatesOnboardingComplete(snap.data());
+          await _persistOnboardingCache(uid, done);
+          return done;
+        } catch (_) {
+          return false;
+        }
+      }
+    }
+
+    final localEmail = _localAuthStore.activeEmail;
+    if (localEmail == null) {
+      return false;
+    }
+    final localUid = await _localAuthStore.userIdForEmail(localEmail);
+    if (localUid == null) {
       return false;
     }
     if (!forceRefresh) {
-      final cached = _readCachedOnboardingComplete(uid);
+      final cached = _readCachedOnboardingComplete(localUid);
       if (cached != null) {
         return cached;
       }
     }
-    try {
-      final snap = await _firestore.collection('profiles').doc(uid).get();
-      final done = _profileDataIndicatesOnboardingComplete(snap.data());
-      await _persistOnboardingCache(uid, done);
-      return done;
-    } catch (_) {
-      return false;
+    final done = await _localAuthStore.isOnboardingComplete(localEmail);
+    await _persistOnboardingCache(localUid, done);
+    return done;
+  }
+
+  Future<void> markOnboardingComplete() async {
+    if (Firebase.apps.isNotEmpty) {
+      final uid = _auth.currentUser?.uid;
+      if (uid != null) {
+        await mergeProfileOnboardingFields(
+          uid: uid,
+          onboardingComplete: true,
+        );
+      }
+    }
+
+    final localEmail = _localAuthStore.activeEmail;
+    if (localEmail != null) {
+      await _localAuthStore.setOnboardingComplete(localEmail, true);
+      final localUid = await _localAuthStore.userIdForEmail(localEmail);
+      if (localUid != null) {
+        await _persistOnboardingCache(localUid, true);
+      }
     }
   }
 
@@ -818,12 +961,96 @@ class AuthRepository {
     try {
       await GoogleSignIn().signOut();
     } catch (_) {}
-    await FirebaseApiLogger.traceAuth(
-      operation: 'signOut',
-      action: () => _auth.signOut(),
-    );
+    await _localAuthStore.clearActiveSession();
     await clearOnboardingCache();
     await _storage.clearSession();
+    if (Firebase.apps.isNotEmpty) {
+      await FirebaseApiLogger.traceAuth(
+        operation: 'signOut',
+        action: () => _auth.signOut(),
+      );
+    }
+  }
+
+  Future<String?> _resolveCurrentAccountEmail() async {
+    if (Firebase.apps.isNotEmpty) {
+      final email = _auth.currentUser?.email?.trim();
+      if (email != null && email.isNotEmpty) {
+        return email;
+      }
+    }
+    return _localAuthStore.activeEmail ?? _localAuthStore.rememberedEmail;
+  }
+
+  Future<void> _deleteFirestoreUserData(String uid) async {
+    if (Firebase.apps.isEmpty) {
+      return;
+    }
+    final profileRef = _firestore.collection('profiles').doc(uid);
+    final profileSnap = await profileRef.get();
+    final username = (profileSnap.data()?['username'] as String?)?.trim() ?? '';
+    final batch = _firestore.batch();
+    batch.delete(profileRef);
+    batch.delete(_firestore.collection('users').doc(uid));
+    if (username.isNotEmpty) {
+      batch.delete(
+        _firestore.collection('usernames').doc(username.toLowerCase()),
+      );
+    }
+    await batch.commit();
+  }
+
+  /// Permanently deletes the signed-in account (Firebase + local device data).
+  Future<ResponseModel<bool>> deleteAccount() async {
+    try {
+      final email = await _resolveCurrentAccountEmail();
+
+      if (Firebase.apps.isNotEmpty) {
+        final user = _auth.currentUser;
+        if (user != null) {
+          final uid = user.uid;
+          try {
+            await _deleteFirestoreUserData(uid);
+            await FirebaseApiLogger.traceAuth(
+              operation: 'User.delete',
+              context: 'uid: $uid',
+              action: () => user.delete(),
+            );
+          } on FirebaseAuthException catch (e) {
+            if (e.code == 'requires-recent-login') {
+              return ResponseModel.failure(
+                'For your security, please sign in again before deleting '
+                'your account.',
+              );
+            }
+            return ResponseModel.failure(_firebaseAuthMessage(e));
+          }
+        }
+      }
+
+      if (email != null && email.isNotEmpty) {
+        await _localAuthStore.deleteAccount(email);
+      }
+      await _localAuthStore.clearRememberedCredentials();
+      await _localAuthStore.clearActiveSession();
+      await clearOnboardingCache();
+      await _storage.clearSession();
+
+      if (Firebase.apps.isNotEmpty) {
+        try {
+          await FirebaseApiLogger.traceAuth(
+            operation: 'signOut',
+            action: () => _auth.signOut(),
+          );
+        } catch (_) {}
+      }
+
+      return ResponseModel.success(true);
+    } on FirebaseException catch (e) {
+      return ResponseModel.failure(e.message ?? 'Failed to delete account');
+    } catch (e) {
+      return ResponseModel.failure(_mapError(e));
+    }
   }
 
   String _genderLabel(int index) {

@@ -350,7 +350,7 @@ abstract final class IntentLoginStyles {
       );
 
   static TextStyle get onboardingCardFieldLabel => GoogleFonts.inter(
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: FontWeight.w600,
         color: AppColors.intentText,
         height: 1.2,
@@ -455,5 +455,27 @@ abstract final class IntentLoginStyles {
         color: AppColors.white,
         height: 1.2,
         letterSpacing: 1.2,
+      );
+
+  // --- Snackbar ---
+  static TextStyle get snackbarTitle => GoogleFonts.inter(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        color: AppColors.intentText,
+        height: 1.2,
+      );
+
+  static TextStyle get snackbarMessage => GoogleFonts.inter(
+        fontSize: 13,
+        fontWeight: FontWeight.w400,
+        color: AppColors.intentTextSoft,
+        height: 1.35,
+      );
+
+  static TextStyle get snackbarMessageStandalone => GoogleFonts.inter(
+        fontSize: 13,
+        fontWeight: FontWeight.w400,
+        color: AppColors.intentText,
+        height: 1.35,
       );
 }

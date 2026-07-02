@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/providers/auth_repository_provider.dart';
 import 'package:intent_app/app/routes/app_router.dart';
+import 'package:intent_app/app/routes/auth_refresh_listenable.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/core/utils/auth_snackbar.dart';
 import 'package:intent_app/data/repositories/auth_repository.dart';
@@ -55,18 +56,27 @@ class AuthNotifier extends Notifier<AuthState> {
     required GlobalKey<FormState> formKey,
     required TextEditingController emailController,
     required TextEditingController passwordController,
+    bool rememberMe = true,
   }) async {
     if (!(formKey.currentState?.validate() ?? false)) {
       return;
     }
     state = state.copyWith(isLoading: true);
     try {
+      final email = emailController.text.trim();
+      final password = passwordController.text;
       final result = await _authRepository.login(
-        emailController.text.trim(),
-        passwordController.text,
+        email,
+        password,
+        rememberMe: rememberMe,
       );
       if (result.success && result.data != null) {
+        await authRefreshListenable.notifyLocalSessionChanged();
+        final complete = await _authRepository.isProfileOnboardingComplete();
         AuthSnackbar.success(title: 'Success', message: 'Login Successfully');
+        appRouter.go(
+          complete ? AppRoutes.discover : AppRoutes.onboarding1,
+        );
       } else {
         AuthSnackbar.error(result.message ?? 'Something went wrong');
       }

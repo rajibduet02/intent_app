@@ -28,6 +28,15 @@ abstract final class AuthSnackbar {
     );
   }
 
+  static void info(String message, {String title = 'Reminder'}) {
+    _show(
+      variant: AppSnackbarVariant.info,
+      title: title,
+      message: message,
+      displayDuration: const Duration(seconds: 3),
+    );
+  }
+
   static void _show({
     required AppSnackbarVariant variant,
     required String title,

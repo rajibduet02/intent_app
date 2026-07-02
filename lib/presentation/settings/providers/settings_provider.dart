@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intent_app/app/providers/auth_repository_provider.dart';
+import 'package:intent_app/app/routes/auth_refresh_listenable.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/theme/theme.dart';
@@ -46,6 +47,7 @@ class SettingsNotifier extends Notifier<SettingsState> {
     state = state.copyWith(isLoggingOut: true);
     try {
       await ref.read(authRepositoryProvider).logout();
+      await authRefreshListenable.notifyLocalSessionChanged();
     } catch (_) {
       // UI flow: still return to login if sign-out fails locally.
     } finally {
@@ -112,14 +114,22 @@ class SettingsNotifier extends Notifier<SettingsState> {
 
     state = state.copyWith(isDeletingAccount: true);
     try {
-      await Future<void>.delayed(const Duration(milliseconds: 400));
-      AuthSnackbar.success(
-        title: 'Account deletion requested',
-        message:
-            'Your account deletion request has been received. We will '
-            'process it shortly.',
-      );
-      appRouter.go(AppRoutes.auth);
+      final result = await ref.read(authRepositoryProvider).deleteAccount();
+      if (!context.mounted) {
+        return;
+      }
+      if (result.success) {
+        await authRefreshListenable.notifyLocalSessionChanged();
+        AuthSnackbar.success(
+          title: 'Account deleted',
+          message: 'Your account has been permanently deleted.',
+        );
+        appRouter.go(AppRoutes.auth);
+      } else {
+        AuthSnackbar.error(
+          result.message ?? 'Could not delete your account. Please try again.',
+        );
+      }
     } finally {
       state = state.copyWith(isDeletingAccount: false);
     }

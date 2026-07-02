@@ -23,6 +23,7 @@ class MatchesScreen extends StatelessWidget {
     final matches = MatchProfile.samples;
 
     return DiscoverScaffold(
+      topBar: const MatchesHeader(),
       bottomNavigationBar: DiscoverBottomNav(
         selectedTab: CustomBottomNavTab.compatibility,
         onTabSelected: (tab) => navigateCustomBottomNavTab(context, tab),
@@ -34,8 +35,7 @@ class MatchesScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const MatchesHeader(),
-            const SizedBox(height: 14),
+            const SizedBox(height: 6),
             MatchesTabBar(
               selectedTab: MatchesScreenTab.matches,
               matchesCount: matchesCount,

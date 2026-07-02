@@ -108,6 +108,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
     final conversations = _filteredConversations;
 
     return DiscoverScaffold(
+      topBar: const MessagesHeader(),
       bottomNavigationBar: DiscoverBottomNav(
         selectedTab: CustomBottomNavTab.messages,
         onTabSelected: (tab) => navigateCustomBottomNavTab(context, tab),
@@ -119,8 +120,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const MessagesHeader(),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             MessagesFilterChips(
               selectedFilter: _selectedFilter,
               onFilterSelected: (filter) =>

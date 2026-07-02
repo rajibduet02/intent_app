@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
+import 'package:intent_app/core/utils/auth_snackbar.dart';
 import 'package:intent_app/presentation/onboarding/data/enneagram_questions.dart';
 import 'package:intent_app/presentation/onboarding/providers/enneagram_assessment_state.dart';
 
@@ -25,6 +26,18 @@ class EnneagramAssessmentNotifier extends Notifier<EnneagramAssessmentState> {
 
   Future<void> submit() async {
     if (state.answeredCount < EnneagramQuestions.totalQuestions) {
+      if (state.answeredCount == 0) {
+        AuthSnackbar.info(
+          'Please answer the Enneagram questions before viewing your result.',
+        );
+      } else {
+        final remaining =
+            EnneagramQuestions.totalQuestions - state.answeredCount;
+        AuthSnackbar.info(
+          'Please answer all questions before viewing your result. '
+          '$remaining remaining.',
+        );
+      }
       return;
     }
     state = state.copyWith(isLoading: true);

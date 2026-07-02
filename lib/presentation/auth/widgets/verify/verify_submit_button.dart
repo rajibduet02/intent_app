@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'package:intent_app/app/theme/theme.dart';
 
-/// Decorative verify affordance. Verification is triggered automatically when
-/// the OTP is complete; this control is not interactive.
+/// Verify affordance. Verification runs automatically when the OTP is
+/// complete; this control also submits when tapped.
 class VerifySubmitButton extends StatelessWidget {
-  const VerifySubmitButton({super.key});
+  const VerifySubmitButton({
+    super.key,
+    this.onPressed,
+    this.enabled = false,
+    this.isLoading = false,
+  });
+
+  final VoidCallback? onPressed;
+  final bool enabled;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -38,18 +47,36 @@ class VerifySubmitButton extends StatelessWidget {
               color: AppColors.intentForest.withValues(alpha: 0.08),
             ),
           ),
-          Container(
-            width: 64,
-            height: 64,
-            decoration: const BoxDecoration(
-              color: AppColors.intentForest,
-              shape: BoxShape.circle,
-            ),
-            alignment: Alignment.center,
-            child: const Icon(
-              Icons.check,
-              color: AppColors.intentGold,
-              size: 28,
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: enabled && !isLoading ? onPressed : null,
+              customBorder: const CircleBorder(),
+              child: Container(
+                width: 64,
+                height: 64,
+                decoration: BoxDecoration(
+                  color: enabled
+                      ? AppColors.intentForest
+                      : AppColors.intentForest.withValues(alpha: 0.45),
+                  shape: BoxShape.circle,
+                ),
+                alignment: Alignment.center,
+                child: isLoading
+                    ? const SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppColors.intentGold,
+                        ),
+                      )
+                    : const Icon(
+                        Icons.check,
+                        color: AppColors.intentGold,
+                        size: 28,
+                      ),
+              ),
             ),
           ),
         ],

@@ -342,7 +342,7 @@ class _PrivacyNote extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 0, right: AppSpacing.xs),
+          padding: const EdgeInsets.only(top: 0, right: 0),
           child: Icon(
             Icons.verified_user_outlined,
             size: 16,

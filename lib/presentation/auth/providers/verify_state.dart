@@ -10,6 +10,7 @@ class VerifyState {
     required this.isLoading,
     required this.isResending,
     required this.canResend,
+    this.verificationSucceeded = false,
   });
 
   final VerifyRouteArgs? args;
@@ -18,6 +19,7 @@ class VerifyState {
   final bool isLoading;
   final bool isResending;
   final bool canResend;
+  final bool verificationSucceeded;
 
   factory VerifyState.initial() => const VerifyState(
         otp: '',
@@ -34,6 +36,7 @@ class VerifyState {
     bool? isLoading,
     bool? isResending,
     bool? canResend,
+    bool? verificationSucceeded,
   }) {
     return VerifyState(
       args: args ?? this.args,
@@ -42,6 +45,8 @@ class VerifyState {
       isLoading: isLoading ?? this.isLoading,
       isResending: isResending ?? this.isResending,
       canResend: canResend ?? this.canResend,
+      verificationSucceeded:
+          verificationSucceeded ?? this.verificationSucceeded,
     );
   }
 

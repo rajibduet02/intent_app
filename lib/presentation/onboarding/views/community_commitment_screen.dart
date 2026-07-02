@@ -22,7 +22,7 @@ class CommunityCommitmentScreen extends ConsumerWidget {
         child: OnboardingContinueButton(
           label: 'I Agree',
           isLoading: state.isLoading,
-          onPressed: state.canAgree ? () => unawaited(notifier.submit()) : null,
+          onPressed: () => unawaited(notifier.submit()),
         ),
       ),
       child: SingleChildScrollView(

@@ -50,7 +50,7 @@ class Onboarding3Screen extends ConsumerWidget {
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingTitle,
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Tell us more about your future plans and everyday lifestyle '
               'so Intent can show more meaningful matches.',

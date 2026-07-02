@@ -20,7 +20,6 @@ class AttachmentStyleScreen extends ConsumerWidget {
     final questions = AttachmentStyleQuestions.questions;
     final total = AttachmentStyleQuestions.totalQuestions;
     final progress = total == 0 ? 0.0 : state.answeredCount / total;
-    final isComplete = state.answeredCount >= total;
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
@@ -49,8 +48,7 @@ class AttachmentStyleScreen extends ConsumerWidget {
             const SizedBox(height: 12),
             AttachmentResultButton(
               isLoading: state.isLoading,
-              onPressed:
-                  isComplete ? () => unawaited(notifier.submit()) : null,
+              onPressed: () => unawaited(notifier.submit()),
             ),
           ],
         ),

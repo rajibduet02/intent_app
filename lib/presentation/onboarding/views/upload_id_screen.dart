@@ -32,7 +32,7 @@ class _UploadIdScreenState extends ConsumerState<UploadIdScreen> {
         child: OnboardingContinueButton(
           label: 'Submit ID',
           isLoading: state.isLoading,
-          onPressed: state.canSubmit ? () => unawaited(notifier.submit()) : null,
+          onPressed: () => unawaited(notifier.submit()),
         ),
       ),
       child: SingleChildScrollView(

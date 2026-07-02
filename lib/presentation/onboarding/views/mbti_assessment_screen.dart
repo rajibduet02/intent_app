@@ -20,7 +20,6 @@ class MbtiAssessmentScreen extends ConsumerWidget {
     final questions = MbtiQuestions.sections;
     final total = MbtiQuestions.totalSections;
     final progress = total == 0 ? 0.0 : state.answeredCount / total;
-    final isComplete = state.answeredCount >= total;
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
@@ -49,8 +48,7 @@ class MbtiAssessmentScreen extends ConsumerWidget {
             const SizedBox(height: 12),
             MbtiSubmitButton(
               isLoading: state.isLoading,
-              onPressed:
-                  isComplete ? () => unawaited(notifier.submit()) : null,
+              onPressed: () => unawaited(notifier.submit()),
             ),
           ],
         ),

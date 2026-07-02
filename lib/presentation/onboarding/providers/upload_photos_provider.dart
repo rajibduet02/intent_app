@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
+import 'package:intent_app/core/utils/auth_snackbar.dart';
 import 'package:intent_app/presentation/onboarding/providers/upload_photos_state.dart';
 
 final uploadPhotosProvider =
@@ -71,6 +72,20 @@ class UploadPhotosNotifier extends Notifier<UploadPhotosState> {
 
   Future<void> submit() async {
     if (!state.canContinue) {
+      if (state.photoCount == 0) {
+        AuthSnackbar.info(
+          'Please upload at least ${UploadPhotosState.minimumPhotos} photos '
+          'before continuing.',
+        );
+      } else {
+        final remaining =
+            UploadPhotosState.minimumPhotos - state.photoCount;
+        AuthSnackbar.info(
+          'Please upload $remaining more '
+          '${remaining == 1 ? 'photo' : 'photos'}. '
+          'You need at least ${UploadPhotosState.minimumPhotos} total.',
+        );
+      }
       return;
     }
     state = state.copyWith(

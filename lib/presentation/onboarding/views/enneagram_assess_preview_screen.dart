@@ -132,6 +132,7 @@ class _ResultCard extends StatelessWidget {
                   Text(
                     'Preview',
                     style: IntentLoginStyles.onboardingSubtitle.copyWith(
+                      fontSize: 10,
                       fontWeight: FontWeight.w600,
                       color: AppColors.intentGold,
                     ),
@@ -139,7 +140,7 @@ class _ResultCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               'Type 2 — The \nSupportive Partner',
               textAlign: TextAlign.center,

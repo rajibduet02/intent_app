@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
+import 'package:intent_app/core/utils/auth_snackbar.dart';
 import 'package:intent_app/presentation/onboarding/providers/community_commitment_state.dart';
 
 final communityCommitmentProvider =
@@ -24,6 +25,18 @@ class CommunityCommitmentNotifier extends Notifier<CommunityCommitmentState> {
 
   Future<void> submit() async {
     if (!state.canAgree) {
+      final remaining =
+          state.agreements.where((agreed) => !agreed).length;
+      if (remaining == CommunityCommitmentState.commitmentItems.length) {
+        AuthSnackbar.info(
+          'Please agree to all community commitments before continuing.',
+        );
+      } else {
+        AuthSnackbar.info(
+          'Please agree to all items before continuing. '
+          '$remaining remaining.',
+        );
+      }
       return;
     }
     state = state.copyWith(isLoading: true);

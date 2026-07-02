@@ -41,6 +41,15 @@ class _VerifyScreenState extends ConsumerState<VerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<bool>(
+      verifyProvider.select((s) => s.verificationSucceeded),
+      (previous, succeeded) {
+        if (succeeded && context.mounted) {
+          context.go(AppRoutes.onboarding1);
+        }
+      },
+    );
+
     final verifyNotifier = ref.read(verifyProvider.notifier);
     final verifyState = ref.watch(verifyProvider);
     final args = verifyState.args;
@@ -146,7 +155,11 @@ class _VerifyScreenState extends ConsumerState<VerifyScreen> {
               ],
             ),
             const SizedBox(height: 32),
-            const VerifySubmitButton(),
+            VerifySubmitButton(
+              isLoading: verifyState.isLoading,
+              enabled: verifyState.otp.length == 6 && !verifyState.isLoading,
+              onPressed: () => unawaited(verifyNotifier.submitOtp()),
+            ),
             const SizedBox(height: 16),
             const VerifyFooterMessage(),
           ],

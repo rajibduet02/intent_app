@@ -30,6 +30,7 @@ import 'package:intent_app/presentation/onboarding/views/safety_starts_screen.da
 import 'package:intent_app/presentation/onboarding/views/face_verification_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/community_commitment_screen.dart';
 import 'package:intent_app/presentation/discover/views/discover_screen.dart';
+import 'package:intent_app/presentation/filter/views/filter_screen.dart';
 import 'package:intent_app/presentation/chat/views/chat_screen.dart';
 import 'package:intent_app/presentation/compatibility/views/compatibility_overview_screen.dart';
 import 'package:intent_app/presentation/matches/views/matches_screen.dart';
@@ -250,6 +251,13 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
         child: const DiscoverScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.filter,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const FilterScreen(),
       ),
     ),
     GoRoute(

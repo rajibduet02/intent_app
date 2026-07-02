@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intent_app/app/providers/auth_repository_provider.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/core/utils/validators.dart';
 import 'package:intent_app/presentation/auth/providers/auth_provider.dart';
@@ -28,6 +29,31 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final FocusNode _passwordFocus = FocusNode();
 
   bool _rememberMe = true;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unawaited(_loadRememberedCredentials());
+    });
+  }
+
+  Future<void> _loadRememberedCredentials() async {
+    final creds = await ref.read(authRepositoryProvider).getRememberedCredentials();
+    if (!mounted) {
+      return;
+    }
+    if (creds.rememberMe) {
+      if (creds.email != null) {
+        _emailController.text = creds.email!;
+      }
+      if (creds.password != null) {
+        _passwordController.text = creds.password!;
+      }
+      _rememberMe = true;
+    }
+    setState(() {});
+  }
 
   @override
   void dispose() {
@@ -81,6 +107,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 formKey: _formKey,
                 emailController: _emailController,
                 passwordController: _passwordController,
+                rememberMe: _rememberMe,
                 authNotifier: authNotifier,
               ),
               const SizedBox(height: 24),
@@ -205,12 +232,14 @@ class _LoginContinueButton extends ConsumerWidget {
     required this.formKey,
     required this.emailController,
     required this.passwordController,
+    required this.rememberMe,
     required this.authNotifier,
   });
 
   final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final bool rememberMe;
   final AuthNotifier authNotifier;
 
   @override
@@ -223,6 +252,7 @@ class _LoginContinueButton extends ConsumerWidget {
           formKey: formKey,
           emailController: emailController,
           passwordController: passwordController,
+          rememberMe: rememberMe,
         ),
       ),
     );

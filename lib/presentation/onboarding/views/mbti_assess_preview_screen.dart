@@ -29,7 +29,7 @@ class MbtiAssessPreviewScreen extends StatelessWidget {
             _PreviewHeader(),
             SizedBox(height: AppSpacing.xs),
             _TopIntro(),
-            SizedBox(height: 20),
+            SizedBox(height: 24),
             _ResultCard(),
             SizedBox(height: 16),
             _ConnectionPlusCard(),
@@ -114,7 +114,7 @@ class _ResultCard extends StatelessWidget {
                   child: Text(
                     'PREVIEW',
                     style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                      fontSize: 12,
+                      fontSize: 10,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

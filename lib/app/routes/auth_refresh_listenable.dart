@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intent_app/app/theme/app_animations.dart';
+import 'package:intent_app/core/services/local_auth_store.dart';
 import 'package:intent_app/core/services/storage_service.dart';
 import 'package:intent_app/data/repositories/auth_repository.dart';
 
@@ -19,9 +20,11 @@ class AuthRefreshListenable extends ChangeNotifier {
 
   AuthRepository Function()? _authRepository;
   StorageService Function()? _storageService;
+  LocalAuthStore Function()? _localAuthStore;
 
   User? _user;
   bool? _onboardingComplete;
+  bool _hasLocalSession = false;
   bool _splashResolving = false;
   bool _isHandlingAuthEvent = false;
 
@@ -29,25 +32,33 @@ class AuthRefreshListenable extends ChangeNotifier {
 
   bool? get onboardingComplete => _onboardingComplete;
 
-  bool get isSignedIn => _user != null;
+  bool get isSignedIn => _user != null || _hasLocalSession;
 
   bool get splashResolving => _splashResolving;
 
   void attach({
     required AuthRepository Function() authRepository,
     required StorageService Function() storageService,
+    required LocalAuthStore Function() localAuthStore,
   }) {
     final auth = _resolveAuth();
-    if (auth == null) {
-      return;
-    }
 
     _authRepository = authRepository;
     _storageService = storageService;
+    _localAuthStore = localAuthStore;
+    _hasLocalSession = localAuthStore().hasActiveSession;
+
+    if (auth == null) {
+      if (_hasLocalSession) {
+        unawaited(refreshOnboardingStatus());
+      }
+      return;
+    }
+
     _user = auth.currentUser;
     _subscription?.cancel();
     _subscription = auth.authStateChanges().listen(_scheduleAuthHandling);
-    if (_user != null) {
+    if (_user != null || _hasLocalSession) {
       unawaited(refreshOnboardingStatus());
     }
   }
@@ -73,13 +84,26 @@ class AuthRefreshListenable extends ChangeNotifier {
   /// Call after repository updates onboarding cache (identity, profile merge, etc.).
   Future<void> refreshOnboardingStatus({bool forceRefresh = false}) async {
     final repo = _authRepository?.call();
-    if (repo == null || _user == null) {
+    if (repo == null) {
+      return;
+    }
+    if (_user == null && !_hasLocalSession) {
       return;
     }
     _onboardingComplete = await repo.isProfileOnboardingComplete(
       forceRefresh: forceRefresh,
     );
     notifyListeners();
+  }
+
+  /// Notifies listeners after a local-only session sign-in (no Firebase user).
+  Future<void> notifyLocalSessionChanged() async {
+    _hasLocalSession = _localAuthStore?.call().hasActiveSession ?? false;
+    if (_hasLocalSession) {
+      await refreshOnboardingStatus();
+    } else {
+      notifyListeners();
+    }
   }
 
   void _scheduleAuthHandling(User? user) {
@@ -96,12 +120,15 @@ class AuthRefreshListenable extends ChangeNotifier {
     _isHandlingAuthEvent = true;
     try {
       _user = user;
+      _hasLocalSession = _localAuthStore?.call().hasActiveSession ?? false;
       if (user == null) {
         _onboardingComplete = null;
         final repo = _authRepository?.call();
         final storage = _storageService?.call();
-        await repo?.clearOnboardingCache();
-        await storage?.clearSession();
+        if (!_hasLocalSession) {
+          await repo?.clearOnboardingCache();
+          await storage?.clearSession();
+        }
         notifyListeners();
         return;
       }
@@ -125,6 +152,7 @@ class AuthRefreshListenable extends ChangeNotifier {
     _subscription = null;
     _authRepository = null;
     _storageService = null;
+    _localAuthStore = null;
     super.dispose();
   }
 }

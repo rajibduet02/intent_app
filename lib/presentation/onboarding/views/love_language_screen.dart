@@ -25,9 +25,7 @@ class LoveLanguageScreen extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           isLoading: state.isLoading,
-          onPressed: state.canContinue
-              ? () => unawaited(notifier.submit())
-              : null,
+          onPressed: () => unawaited(notifier.submit()),
         ),
       ),
       child: SingleChildScrollView(

@@ -16,6 +16,10 @@ class DiscoverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DiscoverScaffold(
+      topBar: DiscoverTopBar(
+        onFiltersTap: () => context.push(AppRoutes.filter),
+        onNotificationsTap: () => context.push(AppRoutes.notifications),
+      ),
       bottomNavigationBar: DiscoverBottomNav(
         selectedTab: CustomBottomNavTab.discover,
         onTabSelected: (tab) => navigateCustomBottomNavTab(context, tab),
@@ -27,10 +31,6 @@ class DiscoverScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            DiscoverTopBar(
-              onNotificationsTap: () => context.push(AppRoutes.notifications),
-            ),
-            const SizedBox(height: AppSpacing.sm),
             const _PhotosHiddenBadge(),
             const SizedBox(height: AppSpacing.lg),
             DiscoverMatchCardList(

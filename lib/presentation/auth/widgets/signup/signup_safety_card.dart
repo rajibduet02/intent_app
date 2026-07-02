@@ -50,8 +50,8 @@ class SignupSafetyCard extends StatelessWidget {
                   ),
                 ),
                 Positioned(
+                  top: -2,
                   right: -2,
-                  bottom: -2,
                   child: Container(
                     width: 18,
                     height: 18,

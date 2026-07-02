@@ -28,6 +28,7 @@ abstract final class AppRoutes {
   static const String communityCommitment = '/onboarding/community-commitment';
   static const String intentionSuccess = '/onboarding/intention-success';
   static const String discover = '/discover';
+  static const String filter = '/filter';
   static const String profile = '/profile';
   static const String editProfile = '/profile/edit';
   static const String settings = '/settings';

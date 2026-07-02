@@ -16,6 +16,10 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DiscoverScaffold(
+      topBar: ProfileScreenHeader(
+        onBack: () => context.go(AppRoutes.discover),
+        onSettings: () => context.push(AppRoutes.settings),
+      ),
       bottomNavigationBar: DiscoverBottomNav(
         selectedTab: CustomBottomNavTab.profile,
         onTabSelected: (tab) => navigateCustomBottomNavTab(context, tab),
@@ -27,11 +31,6 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ProfileScreenHeader(
-              onBack: () => context.go(AppRoutes.discover),
-              onSettings: () => context.push(AppRoutes.settings),
-            ),
-            const SizedBox(height: 16),
             const ProfileHeroCard(),
             const SizedBox(height: 14),
             ProfileScreenSection(

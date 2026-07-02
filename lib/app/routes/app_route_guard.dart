@@ -39,6 +39,7 @@ abstract final class AppRouteGuard {
         path == AppRoutes.communityCommitment ||
         path == AppRoutes.intentionSuccess ||
         path == AppRoutes.discover ||
+        path == AppRoutes.filter ||
         path == AppRoutes.profile ||
         path == AppRoutes.editProfile ||
         path == AppRoutes.settings ||
