@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:intent_app/app/theme/theme.dart';
 
 class MessagesHeader extends StatelessWidget {
-  const MessagesHeader({super.key});
+  const MessagesHeader({
+    super.key,
+    this.onSearchTap,
+  });
+
+  final VoidCallback? onSearchTap;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,10 @@ class MessagesHeader extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 12),
-            const _HeaderActionButton(icon: Icons.search),
+            _HeaderActionButton(
+              icon: Icons.search,
+              onTap: onSearchTap,
+            ),
             const SizedBox(width: 10),
             const _HeaderActionButton(
               icon: Icons.tune,

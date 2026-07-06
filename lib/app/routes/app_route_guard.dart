@@ -63,6 +63,7 @@ abstract final class AppRouteGuard {
         path == AppRoutes.connectionPlus ||
         path == AppRoutes.premiumIcon ||
         path == AppRoutes.messages ||
+        path == AppRoutes.search ||
         path == AppRoutes.chat ||
         path == AppRoutes.mbtiAssessment ||
         path == AppRoutes.mbtiAssessPreview) {

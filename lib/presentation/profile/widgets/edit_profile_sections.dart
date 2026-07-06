@@ -568,44 +568,56 @@ class EditProfileLifestyleRow extends StatelessWidget {
     required this.label,
     required this.value,
     this.showDivider = true,
+    this.onTap,
   });
 
   final IconData icon;
   final String label;
   final String value;
   final bool showDivider;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            Icon(icon, size: 16, color: AppColors.intentTextSoft),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                label,
-                style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                  fontSize: 13,
-                ),
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(8),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              child: Row(
+                children: [
+                  Icon(icon, size: 16, color: AppColors.intentTextSoft),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      label,
+                      style: IntentLoginStyles.onboardingSubtitle.copyWith(
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    value,
+                    style: IntentLoginStyles.onboardingCardFieldLabel.copyWith(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.intentForest,
+                    ),
+                  ),
+                  const SizedBox(width: 2),
+                  Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 18,
+                    color: AppColors.intentTextSoft.withValues(alpha: 0.75),
+                  ),
+                ],
               ),
             ),
-            Text(
-              value,
-              style: IntentLoginStyles.onboardingCardFieldLabel.copyWith(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: AppColors.intentForest,
-              ),
-            ),
-            const SizedBox(width: 2),
-            Icon(
-              Icons.keyboard_arrow_down,
-              size: 18,
-              color: AppColors.intentTextSoft.withValues(alpha: 0.75),
-            ),
-          ],
+          ),
         ),
         if (showDivider) ...[
           const SizedBox(height: 12),

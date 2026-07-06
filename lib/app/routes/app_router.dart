@@ -53,6 +53,7 @@ import 'package:intent_app/presentation/propose_date/views/propose_date_screen.d
 import 'package:intent_app/presentation/profile_preview/views/profile_preview_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/intention_success_screen.dart';
 import 'package:intent_app/presentation/notifications/views/notification_screen.dart';
+import 'package:intent_app/presentation/search/views/search_screen.dart';
 import 'package:intent_app/presentation/settings/views/settings_screen.dart';
 import 'package:intent_app/presentation/splash/views/splash_screen.dart';
 import 'package:intent_app/presentation/choose_icon/views/choose_icon_screen.dart';
@@ -281,6 +282,13 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
         child: const NotificationScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.search,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const SearchScreen(),
       ),
     ),
     GoRoute(

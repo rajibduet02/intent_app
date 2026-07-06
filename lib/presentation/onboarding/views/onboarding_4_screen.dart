@@ -23,22 +23,10 @@ class Onboarding4Screen extends ConsumerWidget {
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            OnboardingContinueButton(
-              label: 'BEGIN',
-              isLoading: state.isLoading,
-              onPressed: () => unawaited(notifier.submit()),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              'These answers help Intent create more meaningful '
-              'compatibility insights.',
-              textAlign: TextAlign.center,
-              style: IntentLoginStyles.onboardingFooterNote,
-            ),
-          ],
+        child: OnboardingContinueButton(
+          label: 'BEGIN',
+          isLoading: state.isLoading,
+          onPressed: () => unawaited(notifier.submit()),
         ),
       ),
       child: SingleChildScrollView(
@@ -126,6 +114,13 @@ class Onboarding4Screen extends ConsumerWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 16),
+            Text(
+              'These answers help Intent create more meaningful '
+              'compatibility insights.',
+              textAlign: TextAlign.center,
+              style: IntentLoginStyles.onboardingFooterNote,
+            ),
           ],
         ),
       ),
@@ -133,4 +128,4 @@ class Onboarding4Screen extends ConsumerWidget {
   }
 }
 
-const double _onboarding4PinnedFooterHeight = 120;
+const double _onboarding4PinnedFooterHeight = 76;
