@@ -7,7 +7,8 @@ import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_aut
 import 'package:intent_app/presentation/onboarding/data/attachment_style_questions.dart';
 import 'package:intent_app/presentation/onboarding/providers/attachment_style_provider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/attachment/attachment_question_card.dart';
-import 'package:intent_app/presentation/onboarding/widgets/attachment/attachment_result_button.dart';
+import 'package:intent_app/presentation/onboarding/widgets/assessment_pinned_footer.dart';
+import 'package:intent_app/presentation/onboarding/widgets/assessment_progress_indicator.dart';
 import 'package:intent_app/presentation/onboarding/widgets/attachment/attachment_style_header.dart';
 
 class AttachmentStyleScreen extends ConsumerWidget {
@@ -19,45 +20,25 @@ class AttachmentStyleScreen extends ConsumerWidget {
     final state = ref.watch(attachmentStyleProvider);
     final questions = AttachmentStyleQuestions.questions;
     final total = AttachmentStyleQuestions.totalQuestions;
-    final progress = total == 0 ? 0.0 : state.answeredCount / total;
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '${state.answeredCount} of $total answered',
-                style: IntentLoginStyles.mbtiProgress,
-              ),
-            ),
-            const SizedBox(height: 8),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(2),
-              child: LinearProgressIndicator(
-                value: progress,
-                minHeight: 3,
-                backgroundColor: AppColors.intentProgressInactive,
-                color: AppColors.intentText,
-              ),
-            ),
-            const SizedBox(height: 12),
-            AttachmentResultButton(
-              isLoading: state.isLoading,
-              onPressed: () => unawaited(notifier.submit()),
-            ),
-          ],
+        child: AssessmentPinnedFooter(
+          submitLabel: 'View Attachment Result',
+          isLoading: state.isLoading,
+          onSubmit: () => unawaited(notifier.submit()),
+          submitLabelStyle: IntentLoginStyles.mbtiSubmit.copyWith(
+            letterSpacing: 0.4,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
-          bottom: 24 + _attachmentPinnedFooterHeight,
+          bottom: 24 + assessmentPinnedFooterHeight,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,6 +46,11 @@ class AttachmentStyleScreen extends ConsumerWidget {
             AttachmentStyleHeader(onBack: notifier.onBack),
             const SizedBox(height: AppSpacing.xs),
             const _Intro(),
+            const SizedBox(height: 16),
+            AssessmentProgressIndicator(
+              answeredCount: state.answeredCount,
+              total: total,
+            ),
             const SizedBox(height: 16),
             for (var i = 0; i < questions.length; i++) ...[
               if (i > 0) const SizedBox(height: 16),
@@ -159,4 +145,4 @@ class _Intro extends StatelessWidget {
   }
 }
 
-const double _attachmentPinnedFooterHeight = 100;
+

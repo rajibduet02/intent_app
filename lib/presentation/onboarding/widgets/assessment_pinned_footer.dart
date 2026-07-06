@@ -2,23 +2,32 @@ import 'package:flutter/material.dart';
 
 import 'package:intent_app/app/theme/theme.dart';
 
-class MbtiSubmitButton extends StatelessWidget {
-  const MbtiSubmitButton({
+/// Scroll inset for [AssessmentPinnedFooter] content (excludes outer bottom padding).
+const double assessmentPinnedFooterHeight = 48;
+
+class AssessmentPinnedFooter extends StatelessWidget {
+  const AssessmentPinnedFooter({
     super.key,
-    required this.onPressed,
-    this.isLoading = false,
+    required this.submitLabel,
+    required this.isLoading,
+    required this.onSubmit,
+    this.submitLabelStyle,
   });
 
-  final VoidCallback? onPressed;
+  final String submitLabel;
   final bool isLoading;
+  final VoidCallback onSubmit;
+  final TextStyle? submitLabelStyle;
 
   @override
   Widget build(BuildContext context) {
+    final labelStyle = submitLabelStyle ?? IntentLoginStyles.mbtiSubmit;
+
     return SizedBox(
       width: double.infinity,
       height: AppSpacing.primaryButtonHeight,
       child: ElevatedButton(
-        onPressed: isLoading ? null : onPressed,
+        onPressed: isLoading ? null : onSubmit,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.intentForest,
           disabledBackgroundColor:
@@ -26,7 +35,8 @@ class MbtiSubmitButton extends StatelessWidget {
           elevation: 0,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSpacing.primaryButtonBorderRadius),
+            borderRadius:
+                BorderRadius.circular(AppSpacing.primaryButtonBorderRadius),
           ),
         ),
         child: isLoading
@@ -38,7 +48,14 @@ class MbtiSubmitButton extends StatelessWidget {
                   color: AppColors.white,
                 ),
               )
-            : Text('View MBTI Result', style: IntentLoginStyles.mbtiSubmit),
+            : FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  submitLabel,
+                  style: labelStyle,
+                  textAlign: TextAlign.center,
+                ),
+              ),
       ),
     );
   }

@@ -8,7 +8,8 @@ import 'package:intent_app/presentation/onboarding/data/mbti_questions.dart';
 import 'package:intent_app/presentation/onboarding/providers/mbti_assessment_provider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/mbti/mbti_assessment_header.dart';
 import 'package:intent_app/presentation/onboarding/widgets/mbti/mbti_question_card.dart';
-import 'package:intent_app/presentation/onboarding/widgets/mbti/mbti_submit_button.dart';
+import 'package:intent_app/presentation/onboarding/widgets/assessment_pinned_footer.dart';
+import 'package:intent_app/presentation/onboarding/widgets/assessment_progress_indicator.dart';
 
 class MbtiAssessmentScreen extends ConsumerWidget {
   const MbtiAssessmentScreen({super.key});
@@ -19,45 +20,21 @@ class MbtiAssessmentScreen extends ConsumerWidget {
     final state = ref.watch(mbtiAssessmentProvider);
     final questions = MbtiQuestions.sections;
     final total = MbtiQuestions.totalSections;
-    final progress = total == 0 ? 0.0 : state.answeredCount / total;
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '${state.answeredCount} of $total answered',
-                style: IntentLoginStyles.mbtiProgress,
-              ),
-            ),
-            const SizedBox(height: 8),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(2),
-              child: LinearProgressIndicator(
-                value: progress,
-                minHeight: 3,
-                backgroundColor: AppColors.intentProgressInactive,
-                color: AppColors.intentText,
-              ),
-            ),
-            const SizedBox(height: 12),
-            MbtiSubmitButton(
-              isLoading: state.isLoading,
-              onPressed: () => unawaited(notifier.submit()),
-            ),
-          ],
+        child: AssessmentPinnedFooter(
+          submitLabel: 'View MBTI Result',
+          isLoading: state.isLoading,
+          onSubmit: () => unawaited(notifier.submit()),
         ),
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
-          bottom: 24 + _mbtiPinnedFooterHeight,
+          bottom: 24 + assessmentPinnedFooterHeight,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -67,6 +44,11 @@ class MbtiAssessmentScreen extends ConsumerWidget {
             ),
             const SizedBox(height: AppSpacing.xs),
             const _Intro(),
+            const SizedBox(height: 16),
+            AssessmentProgressIndicator(
+              answeredCount: state.answeredCount,
+              total: total,
+            ),
             const SizedBox(height: 16),
             for (var i = 0; i < questions.length; i++) ...[
               if (i > 0) const SizedBox(height: 16),
@@ -158,4 +140,4 @@ class _Intro extends StatelessWidget {
   }
 }
 
-const double _mbtiPinnedFooterHeight = 100;
+
