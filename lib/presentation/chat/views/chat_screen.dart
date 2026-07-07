@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/chat/widgets/chat_countdown_bar.dart';
 import 'package:intent_app/presentation/chat/widgets/chat_gentle_prompts_section.dart';
@@ -80,7 +81,9 @@ class ChatScreen extends StatelessWidget {
                   const ChatMessageList(messages: _messages),
                   const ChatGentlePromptsSection(prompts: _prompts),
                   const ChatSafetyCard(),
-                  const ChatProposeDateCard(),
+                  ChatProposeDateCard(
+                    onTap: () => context.push(AppRoutes.proposeDate),
+                  ),
                   const SizedBox(height: 8),
                 ],
               ),

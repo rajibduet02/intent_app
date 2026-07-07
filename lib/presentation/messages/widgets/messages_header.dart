@@ -43,11 +43,6 @@ class MessagesHeader extends StatelessWidget {
               icon: Icons.search,
               onTap: onSearchTap,
             ),
-            const SizedBox(width: 10),
-            const _HeaderActionButton(
-              icon: Icons.tune,
-              badgeCount: 5,
-            ),
           ],
         ),
       ],

@@ -95,7 +95,7 @@ class CompatibilityPreviewScreen extends StatelessWidget {
               label: 'Start Conversation',
               icon: Icons.chat_bubble_outline,
               showChevron: false,
-              onPressed: () {},
+              onPressed: () => context.push(AppRoutes.chat),
             ),
             const SizedBox(height: 12),
             Center(

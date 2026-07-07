@@ -590,9 +590,15 @@ class _ModeChip extends StatelessWidget {
   }
 }
 
-class ProposeDateSuggestedIdeas extends StatelessWidget {
+class ProposeDateSuggestedIdeas extends StatefulWidget {
   const ProposeDateSuggestedIdeas({super.key});
 
+  @override
+  State<ProposeDateSuggestedIdeas> createState() =>
+      _ProposeDateSuggestedIdeasState();
+}
+
+class _ProposeDateSuggestedIdeasState extends State<ProposeDateSuggestedIdeas> {
   static const _ideas = [
     _DateIdea(label: 'Coffee', icon: Icons.coffee_outlined),
     _DateIdea(label: 'Walk in a public park', icon: Icons.park_outlined),
@@ -604,6 +610,8 @@ class ProposeDateSuggestedIdeas extends StatelessWidget {
     _DateIdea(label: 'Go to a coffee shop', icon: Icons.coffee_outlined),
     _DateIdea(label: 'Go to a park', icon: Icons.park_outlined),
   ];
+
+  String? _selectedLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -622,39 +630,73 @@ class ProposeDateSuggestedIdeas extends StatelessWidget {
           runSpacing: 8,
           children: [
             for (final idea in _ideas)
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: AppColors.intentInputBorder.withValues(alpha: 0.7),
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      idea.icon,
-                      size: 18,
-                      color: AppColors.intentForest,
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      idea.label,
-                      style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.intentText,
-                      ),
-                    ),
-                  ],
-                ),
+              _DateIdeaChip(
+                idea: idea,
+                isSelected: _selectedLabel == idea.label,
+                onTap: () => setState(() => _selectedLabel = idea.label),
               ),
           ],
         ),
       ],
+    );
+  }
+}
+
+class _DateIdeaChip extends StatelessWidget {
+  const _DateIdeaChip({
+    required this.idea,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final _DateIdea idea;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final iconColor =
+        isSelected ? AppColors.white : AppColors.intentForest;
+    final textColor = isSelected ? AppColors.white : AppColors.intentText;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(20),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: isSelected ? AppColors.intentForest : AppColors.white,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: isSelected
+                  ? AppColors.intentForest
+                  : AppColors.intentInputBorder.withValues(alpha: 0.7),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                idea.icon,
+                size: 18,
+                color: iconColor,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                idea.label,
+                style: IntentLoginStyles.onboardingSubtitle.copyWith(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: textColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
