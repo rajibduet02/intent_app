@@ -590,15 +590,16 @@ class _ModeChip extends StatelessWidget {
   }
 }
 
-class ProposeDateSuggestedIdeas extends StatefulWidget {
-  const ProposeDateSuggestedIdeas({super.key});
+class ProposeDateSuggestedIdeas extends StatelessWidget {
+  const ProposeDateSuggestedIdeas({
+    super.key,
+    this.selectedLabel,
+    required this.onSelected,
+  });
 
-  @override
-  State<ProposeDateSuggestedIdeas> createState() =>
-      _ProposeDateSuggestedIdeasState();
-}
+  final String? selectedLabel;
+  final ValueChanged<String> onSelected;
 
-class _ProposeDateSuggestedIdeasState extends State<ProposeDateSuggestedIdeas> {
   static const _ideas = [
     _DateIdea(label: 'Coffee', icon: Icons.coffee_outlined),
     _DateIdea(label: 'Walk in a public park', icon: Icons.park_outlined),
@@ -610,8 +611,6 @@ class _ProposeDateSuggestedIdeasState extends State<ProposeDateSuggestedIdeas> {
     _DateIdea(label: 'Go to a coffee shop', icon: Icons.coffee_outlined),
     _DateIdea(label: 'Go to a park', icon: Icons.park_outlined),
   ];
-
-  String? _selectedLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -632,8 +631,8 @@ class _ProposeDateSuggestedIdeasState extends State<ProposeDateSuggestedIdeas> {
             for (final idea in _ideas)
               _DateIdeaChip(
                 idea: idea,
-                isSelected: _selectedLabel == idea.label,
-                onTap: () => setState(() => _selectedLabel = idea.label),
+                isSelected: selectedLabel == idea.label,
+                onTap: () => onSelected(idea.label),
               ),
           ],
         ),
@@ -709,14 +708,16 @@ class _DateIdea {
 }
 
 class ProposeDateSafetyCard extends StatelessWidget {
-  const ProposeDateSafetyCard({super.key});
+  const ProposeDateSafetyCard({super.key, this.onTap});
+
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         borderRadius: BorderRadius.circular(16),
         child: Container(
           padding: const EdgeInsets.all(14),

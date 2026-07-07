@@ -33,6 +33,7 @@ import 'package:intent_app/presentation/discover/views/discover_screen.dart';
 import 'package:intent_app/presentation/filter/views/filter_screen.dart';
 import 'package:intent_app/presentation/chat/views/chat_screen.dart';
 import 'package:intent_app/presentation/compatibility/views/compatibility_overview_screen.dart';
+import 'package:intent_app/presentation/dates/views/dates_screen.dart';
 import 'package:intent_app/presentation/matches/views/matches_screen.dart';
 import 'package:intent_app/presentation/messages/views/messages_screen.dart';
 import 'package:intent_app/presentation/profile/views/edit_profile_screen.dart';
@@ -317,6 +318,13 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
         child: const MatchesScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.dates,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const DatesScreen(),
       ),
     ),
     GoRoute(

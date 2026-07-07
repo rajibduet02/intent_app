@@ -16,6 +16,7 @@ class DiscoverBottomNav extends StatelessWidget {
     required this.selectedTab,
     required this.onTabSelected,
     this.messagesBadgeCount,
+    this.datesBadgeCount,
   });
 
   static const double bottomNavHeight = 84;
@@ -27,6 +28,7 @@ class DiscoverBottomNav extends StatelessWidget {
   final CustomBottomNavTab selectedTab;
   final ValueChanged<CustomBottomNavTab> onTabSelected;
   final int? messagesBadgeCount;
+  final int? datesBadgeCount;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +77,7 @@ class DiscoverBottomNav extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(6, 4, 6, 8 + bottomInset),
+              padding: EdgeInsets.fromLTRB(4, 4, 4, 8 + bottomInset),
               child: Row(
                 children: [
                   _NavItem(
@@ -102,10 +104,13 @@ class DiscoverBottomNav extends StatelessWidget {
                     isSelected: selectedTab == CustomBottomNavTab.dates,
                     onTap: () => onTabSelected(CustomBottomNavTab.dates),
                     iconBuilder: (color, size) => Icon(
-                      Icons.calendar_today_rounded,
+                      selectedTab == CustomBottomNavTab.dates
+                          ? Icons.event_available_rounded
+                          : Icons.event_available_outlined,
                       size: size,
                       color: color,
                     ),
+                    badgeCount: datesBadgeCount,
                   ),
                   _NavItem(
                     label: 'Messages',
@@ -270,7 +275,7 @@ class _NavItem extends StatelessWidget {
                   duration: const Duration(milliseconds: 220),
                   curve: Curves.easeOutCubic,
                   style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                    fontSize: isSelected ? 11 : 10,
+                    fontSize: isSelected ? 10 : 9,
                     fontWeight:
                         isSelected ? FontWeight.w700 : FontWeight.w500,
                     color: labelColor,

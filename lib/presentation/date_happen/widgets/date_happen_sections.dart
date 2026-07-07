@@ -226,6 +226,7 @@ class _SummaryRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(
           icon,
@@ -240,11 +241,13 @@ class _SummaryRow extends StatelessWidget {
             color: AppColors.intentTextSoft,
           ),
         ),
-        const Spacer(),
-        Flexible(
+        const SizedBox(width: 12),
+        Expanded(
           child: Text(
             value,
             textAlign: TextAlign.right,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
             style: IntentLoginStyles.onboardingCardFieldLabel.copyWith(
               fontSize: 15,
               fontWeight: FontWeight.w600,

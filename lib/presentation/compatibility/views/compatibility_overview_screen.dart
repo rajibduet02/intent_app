@@ -3,8 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/theme/theme.dart';
-import 'package:intent_app/core/utils/custom_tab_navigation.dart';
-import 'package:intent_app/core/widgets/custom_bottom_nav.dart';
+import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/compatibility/widgets/compatibility_ai_insights_card.dart';
 import 'package:intent_app/presentation/compatibility/widgets/compatibility_alignments_card.dart';
 import 'package:intent_app/presentation/compatibility/widgets/compatibility_dealbreaker_card.dart';
@@ -13,19 +12,19 @@ import 'package:intent_app/presentation/compatibility/widgets/compatibility_over
 import 'package:intent_app/presentation/compatibility/widgets/compatibility_profiles_section.dart';
 import 'package:intent_app/presentation/compatibility/widgets/compatibility_score_card.dart';
 import 'package:intent_app/presentation/discover/widgets/discover_action_button.dart';
-import 'package:intent_app/presentation/discover/widgets/discover_scaffold.dart';
 
 class CompatibilityPreviewScreen extends StatelessWidget {
   const CompatibilityPreviewScreen({super.key});
 
+  void _onBack(BuildContext context) {
+    if (context.canPop()) {
+      context.pop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DiscoverScaffold(
-      bottomNavigationBar: DiscoverBottomNav(
-        selectedTab: CustomBottomNavTab.compatibility,
-        onTabSelected: (tab) => navigateCustomBottomNavTab(context, tab),
-        messagesBadgeCount: 5,
-      ),
+    return FixedBackgroundAuthScaffold(
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
@@ -33,7 +32,7 @@ class CompatibilityPreviewScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             CompatibilityPreviewHeader(
-              onBack: () => context.go(AppRoutes.discover),
+              onBack: () => _onBack(context),
             ),
             const SizedBox(height: 18),
             const CompatibilityProfilesSection(),
@@ -100,9 +99,9 @@ class CompatibilityPreviewScreen extends StatelessWidget {
             const SizedBox(height: 12),
             Center(
               child: GestureDetector(
-                onTap: () => context.go(AppRoutes.profile),
+                onTap: () => _onBack(context),
                 child: Text(
-                  'Not ready yet? Return to profile',
+                  'Not ready yet? Go back',
                   style: IntentLoginStyles.onboardingSubtitle.copyWith(
                     fontSize: 12,
                     decoration: TextDecoration.underline,

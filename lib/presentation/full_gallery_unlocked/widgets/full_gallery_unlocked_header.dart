@@ -22,7 +22,8 @@ class FullGalleryUnlockedHeader extends StatelessWidget {
           IntentBackButton(onPressed: onBack),
           Expanded(
             child: Text(
-              'Full gallery unlocked',
+              // 'Full gallery unlocked',
+              'Full Gallery Unlocked',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingTitle.copyWith(fontSize: 22),
             ),

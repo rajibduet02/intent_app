@@ -437,7 +437,8 @@ class _UnlockJourneyStepper extends StatelessWidget {
         Expanded(
           child: _JourneyStep(
             node: const _JourneyNode.current(stepNumber: 3),
-            title: 'Full gallery unlocked',
+            // title: 'Full gallery unlocked',
+            title: 'Full Gallery Unlocked',
             subtitle: 'Now available',
             titleColor: _journeyGold,
             subtitleColor: _journeyGold,

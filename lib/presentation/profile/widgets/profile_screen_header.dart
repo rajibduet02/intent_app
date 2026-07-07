@@ -6,13 +6,13 @@ import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_aut
 class ProfileScreenHeader extends StatelessWidget {
   const ProfileScreenHeader({
     super.key,
-    required this.onBack,
+    this.onBack,
     this.title = 'Profile',
     this.onSettings,
     this.trailingIcon = Icons.settings_outlined,
   });
 
-  final VoidCallback onBack;
+  final VoidCallback? onBack;
   final String title;
   final VoidCallback? onSettings;
   final IconData trailingIcon;
@@ -23,7 +23,13 @@ class ProfileScreenHeader extends StatelessWidget {
       height: 48,
       child: Row(
         children: [
-          IntentBackButton(onPressed: onBack),
+          if (onBack != null)
+            IntentBackButton(onPressed: onBack!)
+          else
+            const SizedBox(
+              width: AppSpacing.backButtonSize,
+              height: AppSpacing.backButtonSize,
+            ),
           Expanded(
             child: Text(
               title,

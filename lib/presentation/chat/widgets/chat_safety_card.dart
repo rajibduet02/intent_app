@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intent_app/app/theme/theme.dart';
 
 class ChatSafetyCard extends StatelessWidget {
-  const ChatSafetyCard({super.key});
+  const ChatSafetyCard({super.key, this.onTap});
+
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class ChatSafetyCard extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () {},
+          onTap: onTap,
           borderRadius: BorderRadius.circular(16),
           child: Container(
             padding: const EdgeInsets.all(14),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/onboarding/providers/onboarding_2_provider.dart';
@@ -211,7 +210,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             EditProfileSaveButton(
-              onPressed: () => context.go(AppRoutes.profile),
+              onPressed: () {
+                if (context.canPop()) {
+                  context.pop();
+                }
+              },
             ),
             const SizedBox(height: 14),
             Center(

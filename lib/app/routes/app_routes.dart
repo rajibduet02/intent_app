@@ -38,6 +38,7 @@ abstract final class AppRoutes {
   static const String messages = '/messages';
   static const String search = '/search';
   static const String matches = '/matches';
+  static const String dates = '/dates';
   static const String whyMatches = '/why-matches';
   static const String chooseIcon = '/choose-icon';
   static const String proposeDate = '/propose-date';

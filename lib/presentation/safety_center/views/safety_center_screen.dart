@@ -12,8 +12,6 @@ class SafetyCenterScreen extends StatelessWidget {
   void _onBack(BuildContext context) {
     if (context.canPop()) {
       context.pop();
-    } else {
-      context.go(AppRoutes.peopleNotice);
     }
   }
 

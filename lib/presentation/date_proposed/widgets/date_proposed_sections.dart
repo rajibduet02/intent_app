@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:intent_app/app/theme/theme.dart';
+import 'package:intent_app/presentation/chat/models/date_proposal.dart';
 
 class DateProposedIntroText extends StatelessWidget {
   const DateProposedIntroText({
@@ -176,10 +177,19 @@ const _planCardBg = Color(0xFFFDFBFA);
 const _planIconBg = Color(0xFFF4F7FB);
 
 class DateProposedPlanCard extends StatelessWidget {
-  const DateProposedPlanCard({super.key});
+  const DateProposedPlanCard({super.key, this.proposal});
+
+  final DateProposal? proposal;
 
   @override
   Widget build(BuildContext context) {
+    final date = proposal?.date ?? 'Friday, June 21';
+    final time = proposal?.time ?? '6:30 PM';
+    final location = proposal?.place ?? 'Bloom Café, Downtown';
+    final dateType = proposal?.modeLabel ?? 'In person';
+    final message = proposal?.message ??
+        'Would love to meet for coffee and continue our conversation.';
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 18),
@@ -201,37 +211,46 @@ class DateProposedPlanCard extends StatelessWidget {
               color: AppColors.intentText,
             ),
           ),
+          if (proposal?.dateIdea != null && proposal!.dateIdea!.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            Text(
+              proposal!.dateIdea!,
+              style: IntentLoginStyles.onboardingCardFieldLabel.copyWith(
+                fontSize: 16,
+              ),
+            ),
+          ],
           const SizedBox(height: 18),
-          const _PlanDetailRow(
+          _PlanDetailRow(
             icon: Icons.calendar_today_outlined,
             label: 'Date',
-            value: 'Friday, June 21',
+            value: date,
             iconBackground: _planIconBg,
           ),
           const _PlanRowDivider(),
-          const _PlanDetailRow(
+          _PlanDetailRow(
             icon: Icons.schedule_outlined,
             label: 'Time',
-            value: '6:30 PM',
+            value: time,
             iconBackground: _planIconBg,
           ),
           const _PlanRowDivider(),
-          const _PlanDetailRow(
+          _PlanDetailRow(
             icon: Icons.location_on_outlined,
             label: 'Location',
-            value: 'Bloom Café, Downtown',
+            value: location,
             subValue: 'Public place',
             iconBackground: _planIconBg,
           ),
           const _PlanRowDivider(),
-          const _PlanDetailRow(
+          _PlanDetailRow(
             icon: Icons.people_outline,
             label: 'Date type',
-            value: 'In person',
+            value: dateType,
             iconBackground: _planIconBg,
           ),
           const SizedBox(height: 16),
-          const _ProposerMessageCard(),
+          _ProposerMessageCard(message: message),
         ],
       ),
     );
@@ -327,7 +346,9 @@ class _PlanDetailRow extends StatelessWidget {
 }
 
 class _ProposerMessageCard extends StatelessWidget {
-  const _ProposerMessageCard();
+  const _ProposerMessageCard({required this.message});
+
+  final String message;
 
   static const _messageBg = Color(0xFFFAF7F2);
   static const _quoteCircle = Color(0xFFFBE9E0);
@@ -375,8 +396,7 @@ class _ProposerMessageCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'I thought this could be a comfortable first plan for us. '
-                  'Coffee feels simple, public, and easy to talk.',
+                  message,
                   style: IntentLoginStyles.onboardingSubtitle.copyWith(
                     fontSize: 16,
                     color: AppColors.intentText,

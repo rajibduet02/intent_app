@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:intent_app/app/routes/app_routes.dart';
+import 'package:intent_app/core/utils/chat_navigation.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/report_user/widgets/report_user_header.dart';
 import 'package:intent_app/presentation/report_user/widgets/report_user_sections.dart';
@@ -28,9 +28,15 @@ class _ReportUserScreenState extends State<ReportUserScreen> {
   void _onBack(BuildContext context) {
     if (context.canPop()) {
       context.pop();
-    } else {
-      context.go(AppRoutes.safetyCenter);
     }
+  }
+
+  Future<void> _submitReport(BuildContext context) async {
+    await showReportSubmittedDialog(context);
+    if (!context.mounted) {
+      return;
+    }
+    _onBack(context);
   }
 
   @override
@@ -71,7 +77,7 @@ class _ReportUserScreenState extends State<ReportUserScreen> {
             const ReportUserPrivacyCard(),
             const SizedBox(height: 20),
             ReportUserSubmitButton(
-              onPressed: () => context.push(AppRoutes.connectionPlus),
+              onPressed: () => _submitReport(context),
             ),
             const SizedBox(height: 14),
             ReportUserCancelLink(

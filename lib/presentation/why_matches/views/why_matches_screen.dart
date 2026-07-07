@@ -52,7 +52,7 @@ class WhyMatchesScreen extends StatelessWidget {
             const SizedBox(height: 12),
             Center(
               child: GestureDetector(
-                onTap: () => context.go(AppRoutes.compatibilityPreview),
+                onTap: () => context.push(AppRoutes.compatibilityPreview),
                 child: Text(
                   'Back to Compatibility Overview',
                   style: IntentLoginStyles.onboardingSubtitle.copyWith(

@@ -6,6 +6,7 @@ import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/messages/data/messages_sample_conversations.dart';
 import 'package:intent_app/core/utils/custom_tab_navigation.dart';
 import 'package:intent_app/core/widgets/custom_bottom_nav.dart';
+import 'package:intent_app/presentation/dates/data/dates_sample_data.dart';
 import 'package:intent_app/presentation/discover/widgets/discover_scaffold.dart';
 import 'package:intent_app/presentation/messages/widgets/message_conversation_card.dart';
 import 'package:intent_app/presentation/messages/widgets/messages_filter_chips.dart';
@@ -45,6 +46,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
         selectedTab: CustomBottomNavTab.messages,
         onTabSelected: (tab) => navigateCustomBottomNavTab(context, tab),
         messagesBadgeCount: 5,
+        datesBadgeCount: datesPendingActionCount,
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),

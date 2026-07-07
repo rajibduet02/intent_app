@@ -5,6 +5,7 @@ import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/core/utils/custom_tab_navigation.dart';
 import 'package:intent_app/core/widgets/custom_bottom_nav.dart';
+import 'package:intent_app/presentation/dates/data/dates_sample_data.dart';
 import 'package:intent_app/presentation/discover/widgets/discover_focus_card.dart';
 import 'package:intent_app/presentation/discover/widgets/discover_match_card.dart';
 import 'package:intent_app/presentation/discover/widgets/discover_scaffold.dart';
@@ -24,6 +25,7 @@ class DiscoverScreen extends StatelessWidget {
         selectedTab: CustomBottomNavTab.discover,
         onTabSelected: (tab) => navigateCustomBottomNavTab(context, tab),
         messagesBadgeCount: 5,
+        datesBadgeCount: datesPendingActionCount,
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
@@ -34,9 +36,9 @@ class DiscoverScreen extends StatelessWidget {
             const _PhotosHiddenBadge(),
             const SizedBox(height: AppSpacing.lg),
             DiscoverMatchCardList(
-              onCardTap: () => context.go(AppRoutes.profilePreview),
+              onCardTap: () => context.push(AppRoutes.profilePreview),
               onViewCompatibility: () =>
-                  context.go(AppRoutes.compatibilityPreview),
+                  context.push(AppRoutes.compatibilityPreview),
               onConnectWithIntention: () => context.push(AppRoutes.whyMatches),
               onPassRespectfully: () {},
             ),

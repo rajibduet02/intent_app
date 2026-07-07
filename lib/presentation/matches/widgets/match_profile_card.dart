@@ -9,12 +9,14 @@ class MatchProfileCard extends StatelessWidget {
     required this.match,
     this.onTap,
     this.onAvatarTap,
+    this.onCompatibilityTap,
     this.onMessageTap,
   });
 
   final MatchProfile match;
   final VoidCallback? onTap;
   final VoidCallback? onAvatarTap;
+  final VoidCallback? onCompatibilityTap;
   final VoidCallback? onMessageTap;
 
   @override
@@ -89,14 +91,17 @@ class MatchProfileCard extends StatelessWidget {
                             color: const Color(0xFFE8F0E4),
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Text(
-                            '${match.compatibilityPercent}% COMPATIBLE',
-                            style: IntentLoginStyles.onboardingSubtitle
-                                .copyWith(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 0.3,
-                              color: AppColors.intentForest,
+                          child: GestureDetector(
+                            onTap: onCompatibilityTap,
+                            child: Text(
+                              '${match.compatibilityPercent}% COMPATIBLE',
+                              style: IntentLoginStyles.onboardingSubtitle
+                                  .copyWith(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.3,
+                                color: AppColors.intentForest,
+                              ),
                             ),
                           ),
                         ),

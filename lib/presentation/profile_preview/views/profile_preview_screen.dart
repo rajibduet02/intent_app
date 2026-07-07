@@ -3,10 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/theme/theme.dart';
-import 'package:intent_app/core/widgets/custom_bottom_nav.dart';
-import 'package:intent_app/core/utils/custom_tab_navigation.dart';
+import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/discover/widgets/discover_action_button.dart';
-import 'package:intent_app/presentation/discover/widgets/discover_scaffold.dart';
 import 'package:intent_app/presentation/profile_preview/widgets/profile_photo_privacy_banner.dart';
 import 'package:intent_app/presentation/profile_preview/widgets/profile_preview_header.dart';
 import 'package:intent_app/presentation/profile_preview/widgets/profile_section_card.dart';
@@ -15,14 +13,15 @@ import 'package:intent_app/presentation/profile_preview/widgets/profile_summary_
 class ProfilePreviewScreen extends StatelessWidget {
   const ProfilePreviewScreen({super.key});
 
+  void _onBack(BuildContext context) {
+    if (context.canPop()) {
+      context.pop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DiscoverScaffold(
-      bottomNavigationBar: DiscoverBottomNav(
-        selectedTab: CustomBottomNavTab.profile,
-        onTabSelected: (tab) => navigateCustomBottomNavTab(context, tab),
-        messagesBadgeCount: 5,
-      ),
+    return FixedBackgroundAuthScaffold(
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
@@ -30,13 +29,7 @@ class ProfilePreviewScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ProfilePreviewHeader(
-              onBack: () {
-                if (context.canPop()) {
-                  context.pop();
-                } else {
-                  context.go(AppRoutes.discover);
-                }
-              },
+              onBack: () => _onBack(context),
             ),
             const SizedBox(height: 12),
             Text(
@@ -143,6 +136,13 @@ class ProfilePreviewScreen extends StatelessWidget {
               icon: Icons.favorite_border,
               showChevron: false,
               onPressed: () {},
+            ),
+            const SizedBox(height: 10),
+            DiscoverActionButton(
+              label: 'Safety Center',
+              icon: Icons.verified_user_outlined,
+              showChevron: true,
+              onPressed: () => context.push(AppRoutes.safetyCenter),
             ),
             const SizedBox(height: 10),
             DiscoverActionButton(

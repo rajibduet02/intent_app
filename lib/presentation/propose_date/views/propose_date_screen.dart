@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/theme/theme.dart';
-import 'package:intent_app/core/utils/custom_tab_navigation.dart';
-import 'package:intent_app/core/widgets/custom_bottom_nav.dart';
-import 'package:intent_app/presentation/discover/widgets/discover_scaffold.dart';
+import 'package:intent_app/core/utils/chat_navigation.dart';
+import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
+import 'package:intent_app/presentation/chat/providers/date_proposal_provider.dart';
 import 'package:intent_app/presentation/propose_date/widgets/propose_date_header.dart';
 import 'package:intent_app/presentation/propose_date/widgets/propose_date_sections.dart';
 
-class ProposeDateScreen extends StatefulWidget {
+class ProposeDateScreen extends ConsumerStatefulWidget {
   const ProposeDateScreen({super.key});
 
   @override
-  State<ProposeDateScreen> createState() => _ProposeDateScreenState();
+  ConsumerState<ProposeDateScreen> createState() => _ProposeDateScreenState();
 }
 
-class _ProposeDateScreenState extends State<ProposeDateScreen> {
+class _ProposeDateScreenState extends ConsumerState<ProposeDateScreen> {
   ProposeDateMode _mode = ProposeDateMode.inPerson;
   final TextEditingController _messageController = TextEditingController();
   final TextEditingController _placeController = TextEditingController();
@@ -29,12 +30,41 @@ class _ProposeDateScreenState extends State<ProposeDateScreen> {
   int _messageLength = 0;
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
+  String? _selectedDateIdea;
+  bool _prefilled = false;
 
   @override
   void initState() {
     super.initState();
     _messageController.addListener(() {
       setState(() => _messageLength = _messageController.text.length);
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_prefilled) {
+      _prefillFromExistingProposal();
+      _prefilled = true;
+    }
+  }
+
+  void _prefillFromExistingProposal() {
+    final proposal = ref.read(dateProposalProvider).proposal;
+    if (proposal == null) {
+      return;
+    }
+    setState(() {
+      _selectedDateIdea = proposal.dateIdea;
+      _placeController.text = proposal.place ?? '';
+      _dateController.text = proposal.date ?? '';
+      _timeController.text = proposal.time ?? '';
+      _messageController.text = proposal.message ?? '';
+      _messageLength = _messageController.text.length;
+      _mode = proposal.modeLabel == 'Virtual'
+          ? ProposeDateMode.virtual
+          : ProposeDateMode.inPerson;
     });
   }
 
@@ -109,9 +139,19 @@ class _ProposeDateScreenState extends State<ProposeDateScreen> {
   }
 
   String _formatDate(DateTime date) {
+    const weekdays = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
+    ];
+    final weekday = weekdays[date.weekday - 1];
     final month = date.month.toString().padLeft(2, '0');
     final day = date.day.toString().padLeft(2, '0');
-    return '$month/$day/${date.year}';
+    return '$weekday, $month/$day/${date.year}';
   }
 
   String _formatTime(TimeOfDay time) {
@@ -124,22 +164,40 @@ class _ProposeDateScreenState extends State<ProposeDateScreen> {
   void _onBack() {
     if (context.canPop()) {
       context.pop();
-    } else {
-      context.go(AppRoutes.discover);
     }
+  }
+
+  void _sendProposal() {
+    final existing = ref.read(dateProposalProvider).proposal;
+    final isCounter = existing != null && !existing.isSentByMe;
+
+    ref.read(dateProposalProvider.notifier).sendProposal(
+          dateIdea: _selectedDateIdea,
+          place: _placeController.text.trim().isEmpty
+              ? null
+              : _placeController.text.trim(),
+          date: _dateController.text.trim().isEmpty
+              ? null
+              : _dateController.text.trim(),
+          time: _timeController.text.trim().isEmpty
+              ? null
+              : _timeController.text.trim(),
+          message: _messageController.text.trim().isEmpty
+              ? null
+              : _messageController.text.trim(),
+          modeLabel: _mode == ProposeDateMode.virtual ? 'Virtual' : 'In person',
+          isCounterProposal: isCounter,
+        );
+
+    popToChat(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    return DiscoverScaffold(
-      bottomNavigationBar: DiscoverBottomNav(
-        selectedTab: CustomBottomNavTab.dates,
-        onTabSelected: (tab) => navigateCustomBottomNavTab(context, tab),
-        messagesBadgeCount: 5,
-      ),
+    return FixedBackgroundAuthScaffold(
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -165,15 +223,18 @@ class _ProposeDateScreenState extends State<ProposeDateScreen> {
               onTimeTap: _pickTime,
             ),
             const SizedBox(height: 18),
-            const ProposeDateSuggestedIdeas(),
+            ProposeDateSuggestedIdeas(
+              selectedLabel: _selectedDateIdea,
+              onSelected: (label) => setState(() => _selectedDateIdea = label),
+            ),
             const SizedBox(height: 14),
-            const ProposeDateSafetyCard(),
+            ProposeDateSafetyCard(
+              onTap: () => context.push(AppRoutes.safetyCenter),
+            ),
             const SizedBox(height: 12),
             const ProposeDateInfoNote(),
             const SizedBox(height: 18),
-            ProposeDateSendButton(
-              onPressed: () => context.push(AppRoutes.dateProposed),
-            ),
+            ProposeDateSendButton(onPressed: _sendProposal),
           ],
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/core/utils/custom_tab_navigation.dart';
 import 'package:intent_app/core/widgets/custom_bottom_nav.dart';
+import 'package:intent_app/presentation/dates/data/dates_sample_data.dart';
 import 'package:intent_app/presentation/discover/widgets/discover_scaffold.dart';
 import 'package:intent_app/presentation/profile/widgets/profile_hero_card.dart';
 import 'package:intent_app/presentation/profile/widgets/profile_screen_header.dart';
@@ -17,13 +18,13 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DiscoverScaffold(
       topBar: ProfileScreenHeader(
-        onBack: () => context.go(AppRoutes.discover),
         onSettings: () => context.push(AppRoutes.settings),
       ),
       bottomNavigationBar: DiscoverBottomNav(
         selectedTab: CustomBottomNavTab.profile,
         onTabSelected: (tab) => navigateCustomBottomNavTab(context, tab),
         messagesBadgeCount: 5,
+        datesBadgeCount: datesPendingActionCount,
       ),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
