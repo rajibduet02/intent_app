@@ -24,6 +24,12 @@ abstract final class AppRouteGuard {
         path == AppRoutes.onboarding2 ||
         path == AppRoutes.onboarding3 ||
         path == AppRoutes.onboarding4 ||
+        path == AppRoutes.mbtiAssessment ||
+        path == AppRoutes.mbtiAssessPreview ||
+        path == AppRoutes.intentReflectionsIntro ||
+        path == AppRoutes.intentReflectionsAssessment ||
+        path == AppRoutes.relationshipStyleIntro ||
+        path == AppRoutes.relationshipStyleAssessment ||
         path == AppRoutes.enneagramAssessment ||
         path == AppRoutes.enneagramAssessPreview ||
         path == AppRoutes.attachmentStyle ||
@@ -65,9 +71,7 @@ abstract final class AppRouteGuard {
         path == AppRoutes.premiumIcon ||
         path == AppRoutes.messages ||
         path == AppRoutes.search ||
-        path == AppRoutes.chat ||
-        path == AppRoutes.mbtiAssessment ||
-        path == AppRoutes.mbtiAssessPreview) {
+        path == AppRoutes.chat) {
       return null;
     }
     return AppRoutes.auth;

@@ -15,6 +15,10 @@ import 'package:intent_app/presentation/onboarding/views/onboarding_2_screen.dar
 import 'package:intent_app/presentation/onboarding/views/onboarding_3_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/mbti_assessment_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/mbti_assess_preview_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/intent_reflections_intro_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/intent_reflections_assessment_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/relationship_style_intro_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/relationship_style_assessment_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/onboarding_4_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/enneagram_assessment_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/enneagram_assess_preview_screen.dart';
@@ -149,6 +153,41 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.mbtiAssessment,
       pageBuilder: (context, state) =>
           _fadePage(key: state.pageKey, child: const MbtiAssessmentScreen()),
+    ),
+    GoRoute(
+      path: AppRoutes.mbtiAssessPreview,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const MbtiAssessPreviewScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.intentReflectionsIntro,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const IntentReflectionsIntroScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.intentReflectionsAssessment,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const IntentReflectionsAssessmentScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.relationshipStyleIntro,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const RelationshipStyleIntroScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.relationshipStyleAssessment,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const RelationshipStyleAssessmentScreen(),
+      ),
     ),
     GoRoute(
       path: AppRoutes.enneagramAssessment,
@@ -444,13 +483,6 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
         child: const WhyMatchesScreen(),
-      ),
-    ),
-    GoRoute(
-      path: AppRoutes.mbtiAssessPreview,
-      pageBuilder: (context, state) => _fadePage(
-        key: state.pageKey,
-        child: const MbtiAssessPreviewScreen(),
       ),
     ),
   ],

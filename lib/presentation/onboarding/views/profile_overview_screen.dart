@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/login/login_brand_header.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
+import 'package:intent_app/presentation/onboarding/providers/relationship_style_assessment_provider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
 
-class ProfileOverviewScreen extends StatelessWidget {
+class ProfileOverviewScreen extends ConsumerWidget {
   const ProfileOverviewScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final relationshipResult =
+        ref.watch(relationshipStyleAssessmentProvider).result;
+    final relationshipValue = relationshipResult?.primaryLabel ??
+        'Steady / Secure';
+    final relationshipSubtitle = relationshipResult?.secondaryLabel == null
+        ? null
+        : 'With ${relationshipResult!.secondaryLabel!.toLowerCase()} tendencies';
+
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
@@ -32,7 +42,10 @@ class ProfileOverviewScreen extends StatelessWidget {
             const SizedBox(height: AppSpacing.sm),
             const _HeroCopy(),
             const SizedBox(height: AppSpacing.lg),
-            const _ProfileOverviewCard(),
+            _ProfileOverviewCard(
+              relationshipStyleValue: relationshipValue,
+              relationshipStyleSubtitle: relationshipSubtitle,
+            ),
             const SizedBox(height: AppSpacing.md),
             const _SummaryInfoBox(),
             const SizedBox(height: AppSpacing.md),
@@ -97,7 +110,13 @@ class _HeroCopy extends StatelessWidget {
 }
 
 class _ProfileOverviewCard extends StatelessWidget {
-  const _ProfileOverviewCard();
+  const _ProfileOverviewCard({
+    required this.relationshipStyleValue,
+    this.relationshipStyleSubtitle,
+  });
+
+  final String relationshipStyleValue;
+  final String? relationshipStyleSubtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -125,14 +144,15 @@ class _ProfileOverviewCard extends StatelessWidget {
               value: 'INFJ - Insightful Connector',
             ),
             const _ProfileTraitRow(
-              icon: Icons.favorite_border,
-              label: 'ENNEAGRAM',
-              value: 'Type 2 - Supportive Partner',
+              icon: Icons.edit_note_outlined,
+              label: 'INTENT REFLECTIONS',
+              value: 'Completed',
             ),
-            const _ProfileTraitRow(
+            _ProfileTraitRow(
               icon: Icons.groups_outlined,
-              label: 'ATTACHMENT',
-              value: 'Secure-Leaning - Open and steady',
+              label: 'RELATIONSHIP STYLE',
+              value: relationshipStyleValue,
+              subtitle: relationshipStyleSubtitle,
             ),
             const _ProfileTraitRow(
               icon: Icons.schedule_outlined,

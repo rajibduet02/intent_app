@@ -4,6 +4,7 @@ import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/core/utils/auth_snackbar.dart';
 import 'package:intent_app/presentation/onboarding/data/love_language_options.dart';
 import 'package:intent_app/presentation/onboarding/providers/love_language_state.dart';
+import 'package:intent_app/presentation/onboarding/providers/relationship_style_assessment_provider.dart';
 
 final loveLanguageProvider =
     NotifierProvider<LoveLanguageNotifier, LoveLanguageState>(
@@ -35,7 +36,10 @@ class LoveLanguageNotifier extends Notifier<LoveLanguageState> {
   }
 
   void onBack() {
-    appRouter.go(AppRoutes.attachmentStylePreview);
+    ref
+        .read(relationshipStyleAssessmentProvider.notifier)
+        .goToLastQuestion();
+    appRouter.go(AppRoutes.relationshipStyleAssessment);
   }
 
   Future<void> submit() async {

@@ -13,6 +13,14 @@ abstract final class AppRoutes {
   static const String onboarding2 = '/onboarding/2';
   static const String onboarding3 = '/onboarding/3';
   static const String onboarding4 = '/onboarding/4';
+  static const String mbtiAssessment = '/onboarding/mbti';
+  static const String mbtiAssessPreview = '/onboarding/mbti/preview';
+  static const String intentReflectionsIntro = '/onboarding/intent-reflections';
+  static const String intentReflectionsAssessment =
+      '/onboarding/intent-reflections/questions';
+  static const String relationshipStyleIntro = '/onboarding/relationship-style';
+  static const String relationshipStyleAssessment =
+      '/onboarding/relationship-style/questions';
   static const String enneagramAssessment = '/onboarding/enneagram';
   static const String enneagramAssessPreview = '/onboarding/enneagram/preview';
   static const String attachmentStyle = '/onboarding/attachment';
@@ -55,6 +63,4 @@ abstract final class AppRoutes {
   static const String connectionPlus = '/connection-plus';
   static const String premiumIcon = '/premium-icon';
   static const String chat = '/chat';
-  static const String mbtiAssessment = '/onboarding/mbti';
-  static const String mbtiAssessPreview = '/onboarding/mbti/preview';
 }
