@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/presentation/auth/widgets/login/login_brand_header.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
+import 'package:intent_app/presentation/onboarding/providers/onboarding_4_provider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
 
-class MbtiAssessPreviewScreen extends StatelessWidget {
+class MbtiAssessPreviewScreen extends ConsumerWidget {
   const MbtiAssessPreviewScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
-          onPressed: () => appRouter.go(AppRoutes.intentReflectionsIntro),
+          onPressed: () {
+            ref.read(onboarding4Provider.notifier).markCorePersonalityCompleted();
+            appRouter.go(AppRoutes.onboarding4);
+          },
         ),
       ),
       child: SingleChildScrollView(
@@ -51,7 +56,9 @@ class _PreviewHeader extends StatelessWidget {
       height: 48,
       child: Row(
         children: [
-          IntentBackButton(onPressed: () => Navigator.of(context).maybePop()),
+          IntentBackButton(
+            onPressed: () => appRouter.go(AppRoutes.mbtiAssessment),
+          ),
         ],
       ),
     );

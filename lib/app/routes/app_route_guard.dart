@@ -35,6 +35,7 @@ abstract final class AppRouteGuard {
         path == AppRoutes.attachmentStyle ||
         path == AppRoutes.attachmentStylePreview ||
         path == AppRoutes.loveLanguage ||
+        path == AppRoutes.relationshipVibe ||
         path == AppRoutes.profileOverview ||
         path == AppRoutes.photoUnlockIntention ||
         path == AppRoutes.uploadPhotos ||

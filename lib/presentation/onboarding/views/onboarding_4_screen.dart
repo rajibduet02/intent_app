@@ -107,7 +107,12 @@ class Onboarding4Screen extends ConsumerWidget {
                   for (var i = 0; i < Onboarding4Notifier.assessments.length; i++)
                     OnboardingAssessmentTile(
                       item: Onboarding4Notifier.assessments[i],
-                      onTap: () {},
+                      onTap: () => notifier.onAssessmentTap(i),
+                      isCompleted: (i == 0 && state.corePersonalityCompleted) ||
+                          (i == 1 && state.intentReflectionsCompleted) ||
+                          (i == 2 && state.relationshipStyleCompleted) ||
+                          (i == 3 && state.loveLanguageCompleted) ||
+                          (i == 4 && state.vibeSlidersCompleted),
                       showDivider:
                           i < Onboarding4Notifier.assessments.length - 1,
                     ),

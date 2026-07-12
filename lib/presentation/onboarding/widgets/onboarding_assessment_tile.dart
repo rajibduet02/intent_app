@@ -9,11 +9,13 @@ class OnboardingAssessmentTile extends StatelessWidget {
     required this.item,
     required this.onTap,
     this.showDivider = true,
+    this.isCompleted = false,
   });
 
   final OnboardingAssessmentItem item;
   final VoidCallback onTap;
   final bool showDivider;
+  final bool isCompleted;
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +59,18 @@ class OnboardingAssessmentTile extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Icon(
-                    Icons.chevron_right,
-                    color: AppColors.intentTextSoft,
-                    size: 22,
-                  ),
+                  if (isCompleted)
+                    const Icon(
+                      Icons.check_circle,
+                      color: AppColors.intentForest,
+                      size: 22,
+                    )
+                  else
+                    const Icon(
+                      Icons.chevron_right,
+                      color: AppColors.intentTextSoft,
+                      size: 22,
+                    ),
                 ],
               ),
             ),

@@ -5,6 +5,7 @@ import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/presentation/onboarding/data/intent_reflections_questions.dart';
 import 'package:intent_app/presentation/onboarding/providers/intent_reflections_state.dart';
+import 'package:intent_app/presentation/onboarding/providers/onboarding_4_provider.dart';
 
 final intentReflectionsProvider =
     NotifierProvider<IntentReflectionsNotifier, IntentReflectionsState>(
@@ -49,7 +50,7 @@ class IntentReflectionsNotifier extends Notifier<IntentReflectionsState> {
   }
 
   void onBackFromIntro() {
-    appRouter.go(AppRoutes.mbtiAssessPreview);
+    appRouter.go(AppRoutes.onboarding4);
   }
 
   void onBackFromQuestion() {
@@ -74,7 +75,8 @@ class IntentReflectionsNotifier extends Notifier<IntentReflectionsState> {
     }
 
     if (state.currentIndex >= IntentReflectionsQuestions.totalQuestions - 1) {
-      appRouter.go(AppRoutes.relationshipStyleIntro);
+      ref.read(onboarding4Provider.notifier).markIntentReflectionsCompleted();
+      appRouter.go(AppRoutes.onboarding4);
       return;
     }
 

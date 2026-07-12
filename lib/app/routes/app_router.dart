@@ -25,6 +25,7 @@ import 'package:intent_app/presentation/onboarding/views/enneagram_assess_previe
 import 'package:intent_app/presentation/onboarding/views/attachment_style_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/attachment_style_preview_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/love_language_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/relationship_vibe_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/profile_overview_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/photo_unlock_intention_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/upload_photos_screen.dart';
@@ -222,6 +223,13 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
         child: const LoveLanguageScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.relationshipVibe,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const RelationshipVibeScreen(),
       ),
     ),
     GoRoute(

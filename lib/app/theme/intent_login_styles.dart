@@ -429,7 +429,8 @@ abstract final class IntentLoginStyles {
       );
 
   static TextStyle get mbtiQuestion => GoogleFonts.playfairDisplay(
-        fontSize: 18,
+        // fontSize: 18,
+        fontSize: 16,
         fontWeight: FontWeight.w600,
         color: AppColors.intentText,
         height: 1.3,

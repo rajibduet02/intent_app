@@ -77,14 +77,57 @@ class Onboarding4Notifier extends Notifier<Onboarding4State> {
     appRouter.go(AppRoutes.onboarding3);
   }
 
+  void onAssessmentTap(int index) {
+    switch (index) {
+      case 0:
+        appRouter.go(AppRoutes.mbtiAssessment);
+      case 1:
+        appRouter.go(AppRoutes.intentReflectionsIntro);
+      case 2:
+        appRouter.go(AppRoutes.relationshipStyleIntro);
+      case 3:
+        appRouter.go(AppRoutes.loveLanguage);
+      case 4:
+        appRouter.go(AppRoutes.relationshipVibe);
+      default:
+        break;
+    }
+  }
+
+  void markCorePersonalityCompleted() {
+    state = state.copyWith(corePersonalityCompleted: true);
+  }
+
+  void markIntentReflectionsCompleted() {
+    state = state.copyWith(intentReflectionsCompleted: true);
+  }
+
+  void markRelationshipStyleCompleted() {
+    state = state.copyWith(relationshipStyleCompleted: true);
+  }
+
+  void markLoveLanguageCompleted() {
+    state = state.copyWith(loveLanguageCompleted: true);
+  }
+
+  void markVibeSlidersCompleted() {
+    state = state.copyWith(vibeSlidersCompleted: true);
+  }
+
   Future<void> submit() async {
     if (state.selectedDealbreaker == null) {
       AuthSnackbar.error('Please choose a dealbreaker.');
       return;
     }
+    if (!state.allAssessmentsCompleted) {
+      AuthSnackbar.info(
+        'Please complete all required compatibility assessment sections before continuing.',
+      );
+      return;
+    }
     state = state.copyWith(isLoading: true);
     try {
-      appRouter.go(AppRoutes.mbtiAssessment);
+      appRouter.go(AppRoutes.profileOverview);
     } finally {
       state = state.copyWith(isLoading: false);
     }

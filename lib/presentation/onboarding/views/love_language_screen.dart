@@ -9,7 +9,6 @@ import 'package:intent_app/presentation/onboarding/data/love_language_options.da
 import 'package:intent_app/presentation/onboarding/providers/love_language_provider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/love_language/love_language_header.dart';
 import 'package:intent_app/presentation/onboarding/widgets/love_language/love_language_option_card.dart';
-import 'package:intent_app/presentation/onboarding/widgets/love_language/relationship_vibe_slider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
 
 class LoveLanguageScreen extends ConsumerWidget {
@@ -81,89 +80,9 @@ class LoveLanguageScreen extends ConsumerWidget {
                 ),
               ),
             ],
-            const SizedBox(height: AppSpacing.lg),
-            Text(
-              'Your relationship vibe',
-              textAlign: TextAlign.center,
-              style: IntentLoginStyles.onboardingSectionTitle,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Help Intent understand the energy and rhythm you bring into connection.',
-              textAlign: TextAlign.center,
-              style: IntentLoginStyles.onboardingSubtitle,
-            ),
-            const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.fromLTRB(16, 18, 16, 10),
-              decoration: BoxDecoration(
-                color: AppColors.intentCreamDeep.withValues(alpha: 0.55),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: AppColors.intentInputBorder.withValues(alpha: 0.5),
-                ),
-              ),
-              child: Column(
-                children: [
-                  for (var i = 0; i < LoveLanguageOptions.vibeAxes.length; i++) ...[
-                    if (i > 0) const SizedBox(height: 8),
-                    RelationshipVibeSlider(
-                      axis: LoveLanguageOptions.vibeAxes[i],
-                      value: state.vibeValues[LoveLanguageOptions.vibeAxes[i].id]!,
-                      onChanged: (value) => notifier.setVibeValue(
-                        LoveLanguageOptions.vibeAxes[i].id,
-                        value,
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            ),
-            const SizedBox(height: 24),
-            const _CompatibilityNote(),
             const SizedBox(height: 16),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _CompatibilityNote extends StatelessWidget {
-  const _CompatibilityNote();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      decoration: BoxDecoration(
-        color: AppColors.intentGoldMuted.withValues(alpha: 0.16),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.intentGoldMuted.withValues(alpha: 0.35),
-        ),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(
-            Icons.shield_outlined,
-            size: 18,
-            color: AppColors.intentGold.withValues(alpha: 0.95),
-          ),
-          const SizedBox(width: AppSpacing.xs),
-          Expanded(
-            child: Text(
-              'Your answers help Intent understand compatibility beyond surface-level attraction.',
-              style: IntentLoginStyles.onboardingHelper.copyWith(
-                fontStyle: FontStyle.normal,
-                fontSize: 12,
-                height: 1.45,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

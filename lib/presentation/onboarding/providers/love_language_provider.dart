@@ -4,7 +4,7 @@ import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/core/utils/auth_snackbar.dart';
 import 'package:intent_app/presentation/onboarding/data/love_language_options.dart';
 import 'package:intent_app/presentation/onboarding/providers/love_language_state.dart';
-import 'package:intent_app/presentation/onboarding/providers/relationship_style_assessment_provider.dart';
+import 'package:intent_app/presentation/onboarding/providers/onboarding_4_provider.dart';
 
 final loveLanguageProvider =
     NotifierProvider<LoveLanguageNotifier, LoveLanguageState>(
@@ -36,10 +36,11 @@ class LoveLanguageNotifier extends Notifier<LoveLanguageState> {
   }
 
   void onBack() {
-    ref
-        .read(relationshipStyleAssessmentProvider.notifier)
-        .goToLastQuestion();
-    appRouter.go(AppRoutes.relationshipStyleAssessment);
+    appRouter.go(AppRoutes.onboarding4);
+  }
+
+  void onVibeBack() {
+    appRouter.go(AppRoutes.onboarding4);
   }
 
   Future<void> submit() async {
@@ -57,7 +58,18 @@ class LoveLanguageNotifier extends Notifier<LoveLanguageState> {
     }
     state = state.copyWith(isLoading: true);
     try {
-      appRouter.go(AppRoutes.profileOverview);
+      ref.read(onboarding4Provider.notifier).markLoveLanguageCompleted();
+      appRouter.go(AppRoutes.onboarding4);
+    } finally {
+      state = state.copyWith(isLoading: false);
+    }
+  }
+
+  Future<void> submitVibe() async {
+    state = state.copyWith(isLoading: true);
+    try {
+      ref.read(onboarding4Provider.notifier).markVibeSlidersCompleted();
+      appRouter.go(AppRoutes.onboarding4);
     } finally {
       state = state.copyWith(isLoading: false);
     }

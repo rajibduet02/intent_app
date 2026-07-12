@@ -26,6 +26,7 @@ abstract final class AppRoutes {
   static const String attachmentStyle = '/onboarding/attachment';
   static const String attachmentStylePreview = '/onboarding/attachment/preview';
   static const String loveLanguage = '/onboarding/love-language';
+  static const String relationshipVibe = '/onboarding/relationship-vibe';
   static const String profileOverview = '/onboarding/profile-overview';
   static const String photoUnlockIntention = '/onboarding/photo-unlock-intention';
   static const String uploadPhotos = '/onboarding/upload-photos';
