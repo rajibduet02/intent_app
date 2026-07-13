@@ -217,10 +217,10 @@ abstract final class RelationshipStyleQuestions {
           'Over time, you realize you’re starting to rely on your partner emotionally more than you expected. One day, you catch yourself thinking...',
       sectionLabel: partFourLabel,
       answers: _answers('relationship_q14', [
-        '“I didn’t realize how much lighter life can feel when you don’t have to carry everything alone.”',
-        '“This feels really good. I hope they feel how much I’d show up for them too.”',
-        '“I care about them, but I’d probably pull back a little. Loving each other is healthy, but I don’t want the relationship to become something I depend on to feel okay.”',
-        '“Depending on someone this much feels a little scary because people and relationships can change.”',
+        'I didn’t realize how much lighter life can feel when you don’t have to carry everything alone.',
+        'This feels really good. I hope they feel how much I’d show up for them too.',
+        'I care about them, but I’d probably pull back a little. Loving each other is healthy, but I don’t want the relationship to become something I depend on to feel okay.',
+        'Depending on someone this much feels a little scary because people and relationships can change.',
       ]),
     ),
     AssessmentQuestion(
@@ -230,10 +230,10 @@ abstract final class RelationshipStyleQuestions {
           'Over the past year, your relationship has been consistently healthy. You feel respected. Arguments get resolved. You trust each other. The relationship feels peaceful. One day, you catch yourself thinking...',
       sectionLabel: partFourLabel,
       answers: _answers('relationship_q15', [
-        '“This feels peaceful in a way I didn’t know I needed.”',
-        '“I love this. I just need to keep feeling that we’re both still choosing this.”',
-        '“This feels good, but I’d still want to make sure we don’t become too wrapped up in the relationship. I think love stays healthier when both people can stand firmly on their own.”',
-        '“Sometimes peace feels so unfamiliar that I catch myself wondering if something is going to change.”',
+        'This feels peaceful in a way I didn’t know I needed.',
+        'I love this. I just need to keep feeling that we’re both still choosing this.',
+        'This feels good, but I’d still want to make sure we don’t become too wrapped up in the relationship. I think love stays healthier when both people can stand firmly on their own.',
+        'Sometimes peace feels so unfamiliar that I catch myself wondering if something is going to change.',
       ]),
     ),
     AssessmentQuestion(
@@ -243,10 +243,10 @@ abstract final class RelationshipStyleQuestions {
           'Imagine you’re looking back many years from now on a happy, healthy relationship. When people ask what made it last, which answer feels most like something you’d genuinely say?',
       sectionLabel: partFourLabel,
       answers: _answers('relationship_q16', [
-        '“We kept choosing each other, communicating honestly, and growing together.”',
-        '“We never stopped making each other feel wanted, valued, and emotionally safe.”',
-        '“We gave each other love, but also enough space to keep becoming ourselves.”',
-        '“Neither of us was perfect. We just kept giving each other reasons to trust the relationship.”',
+        'We kept choosing each other, communicating honestly, and growing together.',
+        'We never stopped making each other feel wanted, valued, and emotionally safe.',
+        'We gave each other love, but also enough space to keep becoming ourselves.',
+        'Neither of us was perfect. We just kept giving each other reasons to trust the relationship.',
       ]),
     ),
   ];
