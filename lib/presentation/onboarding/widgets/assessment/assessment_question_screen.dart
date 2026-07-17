@@ -9,6 +9,7 @@ import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_b
 
 const double assessmentQuestionPinnedFooterHeight = 76;
 
+/// One question per screen with full-width answer cards.
 class AssessmentQuestionScreen extends StatelessWidget {
   const AssessmentQuestionScreen({
     super.key,
@@ -38,6 +39,7 @@ class AssessmentQuestionScreen extends StatelessWidget {
     final answersById = {
       for (final answer in question.answers) answer.id: answer,
     };
+    final prompt = question.prompt.isNotEmpty ? question.prompt : question.title;
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
@@ -57,7 +59,15 @@ class AssessmentQuestionScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             MbtiAssessmentHeader(onBack: onBack),
-            const SizedBox(height: AppSpacing.xs),
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              progressLabel,
+              style: IntentLoginStyles.mbtiSectionLabel.copyWith(
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.4,
+              ),
+            ),
+            const SizedBox(height: 8),
             Text(
               sectionLabel,
               style: IntentLoginStyles.onboardingAssessmentCategory.copyWith(
@@ -66,55 +76,35 @@ class AssessmentQuestionScreen extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const SizedBox(height: 16),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: AppShadows.intentInput,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      progressLabel.toUpperCase(),
-                      style: IntentLoginStyles.mbtiSectionLabel,
-                    ),
-                    if (question.title.isNotEmpty) ...[
-                      const SizedBox(height: 10),
-                      Text(
-                        question.title,
-                        style: IntentLoginStyles.onboardingAssessmentCategory
-                            .copyWith(
-                          color: AppColors.intentGold,
-                          letterSpacing: 1.2,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                    const SizedBox(height: 12),
-                    Text(
-                      question.prompt.isNotEmpty
-                          ? question.prompt
-                          : question.title,
-                      style: IntentLoginStyles.mbtiQuestion,
-                    ),
-                    const SizedBox(height: 16),
-                    for (var i = 0; i < displayedAnswerIds.length; i++) ...[
-                      if (i > 0) const SizedBox(height: 10),
-                      AssessmentAnswerCard(
-                        text: answersById[displayedAnswerIds[i]]!.text,
-                        isSelected: selectedAnswerId == displayedAnswerIds[i],
-                        onTap: () => onAnswerSelected(displayedAnswerIds[i]),
-                      ),
-                    ],
-                  ],
+            if (question.title.isNotEmpty) ...[
+              const SizedBox(height: 20),
+              Text(
+                question.title,
+                style: IntentLoginStyles.onboardingTitle.copyWith(
+                  fontSize: 22,
+                  height: 1.25,
                 ),
               ),
+            ],
+            const SizedBox(height: 12),
+            Text(
+              prompt,
+              style: IntentLoginStyles.mbtiQuestion.copyWith(
+                fontSize: 16,
+                height: 1.45,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
+            for (var i = 0; i < displayedAnswerIds.length; i++) ...[
+              if (i > 0) const SizedBox(height: 14),
+              AssessmentAnswerCard(
+                text: answersById[displayedAnswerIds[i]]!.text,
+                isSelected: selectedAnswerId == displayedAnswerIds[i],
+                onTap: () => onAnswerSelected(displayedAnswerIds[i]),
+              ),
+            ],
+            const SizedBox(height: 8),
           ],
         ),
       ),

@@ -20,29 +20,34 @@ class RelationshipStyleAssessmentNotifier
   RelationshipStyleAssessmentState build() =>
       RelationshipStyleAssessmentState.initial();
 
-  void _ensureAllQuestionsShuffled() {
-    if (state.shuffledAnswerOrder.length >=
-        RelationshipStyleQuestions.totalQuestions) {
-      return;
-    }
-
-    final shuffled = Map<String, List<String>>.from(state.shuffledAnswerOrder);
-    for (final question in RelationshipStyleQuestions.questions) {
-      shuffled.putIfAbsent(question.id, () {
-        final ids = question.answers.map((answer) => answer.id).toList()
-          ..shuffle(_random);
-        return ids;
-      });
-    }
-    state = state.copyWith(shuffledAnswerOrder: shuffled);
+  void _reshuffleDisplayedOrder(String questionId) {
+    final question = RelationshipStyleQuestions.questions.firstWhere(
+      (q) => q.id == questionId,
+    );
+    final ids = question.answers.map((answer) => answer.id).toList()
+      ..shuffle(_random);
+    state = state.copyWith(
+      shuffledAnswerOrder: {
+        ...state.shuffledAnswerOrder,
+        questionId: ids,
+      },
+    );
   }
 
+  /// Read-only display order. Shuffle happens on navigation, never during build.
   List<String> displayedAnswerIdsFor(String questionId) {
-    _ensureAllQuestionsShuffled();
-    return state.shuffledAnswerOrder[questionId] ?? [];
+    final existing = state.shuffledAnswerOrder[questionId];
+    if (existing != null) {
+      return existing;
+    }
+    final question = RelationshipStyleQuestions.questions.firstWhere(
+      (q) => q.id == questionId,
+    );
+    return question.answers.map((answer) => answer.id).toList();
   }
 
   void selectAnswer(String questionId, String answerId) {
+    // Store original answer ID — style mapping stays on the answer object.
     state = state.copyWith(
       selectedAnswers: {
         ...state.selectedAnswers,
@@ -60,13 +65,48 @@ class RelationshipStyleAssessmentNotifier
       appRouter.go(AppRoutes.relationshipStyleIntro);
       return;
     }
-    state = state.copyWith(currentIndex: state.currentIndex - 1);
+    final previousIndex = state.currentIndex - 1;
+    final previousQuestion =
+        RelationshipStyleQuestions.questions[previousIndex];
+    state = state.copyWith(currentIndex: previousIndex);
+    _reshuffleDisplayedOrder(previousQuestion.id);
+  }
+
+  void onBackFromResults() {
+    goToLastQuestion();
+    appRouter.go(AppRoutes.relationshipStyleAssessment);
   }
 
   void continueFromIntro() {
-    _ensureAllQuestionsShuffled();
-    state = state.copyWith(currentIndex: 0);
+    if (state.isComplete) {
+      if (state.result == null) {
+        final result = RelationshipStyleQuestions.calculateResult(
+          state.selectedAnswers,
+        );
+        state = state.copyWith(result: result);
+      }
+      appRouter.go(AppRoutes.relationshipStyleResults);
+      return;
+    }
+
+    final resumeIndex = _resumeQuestionIndex();
+    final question = RelationshipStyleQuestions.questions[resumeIndex];
+    state = state.copyWith(currentIndex: resumeIndex);
+    _reshuffleDisplayedOrder(question.id);
     appRouter.go(AppRoutes.relationshipStyleAssessment);
+  }
+
+  int _resumeQuestionIndex() {
+    for (var i = 0; i < RelationshipStyleQuestions.questions.length; i++) {
+      final id = RelationshipStyleQuestions.questions[i].id;
+      if (!state.selectedAnswers.containsKey(id)) {
+        return i;
+      }
+    }
+    return state.currentIndex.clamp(
+      0,
+      RelationshipStyleQuestions.totalQuestions - 1,
+    );
   }
 
   void continueFromQuestion() {
@@ -81,17 +121,25 @@ class RelationshipStyleAssessmentNotifier
         state.selectedAnswers,
       );
       state = state.copyWith(result: result);
-      ref.read(onboarding4Provider.notifier).markRelationshipStyleCompleted();
-      appRouter.go(AppRoutes.onboarding4);
+      appRouter.go(AppRoutes.relationshipStyleResults);
       return;
     }
 
-    state = state.copyWith(currentIndex: state.currentIndex + 1);
+    final nextIndex = state.currentIndex + 1;
+    final nextQuestion = RelationshipStyleQuestions.questions[nextIndex];
+    state = state.copyWith(currentIndex: nextIndex);
+    _reshuffleDisplayedOrder(nextQuestion.id);
+  }
+
+  void continueFromResults() {
+    ref.read(onboarding4Provider.notifier).markRelationshipStyleCompleted();
+    appRouter.go(AppRoutes.onboarding4);
   }
 
   void goToLastQuestion() {
-    state = state.copyWith(
-      currentIndex: RelationshipStyleQuestions.totalQuestions - 1,
-    );
+    final lastIndex = RelationshipStyleQuestions.totalQuestions - 1;
+    final lastQuestion = RelationshipStyleQuestions.questions[lastIndex];
+    state = state.copyWith(currentIndex: lastIndex);
+    _reshuffleDisplayedOrder(lastQuestion.id);
   }
 }

@@ -25,7 +25,8 @@ class MbtiAssessmentScreen extends ConsumerWidget {
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: AssessmentPinnedFooter(
-          submitLabel: 'View MBTI Result',
+          // submitLabel: 'See MBTI Result',
+          submitLabel: 'CONTINUE',
           isLoading: state.isLoading,
           onSubmit: () => unawaited(notifier.submit()),
         ),
@@ -76,25 +77,6 @@ class _Intro extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Align(
-          alignment: Alignment.center,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-            decoration: BoxDecoration(
-              color: AppColors.intentGoldMuted.withValues(alpha: 0.14),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Text(
-              '01 PERSONALITY',
-              style: IntentLoginStyles.onboardingAssessmentCategory.copyWith(
-                color: AppColors.intentGold,
-                letterSpacing: 1.6,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: AppSpacing.sm),
         Text(
           'MBTI Assessment',
           textAlign: TextAlign.center,

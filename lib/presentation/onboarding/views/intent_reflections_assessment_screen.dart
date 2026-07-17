@@ -14,13 +14,13 @@ class IntentReflectionsAssessmentScreen extends ConsumerWidget {
     final state = ref.watch(intentReflectionsProvider);
     final question =
         IntentReflectionsQuestions.questions[state.currentIndex];
-    final displayedAnswerIds = state.shuffledAnswerOrder[question.id] ??
-        question.answers.map((answer) => answer.id).toList();
+    final displayedAnswerIds = notifier.displayedAnswerIdsFor(question.id);
+    final isLastQuestion = state.currentIndex >=
+        IntentReflectionsQuestions.totalQuestions - 1;
 
     return AssessmentQuestionScreen(
       onBack: notifier.onBackFromQuestion,
       progressLabel:
-          // 'Reflection ${state.currentIndex + 1} of ${IntentReflectionsQuestions.totalQuestions} — ${question.title}',
           'Reflection ${state.currentIndex + 1} of ${IntentReflectionsQuestions.totalQuestions}',
       sectionLabel: question.sectionLabel,
       question: question,
@@ -29,6 +29,8 @@ class IntentReflectionsAssessmentScreen extends ConsumerWidget {
       onAnswerSelected: (answerId) =>
           notifier.selectAnswer(question.id, answerId),
       onContinue: notifier.continueFromQuestion,
+      // continueLabel: isLastQuestion ? 'SEE RESULTS' : 'NEXT',
+      continueLabel: isLastQuestion ? 'CONTINUE' : 'NEXT',
     );
   }
 }

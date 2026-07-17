@@ -28,8 +28,10 @@ abstract final class AppRouteGuard {
         path == AppRoutes.mbtiAssessPreview ||
         path == AppRoutes.intentReflectionsIntro ||
         path == AppRoutes.intentReflectionsAssessment ||
+        path == AppRoutes.intentReflectionsResults ||
         path == AppRoutes.relationshipStyleIntro ||
         path == AppRoutes.relationshipStyleAssessment ||
+        path == AppRoutes.relationshipStyleResults ||
         path == AppRoutes.enneagramAssessment ||
         path == AppRoutes.enneagramAssessPreview ||
         path == AppRoutes.attachmentStyle ||

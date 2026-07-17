@@ -24,7 +24,7 @@ class Onboarding4Screen extends ConsumerWidget {
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
-          label: 'BEGIN',
+          label: 'CONTINUE',
           isLoading: state.isLoading,
           onPressed: () => unawaited(notifier.submit()),
         ),

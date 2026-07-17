@@ -15,10 +15,12 @@ import 'package:intent_app/presentation/onboarding/views/onboarding_2_screen.dar
 import 'package:intent_app/presentation/onboarding/views/onboarding_3_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/mbti_assessment_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/mbti_assess_preview_screen.dart';
-import 'package:intent_app/presentation/onboarding/views/intent_reflections_intro_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/intent_reflections_assessment_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/intent_reflections_intro_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/intent_reflections_results_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/relationship_style_intro_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/relationship_style_assessment_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/relationship_style_results_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/onboarding_4_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/enneagram_assessment_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/enneagram_assess_preview_screen.dart';
@@ -177,6 +179,13 @@ final GoRouter appRouter = GoRouter(
       ),
     ),
     GoRoute(
+      path: AppRoutes.intentReflectionsResults,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const IntentReflectionsResultsScreen(),
+      ),
+    ),
+    GoRoute(
       path: AppRoutes.relationshipStyleIntro,
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
@@ -188,6 +197,13 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
         child: const RelationshipStyleAssessmentScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.relationshipStyleResults,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const RelationshipStyleResultsScreen(),
       ),
     ),
     GoRoute(

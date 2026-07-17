@@ -14,8 +14,9 @@ class RelationshipStyleAssessmentScreen extends ConsumerWidget {
     final state = ref.watch(relationshipStyleAssessmentProvider);
     final question =
         RelationshipStyleQuestions.questions[state.currentIndex];
-    final displayedAnswerIds = state.shuffledAnswerOrder[question.id] ??
-        question.answers.map((answer) => answer.id).toList();
+    final displayedAnswerIds = notifier.displayedAnswerIdsFor(question.id);
+    final isLastQuestion = state.currentIndex >=
+        RelationshipStyleQuestions.totalQuestions - 1;
 
     return AssessmentQuestionScreen(
       onBack: notifier.onBackFromQuestion,
@@ -28,6 +29,8 @@ class RelationshipStyleAssessmentScreen extends ConsumerWidget {
       onAnswerSelected: (answerId) =>
           notifier.selectAnswer(question.id, answerId),
       onContinue: notifier.continueFromQuestion,
+      // continueLabel: isLastQuestion ? 'SEE RESULTS' : 'NEXT',
+      continueLabel: isLastQuestion ? 'CONTINUE' : 'NEXT',
     );
   }
 }

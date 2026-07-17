@@ -18,9 +18,13 @@ abstract final class AppRoutes {
   static const String intentReflectionsIntro = '/onboarding/intent-reflections';
   static const String intentReflectionsAssessment =
       '/onboarding/intent-reflections/questions';
+  static const String intentReflectionsResults =
+      '/onboarding/intent-reflections/results';
   static const String relationshipStyleIntro = '/onboarding/relationship-style';
   static const String relationshipStyleAssessment =
       '/onboarding/relationship-style/questions';
+  static const String relationshipStyleResults =
+      '/onboarding/relationship-style/results';
   static const String enneagramAssessment = '/onboarding/enneagram';
   static const String enneagramAssessPreview = '/onboarding/enneagram/preview';
   static const String attachmentStyle = '/onboarding/attachment';

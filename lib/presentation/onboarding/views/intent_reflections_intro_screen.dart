@@ -10,6 +10,13 @@ class IntentReflectionsIntroScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(intentReflectionsProvider.notifier);
+    final state = ref.watch(intentReflectionsProvider);
+    final continueLabel = state.selectedAnswers.isEmpty
+        ? 'BEGIN'
+        : state.isComplete
+            // ? 'SEE RESULTS'
+            ? 'CONTINUE'
+            : 'CONTINUE';
 
     return AssessmentIntroScreen(
       onBack: notifier.onBackFromIntro,
@@ -20,7 +27,7 @@ class IntentReflectionsIntroScreen extends ConsumerWidget {
       instruction:
           'Choose the answer that feels closest to your honest first instinct. There are no perfect answers.',
       onContinue: notifier.continueFromIntro,
-      continueLabel: 'BEGIN',
+      continueLabel: continueLabel,
     );
   }
 }

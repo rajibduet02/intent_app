@@ -10,6 +10,13 @@ class RelationshipStyleIntroScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(relationshipStyleAssessmentProvider.notifier);
+    final state = ref.watch(relationshipStyleAssessmentProvider);
+    final continueLabel = state.selectedAnswers.isEmpty
+        ? 'BEGIN'
+        : state.isComplete
+            // ? 'SEE RESULTS'
+            ? 'CONTINUE'
+            : 'CONTINUE';
 
     return AssessmentIntroScreen(
       onBack: notifier.onBackFromIntro,
@@ -19,7 +26,7 @@ class RelationshipStyleIntroScreen extends ConsumerWidget {
       instruction:
           'Choose the answer that sounds most like your natural thought or internal reaction. There are no perfect answers.',
       onContinue: notifier.continueFromIntro,
-      continueLabel: 'BEGIN',
+      continueLabel: continueLabel,
     );
   }
 }
