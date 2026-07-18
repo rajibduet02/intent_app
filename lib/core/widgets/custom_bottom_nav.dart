@@ -176,10 +176,13 @@ class _NavItem extends StatelessWidget {
           splashColor: AppColors.intentForest.withValues(alpha: 0.08),
           highlightColor: AppColors.intentCreamDeep.withValues(alpha: 0.5),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 2),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+            padding: const EdgeInsets.symmetric(vertical: 1),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                 Stack(
                   clipBehavior: Clip.none,
                   alignment: Alignment.center,
@@ -305,6 +308,7 @@ class _NavItem extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
             ),
           ),
         ),

@@ -26,13 +26,10 @@ class ProfileScreen extends StatelessWidget {
         messagesBadgeCount: 5,
         datesBadgeCount: datesPendingActionCount,
       ),
-      child: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const ProfileHeroCard(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const ProfileHeroCard(),
             const SizedBox(height: 14),
             ProfileScreenSection(
               title: 'Basic Info',
@@ -179,7 +176,6 @@ class ProfileScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
     );
   }
 }

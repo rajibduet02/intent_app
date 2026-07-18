@@ -4,23 +4,26 @@ import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/core/widgets/custom_bottom_nav.dart';
 import 'package:intent_app/presentation/auth/widgets/login/login_background_decor.dart';
 
-/// Discover shell with cream background, optional pinned top bar, and bottom nav.
+/// Discover shell with cream background, scrollable body, and pinned bottom nav.
 ///
-/// When [hideChromeOnScroll] is true (default), scrolling down hides the top bar
-/// and bottom navigation; scrolling up reveals them again.
+/// When [topBar] is set, it scrolls with [child] as part of one continuous page.
+/// When [hideChromeOnScroll] is true, scrolling down hides the bottom navigation;
+/// scrolling up reveals it again.
 class DiscoverScaffold extends StatefulWidget {
   const DiscoverScaffold({
     super.key,
     required this.child,
     required this.bottomNavigationBar,
     this.topBar,
-    this.hideChromeOnScroll = true,
+    this.hideChromeOnScroll = false,
+    this.padding = const EdgeInsets.fromLTRB(16, 8, 16, 24),
   });
 
   final Widget child;
   final Widget bottomNavigationBar;
   final Widget? topBar;
   final bool hideChromeOnScroll;
+  final EdgeInsetsGeometry padding;
 
   @override
   State<DiscoverScaffold> createState() => _DiscoverScaffoldState();
@@ -67,7 +70,6 @@ class _DiscoverScaffoldState extends State<DiscoverScaffold> {
     final bottomPadding = _chromeVisible
         ? navHeight
         : MediaQuery.paddingOf(context).bottom;
-    final showTopBar = widget.topBar != null && _chromeVisible;
 
     return Scaffold(
       backgroundColor: AppColors.intentCream,
@@ -78,47 +80,43 @@ class _DiscoverScaffoldState extends State<DiscoverScaffold> {
           const Positioned.fill(child: LoginBackgroundDecor()),
           SafeArea(
             bottom: false,
-            child: Column(
+            child: Stack(
               children: [
-                AnimatedSize(
-                  duration: _chromeAnimationDuration,
-                  curve: Curves.easeOutCubic,
-                  alignment: Alignment.topCenter,
-                  child: showTopBar
-                      ? Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                          child: widget.topBar!,
-                        )
-                      : const SizedBox.shrink(),
+                Positioned.fill(
+                  child: NotificationListener<ScrollNotification>(
+                    onNotification: _handleScrollNotification,
+                    child: AnimatedPadding(
+                      duration: _chromeAnimationDuration,
+                      curve: Curves.easeOutCubic,
+                      padding: EdgeInsets.only(bottom: bottomPadding),
+                      child: SingleChildScrollView(
+                        physics: const ClampingScrollPhysics(),
+                        padding: widget.padding,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            if (widget.topBar != null) ...[
+                              widget.topBar!,
+                              const SizedBox(height: 8),
+                            ],
+                            widget.child,
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                Expanded(
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: NotificationListener<ScrollNotification>(
-                          onNotification: _handleScrollNotification,
-                          child: AnimatedPadding(
-                            duration: _chromeAnimationDuration,
-                            curve: Curves.easeOutCubic,
-                            padding: EdgeInsets.only(bottom: bottomPadding),
-                            child: widget.child,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        child: AnimatedSlide(
-                          duration: _chromeAnimationDuration,
-                          curve: Curves.easeOutCubic,
-                          offset: _chromeVisible
-                              ? Offset.zero
-                              : const Offset(0, 1),
-                          child: widget.bottomNavigationBar,
-                        ),
-                      ),
-                    ],
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: AnimatedSlide(
+                    duration: _chromeAnimationDuration,
+                    curve: Curves.easeOutCubic,
+                    offset: _chromeVisible
+                        ? Offset.zero
+                        : const Offset(0, 1),
+                    child: widget.bottomNavigationBar,
                   ),
                 ),
               ],

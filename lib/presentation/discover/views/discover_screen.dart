@@ -27,13 +27,10 @@ class DiscoverScreen extends StatelessWidget {
         messagesBadgeCount: 5,
         datesBadgeCount: datesPendingActionCount,
       ),
-      child: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const _PhotosHiddenBadge(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const _PhotosHiddenBadge(),
             const SizedBox(height: AppSpacing.lg),
             DiscoverMatchCardList(
               onCardTap: () => context.push(AppRoutes.profilePreview),
@@ -46,7 +43,6 @@ class DiscoverScreen extends StatelessWidget {
             const DiscoverFocusCard(),
           ],
         ),
-      ),
     );
   }
 }

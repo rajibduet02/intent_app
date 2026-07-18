@@ -48,13 +48,10 @@ class _MessagesScreenState extends State<MessagesScreen> {
         messagesBadgeCount: 5,
         datesBadgeCount: datesPendingActionCount,
       ),
-      child: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 8),
             MessagesFilterChips(
               selectedFilter: _selectedFilter,
               onFilterSelected: (filter) =>
@@ -80,7 +77,6 @@ class _MessagesScreenState extends State<MessagesScreen> {
               ],
           ],
         ),
-      ),
     );
   }
 }

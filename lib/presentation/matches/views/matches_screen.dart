@@ -30,13 +30,10 @@ class MatchesScreen extends StatelessWidget {
         messagesBadgeCount: 5,
         datesBadgeCount: datesPendingActionCount,
       ),
-      child: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 6),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 6),
             Text(
               '$matchesCount MATCHES',
               style: IntentLoginStyles.onboardingSubtitle.copyWith(
@@ -66,7 +63,6 @@ class MatchesScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
     );
   }
 }

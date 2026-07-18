@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/theme/theme.dart';
+import 'package:intent_app/core/constants/splash_branding.dart';
 import 'package:intent_app/presentation/auth/widgets/login/login_background_decor.dart';
 import 'package:intent_app/presentation/auth/widgets/login/login_brand_header.dart';
 
@@ -72,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen>
               child: ScaleTransition(
                 scale: _scale,
                 child: IntentBrandMark(
-                  logoSize: 80,
+                  logoSize: SplashBranding.logoSize,
                   title: 'Intent',
                   spacing: 0,
                   // titleStyle: IntentLoginStyles.brandTitle.copyWith(fontSize: 42),
