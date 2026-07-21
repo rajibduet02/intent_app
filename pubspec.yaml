@@ -36,7 +36,6 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^6.0.0
   flutter_launcher_icons: ^0.14.3
-  flutter_native_splash: ^2.4.7
 
 flutter_launcher_icons:
   android: true
@@ -51,28 +50,12 @@ flutter_launcher_icons:
   macos:
     generate: true
 
-# Native splash uses [SplashBranding.nativeLogoSize] (Flutter splash keeps [SplashBranding.logoSize]).
-flutter_native_splash:
-  color: "#F8F4ED"
-  image: assets/icons/splash_logo.png
-  android_gravity: center
-  ios_content_mode: center
-  android_12:
-    color: "#F8F4ED"
-    image: assets/icons/splash_logo_android12.png
-    icon_background_color: "#F8F4ED"
-  ios: true
-  android: true
-  web: false
-
 flutter:
   uses-material-design: true
 
   assets:
     - assets/icons/main_logo.png
     - assets/icons/main_logo_hd.png
-    - assets/icons/splash_logo.png
-    - assets/icons/splash_logo_android12.png
     - assets/icons/new_apple.svg
     - assets/icons/new_google.svg
     - assets/icons/love_person.png
