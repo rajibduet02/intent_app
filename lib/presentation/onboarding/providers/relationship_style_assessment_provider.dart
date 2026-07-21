@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/presentation/onboarding/data/relationship_style_questions.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_4_provider.dart';
+import 'package:intent_app/presentation/onboarding/providers/dealbreaker_and_assessments_provider.dart';
 import 'package:intent_app/presentation/onboarding/providers/relationship_style_assessment_state.dart';
 
 final relationshipStyleAssessmentProvider = NotifierProvider<
@@ -57,7 +57,7 @@ class RelationshipStyleAssessmentNotifier
   }
 
   void onBackFromIntro() {
-    appRouter.go(AppRoutes.onboarding4);
+    appRouter.go(AppRoutes.dealbreakerAndAssessments);
   }
 
   void onBackFromQuestion() {
@@ -132,8 +132,8 @@ class RelationshipStyleAssessmentNotifier
   }
 
   void continueFromResults() {
-    ref.read(onboarding4Provider.notifier).markRelationshipStyleCompleted();
-    appRouter.go(AppRoutes.onboarding4);
+    ref.read(dealbreakerAndAssessmentsProvider.notifier).markRelationshipStyleCompleted();
+    appRouter.go(AppRoutes.dealbreakerAndAssessments);
   }
 
   void goToLastQuestion() {

@@ -5,7 +5,7 @@ import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/presentation/auth/widgets/login/login_brand_header.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_4_provider.dart';
+import 'package:intent_app/presentation/onboarding/providers/dealbreaker_and_assessments_provider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
 
 class MbtiAssessPreviewScreen extends ConsumerWidget {
@@ -18,8 +18,8 @@ class MbtiAssessPreviewScreen extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
           onPressed: () {
-            ref.read(onboarding4Provider.notifier).markCorePersonalityCompleted();
-            appRouter.go(AppRoutes.onboarding4);
+            ref.read(dealbreakerAndAssessmentsProvider.notifier).markCorePersonalityCompleted();
+            appRouter.go(AppRoutes.dealbreakerAndAssessments);
           },
         ),
       ),

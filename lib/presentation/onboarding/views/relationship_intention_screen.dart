@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_2_provider.dart';
+import 'package:intent_app/presentation/onboarding/providers/relationship_intention_provider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_intent_accent.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_select_field.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_select_sheet.dart';
 
-class Onboarding2Screen extends ConsumerWidget {
-  const Onboarding2Screen({super.key});
+class RelationshipIntentionScreen extends ConsumerWidget {
+  const RelationshipIntentionScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.read(onboarding2Provider.notifier);
-    final state = ref.watch(onboarding2Provider);
+    final notifier = ref.read(relationshipIntentionProvider.notifier);
+    final state = ref.watch(relationshipIntentionProvider);
     final isLoading = state.isLoading;
 
     return FixedBackgroundAuthScaffold(
@@ -110,10 +110,10 @@ class Onboarding2Screen extends ConsumerWidget {
     final selected = await showOnboardingSelectSheet(
       context: context,
       title: 'Relationship intention',
-      options: Onboarding2Notifier.relationshipIntentions,
+      options: RelationshipIntentionNotifier.relationshipIntentions,
     );
     if (selected != null) {
-      ref.read(onboarding2Provider.notifier).setRelationshipIntention(selected);
+      ref.read(relationshipIntentionProvider.notifier).setRelationshipIntention(selected);
     }
   }
 
@@ -121,10 +121,10 @@ class Onboarding2Screen extends ConsumerWidget {
     final selected = await showOnboardingSelectSheet(
       context: context,
       title: 'Religion and beliefs',
-      options: Onboarding2Notifier.religionBeliefs,
+      options: RelationshipIntentionNotifier.religionBeliefs,
     );
     if (selected != null) {
-      ref.read(onboarding2Provider.notifier).setReligionBeliefs(selected);
+      ref.read(relationshipIntentionProvider.notifier).setReligionBeliefs(selected);
     }
   }
 
@@ -132,10 +132,10 @@ class Onboarding2Screen extends ConsumerWidget {
     final selected = await showOnboardingSelectSheet(
       context: context,
       title: 'How important is this to you?',
-      options: Onboarding2Notifier.importanceLevels,
+      options: RelationshipIntentionNotifier.importanceLevels,
     );
     if (selected != null) {
-      ref.read(onboarding2Provider.notifier).setImportanceLevel(selected);
+      ref.read(relationshipIntentionProvider.notifier).setImportanceLevel(selected);
     }
   }
 }

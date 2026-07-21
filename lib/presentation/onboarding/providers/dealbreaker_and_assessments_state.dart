@@ -10,8 +10,8 @@ enum OnboardingDealbreakerType {
   final String label;
 }
 
-class Onboarding4State {
-  const Onboarding4State({
+class DealbreakerAndAssessmentsState {
+  const DealbreakerAndAssessmentsState({
     this.selectedDealbreaker,
     required this.isLoading,
     this.corePersonalityCompleted = false,
@@ -36,11 +36,11 @@ class Onboarding4State {
       loveLanguageCompleted &&
       vibeSlidersCompleted;
 
-  factory Onboarding4State.initial() => const Onboarding4State(
+  factory DealbreakerAndAssessmentsState.initial() => const DealbreakerAndAssessmentsState(
         isLoading: false,
       );
 
-  Onboarding4State copyWith({
+  DealbreakerAndAssessmentsState copyWith({
     OnboardingDealbreakerType? selectedDealbreaker,
     bool? isLoading,
     bool? corePersonalityCompleted,
@@ -49,7 +49,7 @@ class Onboarding4State {
     bool? loveLanguageCompleted,
     bool? vibeSlidersCompleted,
   }) {
-    return Onboarding4State(
+    return DealbreakerAndAssessmentsState(
       selectedDealbreaker: selectedDealbreaker ?? this.selectedDealbreaker,
       isLoading: isLoading ?? this.isLoading,
       corePersonalityCompleted:

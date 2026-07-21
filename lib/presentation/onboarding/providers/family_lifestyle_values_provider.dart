@@ -2,14 +2,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/core/utils/auth_snackbar.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_3_state.dart';
+import 'package:intent_app/presentation/onboarding/providers/family_lifestyle_values_state.dart';
 
-final onboarding3Provider =
-    NotifierProvider<Onboarding3Notifier, Onboarding3State>(
-  Onboarding3Notifier.new,
+final familyLifestyleValuesProvider =
+    NotifierProvider<FamilyLifestyleValuesNotifier, FamilyLifestyleValuesState>(
+  FamilyLifestyleValuesNotifier.new,
 );
 
-class Onboarding3Notifier extends Notifier<Onboarding3State> {
+class FamilyLifestyleValuesNotifier extends Notifier<FamilyLifestyleValuesState> {
   static const familyGoals = [
     'Want children someday',
     "Don't want children",
@@ -55,7 +55,7 @@ class Onboarding3Notifier extends Notifier<Onboarding3State> {
   static const int maxValues = 8;
 
   @override
-  Onboarding3State build() => Onboarding3State.initial();
+  FamilyLifestyleValuesState build() => FamilyLifestyleValuesState.initial();
 
   void setFamilyGoal(String? value) {
     state = state.copyWith(familyGoal: value);
@@ -85,7 +85,7 @@ class Onboarding3Notifier extends Notifier<Onboarding3State> {
   }
 
   void onBack() {
-    appRouter.go(AppRoutes.onboarding2);
+    appRouter.go(AppRoutes.relationshipIntention);
   }
 
   Future<void> submit() async {
@@ -104,7 +104,7 @@ class Onboarding3Notifier extends Notifier<Onboarding3State> {
     }
     state = state.copyWith(isLoading: true);
     try {
-      appRouter.go(AppRoutes.onboarding4);
+      appRouter.go(AppRoutes.dealbreakerAndAssessments);
     } finally {
       state = state.copyWith(isLoading: false);
     }

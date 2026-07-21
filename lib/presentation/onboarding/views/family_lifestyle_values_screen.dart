@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_3_provider.dart';
+import 'package:intent_app/presentation/onboarding/providers/family_lifestyle_values_provider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_header.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_multi_select_sheet.dart';
@@ -12,13 +12,13 @@ import 'package:intent_app/presentation/onboarding/widgets/onboarding_select_fie
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_select_sheet.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_value_chip.dart';
 
-class Onboarding3Screen extends ConsumerWidget {
-  const Onboarding3Screen({super.key});
+class FamilyLifestyleValuesScreen extends ConsumerWidget {
+  const FamilyLifestyleValuesScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.read(onboarding3Provider.notifier);
-    final state = ref.watch(onboarding3Provider);
+    final notifier = ref.read(familyLifestyleValuesProvider.notifier);
+    final state = ref.watch(familyLifestyleValuesProvider);
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
@@ -154,7 +154,7 @@ class Onboarding3Screen extends ConsumerWidget {
                       runSpacing: 8,
                       alignment: WrapAlignment.center,
                       children: [
-                        for (final value in Onboarding3Notifier.values)
+                        for (final value in FamilyLifestyleValuesNotifier.values)
                           OnboardingValueChip(
                             label: value,
                             isSelected: state.selectedValues.contains(value),
@@ -182,23 +182,23 @@ class Onboarding3Screen extends ConsumerWidget {
     final selected = await showOnboardingSelectSheet(
       context: context,
       title: 'Family goals',
-      options: Onboarding3Notifier.familyGoals,
+      options: FamilyLifestyleValuesNotifier.familyGoals,
     );
     if (selected != null) {
-      ref.read(onboarding3Provider.notifier).setFamilyGoal(selected);
+      ref.read(familyLifestyleValuesProvider.notifier).setFamilyGoal(selected);
     }
   }
 
   Future<void> _pickLifestyle(BuildContext context, WidgetRef ref) async {
-    final state = ref.read(onboarding3Provider);
+    final state = ref.read(familyLifestyleValuesProvider);
     final selected = await showOnboardingMultiSelectSheet(
       context: context,
       title: 'Your lifestyle',
-      options: Onboarding3Notifier.lifestyleOptions,
+      options: FamilyLifestyleValuesNotifier.lifestyleOptions,
       initialSelected: state.lifestylePreferences,
     );
     if (selected != null) {
-      ref.read(onboarding3Provider.notifier).setLifestylePreferences(selected);
+      ref.read(familyLifestyleValuesProvider.notifier).setLifestylePreferences(selected);
     }
   }
 }

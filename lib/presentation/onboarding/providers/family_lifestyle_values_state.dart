@@ -1,5 +1,5 @@
-class Onboarding3State {
-  const Onboarding3State({
+class FamilyLifestyleValuesState {
+  const FamilyLifestyleValuesState({
     this.familyGoal,
     required this.isDealbreaker,
     required this.lifestylePreferences,
@@ -13,14 +13,14 @@ class Onboarding3State {
   final Set<String> selectedValues;
   final bool isLoading;
 
-  factory Onboarding3State.initial() => const Onboarding3State(
+  factory FamilyLifestyleValuesState.initial() => const FamilyLifestyleValuesState(
         isDealbreaker: false,
         lifestylePreferences: {},
         selectedValues: {},
         isLoading: false,
       );
 
-  Onboarding3State copyWith({
+  FamilyLifestyleValuesState copyWith({
     String? familyGoal,
     bool? isDealbreaker,
     Set<String>? lifestylePreferences,
@@ -28,7 +28,7 @@ class Onboarding3State {
     bool? isLoading,
     bool clearFamilyGoal = false,
   }) {
-    return Onboarding3State(
+    return FamilyLifestyleValuesState(
       familyGoal: clearFamilyGoal ? null : (familyGoal ?? this.familyGoal),
       isDealbreaker: isDealbreaker ?? this.isDealbreaker,
       lifestylePreferences: lifestylePreferences ?? this.lifestylePreferences,

@@ -5,6 +5,7 @@ abstract final class ApiConstants {
   /// Region for signup OTP callables (`sendSignupOtp`, `verifySignupOtpAndCreateUser`).
   static const String firebaseFunctionsRegion = 'us-central1';
 
+  // static const String baseUrl = 'https://api.example.com';
   static const String baseUrl = 'https://api.example.com';
   static const String loginPath = '/auth/login';
   static const String registerPath = '/auth/register';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:intent_app/app/theme/theme.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_4_provider.dart';
+import 'package:intent_app/presentation/onboarding/providers/dealbreaker_and_assessments_provider.dart';
 
 class OnboardingAssessmentTile extends StatelessWidget {
   const OnboardingAssessmentTile({

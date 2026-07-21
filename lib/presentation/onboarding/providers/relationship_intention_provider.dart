@@ -2,14 +2,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/core/utils/auth_snackbar.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_2_state.dart';
+import 'package:intent_app/presentation/onboarding/providers/relationship_intention_state.dart';
 
-final onboarding2Provider =
-    NotifierProvider<Onboarding2Notifier, Onboarding2State>(
-  Onboarding2Notifier.new,
+final relationshipIntentionProvider =
+    NotifierProvider<RelationshipIntentionNotifier, RelationshipIntentionState>(
+  RelationshipIntentionNotifier.new,
 );
 
-class Onboarding2Notifier extends Notifier<Onboarding2State> {
+class RelationshipIntentionNotifier extends Notifier<RelationshipIntentionState> {
   static const relationshipIntentions = [
     'Long-term relationship',
     'Marriage',
@@ -40,7 +40,7 @@ class Onboarding2Notifier extends Notifier<Onboarding2State> {
   ];
 
   @override
-  Onboarding2State build() => Onboarding2State.initial();
+  RelationshipIntentionState build() => RelationshipIntentionState.initial();
 
   void setRelationshipIntention(String? value) {
     state = state.copyWith(relationshipIntention: value);
@@ -55,7 +55,7 @@ class Onboarding2Notifier extends Notifier<Onboarding2State> {
   }
 
   void onBack() {
-    appRouter.go(AppRoutes.onboarding1);
+    appRouter.go(AppRoutes.profileBasics);
   }
 
   Future<void> submit() async {
@@ -74,7 +74,7 @@ class Onboarding2Notifier extends Notifier<Onboarding2State> {
     }
     state = state.copyWith(isLoading: true);
     try {
-      appRouter.go(AppRoutes.onboarding3);
+      appRouter.go(AppRoutes.familyLifestyleValues);
     } finally {
       state = state.copyWith(isLoading: false);
     }

@@ -20,10 +20,10 @@ abstract final class AppRouteGuard {
         path == AppRoutes.verify ||
         path == AppRoutes.forgotPassword ||
         path == AppRoutes.resetPassword ||
-        path == AppRoutes.onboarding1 ||
-        path == AppRoutes.onboarding2 ||
-        path == AppRoutes.onboarding3 ||
-        path == AppRoutes.onboarding4 ||
+        path == AppRoutes.profileBasics ||
+        path == AppRoutes.relationshipIntention ||
+        path == AppRoutes.familyLifestyleValues ||
+        path == AppRoutes.dealbreakerAndAssessments ||
         path == AppRoutes.mbtiAssessment ||
         path == AppRoutes.mbtiAssessPreview ||
         path == AppRoutes.intentReflectionsIntro ||
@@ -32,10 +32,6 @@ abstract final class AppRouteGuard {
         path == AppRoutes.relationshipStyleIntro ||
         path == AppRoutes.relationshipStyleAssessment ||
         path == AppRoutes.relationshipStyleResults ||
-        path == AppRoutes.enneagramAssessment ||
-        path == AppRoutes.enneagramAssessPreview ||
-        path == AppRoutes.attachmentStyle ||
-        path == AppRoutes.attachmentStylePreview ||
         path == AppRoutes.loveLanguage ||
         path == AppRoutes.relationshipVibe ||
         path == AppRoutes.profileOverview ||

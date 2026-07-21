@@ -1,7 +1,7 @@
 enum OnboardingGender { woman, man, nonBinary }
 
-class Onboarding1State {
-  const Onboarding1State({
+class ProfileBasicsState {
+  const ProfileBasicsState({
     required this.isLoading,
     this.firstName = '',
     this.lastName = '',
@@ -19,9 +19,9 @@ class Onboarding1State {
   final OnboardingGender? gender;
   final String? occupation;
 
-  factory Onboarding1State.initial() => const Onboarding1State(isLoading: false);
+  factory ProfileBasicsState.initial() => const ProfileBasicsState(isLoading: false);
 
-  Onboarding1State copyWith({
+  ProfileBasicsState copyWith({
     bool? isLoading,
     String? firstName,
     String? lastName,
@@ -32,7 +32,7 @@ class Onboarding1State {
     bool clearDateOfBirth = false,
     bool clearOccupation = false,
   }) {
-    return Onboarding1State(
+    return ProfileBasicsState(
       isLoading: isLoading ?? this.isLoading,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,

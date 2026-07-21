@@ -1,5 +1,5 @@
-class Onboarding2State {
-  const Onboarding2State({
+class RelationshipIntentionState {
+  const RelationshipIntentionState({
     this.relationshipIntention,
     this.religionBeliefs,
     this.importanceLevel,
@@ -11,18 +11,18 @@ class Onboarding2State {
   final String? importanceLevel;
   final bool isLoading;
 
-  factory Onboarding2State.initial() => const Onboarding2State(
+  factory RelationshipIntentionState.initial() => const RelationshipIntentionState(
         importanceLevel: 'Very important',
         isLoading: false,
       );
 
-  Onboarding2State copyWith({
+  RelationshipIntentionState copyWith({
     String? relationshipIntention,
     String? religionBeliefs,
     String? importanceLevel,
     bool? isLoading,
   }) {
-    return Onboarding2State(
+    return RelationshipIntentionState(
       relationshipIntention:
           relationshipIntention ?? this.relationshipIntention,
       religionBeliefs: religionBeliefs ?? this.religionBeliefs,

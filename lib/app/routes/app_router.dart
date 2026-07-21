@@ -10,9 +10,9 @@ import 'package:intent_app/presentation/auth/views/login_screen.dart';
 import 'package:intent_app/presentation/auth/views/reset_password_screen.dart';
 import 'package:intent_app/presentation/auth/views/signup_screen.dart';
 import 'package:intent_app/presentation/auth/views/verify_screen.dart';
-import 'package:intent_app/presentation/onboarding/views/onboarding_1_screen.dart';
-import 'package:intent_app/presentation/onboarding/views/onboarding_2_screen.dart';
-import 'package:intent_app/presentation/onboarding/views/onboarding_3_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/profile_basics_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/relationship_intention_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/family_lifestyle_values_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/mbti_assessment_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/mbti_assess_preview_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/intent_reflections_assessment_screen.dart';
@@ -21,11 +21,7 @@ import 'package:intent_app/presentation/onboarding/views/intent_reflections_resu
 import 'package:intent_app/presentation/onboarding/views/relationship_style_intro_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/relationship_style_assessment_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/relationship_style_results_screen.dart';
-import 'package:intent_app/presentation/onboarding/views/onboarding_4_screen.dart';
-import 'package:intent_app/presentation/onboarding/views/enneagram_assessment_screen.dart';
-import 'package:intent_app/presentation/onboarding/views/enneagram_assess_preview_screen.dart';
-import 'package:intent_app/presentation/onboarding/views/attachment_style_screen.dart';
-import 'package:intent_app/presentation/onboarding/views/attachment_style_preview_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/dealbreaker_and_assessments_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/love_language_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/relationship_vibe_screen.dart';
 import 'package:intent_app/presentation/onboarding/views/profile_overview_screen.dart';
@@ -133,24 +129,24 @@ final GoRouter appRouter = GoRouter(
       ),
     ),
     GoRoute(
-      path: AppRoutes.onboarding1,
+      path: AppRoutes.profileBasics,
       pageBuilder: (context, state) =>
-          _fadePage(key: state.pageKey, child: const Onboarding1Screen()),
+          _fadePage(key: state.pageKey, child: const ProfileBasicsScreen()),
     ),
     GoRoute(
-      path: AppRoutes.onboarding2,
+      path: AppRoutes.relationshipIntention,
       pageBuilder: (context, state) =>
-          _fadePage(key: state.pageKey, child: const Onboarding2Screen()),
+          _fadePage(key: state.pageKey, child: const RelationshipIntentionScreen()),
     ),
     GoRoute(
-      path: AppRoutes.onboarding3,
+      path: AppRoutes.familyLifestyleValues,
       pageBuilder: (context, state) =>
-          _fadePage(key: state.pageKey, child: const Onboarding3Screen()),
+          _fadePage(key: state.pageKey, child: const FamilyLifestyleValuesScreen()),
     ),
     GoRoute(
-      path: AppRoutes.onboarding4,
+      path: AppRoutes.dealbreakerAndAssessments,
       pageBuilder: (context, state) =>
-          _fadePage(key: state.pageKey, child: const Onboarding4Screen()),
+          _fadePage(key: state.pageKey, child: const DealbreakerAndAssessmentsScreen()),
     ),
     GoRoute(
       path: AppRoutes.mbtiAssessment,
@@ -204,34 +200,6 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => _fadePage(
         key: state.pageKey,
         child: const RelationshipStyleResultsScreen(),
-      ),
-    ),
-    GoRoute(
-      path: AppRoutes.enneagramAssessment,
-      pageBuilder: (context, state) => _fadePage(
-        key: state.pageKey,
-        child: const EnneagramAssessmentScreen(),
-      ),
-    ),
-    GoRoute(
-      path: AppRoutes.enneagramAssessPreview,
-      pageBuilder: (context, state) => _fadePage(
-        key: state.pageKey,
-        child: const EnneagramAssessPreviewScreen(),
-      ),
-    ),
-    GoRoute(
-      path: AppRoutes.attachmentStyle,
-      pageBuilder: (context, state) => _fadePage(
-        key: state.pageKey,
-        child: const AttachmentStyleScreen(),
-      ),
-    ),
-    GoRoute(
-      path: AppRoutes.attachmentStylePreview,
-      pageBuilder: (context, state) => _fadePage(
-        key: state.pageKey,
-        child: const AttachmentStylePreviewScreen(),
       ),
     ),
     GoRoute(

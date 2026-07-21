@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:intent_app/app/theme/theme.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_1_provider.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_1_state.dart';
+import 'package:intent_app/presentation/onboarding/providers/profile_basics_provider.dart';
+import 'package:intent_app/presentation/onboarding/providers/profile_basics_state.dart';
 
 class OnboardingGenderSelector extends ConsumerWidget {
   const OnboardingGenderSelector({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selected = ref.watch(onboarding1Provider.select((s) => s.gender));
-    final notifier = ref.read(onboarding1Provider.notifier);
+    final selected = ref.watch(profileBasicsProvider.select((s) => s.gender));
+    final notifier = ref.read(profileBasicsProvider.notifier);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

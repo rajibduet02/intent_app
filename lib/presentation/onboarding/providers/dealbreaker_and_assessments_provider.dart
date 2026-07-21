@@ -4,11 +4,11 @@ import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/app/theme/app_colors.dart';
 import 'package:intent_app/core/utils/auth_snackbar.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_4_state.dart';
+import 'package:intent_app/presentation/onboarding/providers/dealbreaker_and_assessments_state.dart';
 
-final onboarding4Provider =
-    NotifierProvider<Onboarding4Notifier, Onboarding4State>(
-  Onboarding4Notifier.new,
+final dealbreakerAndAssessmentsProvider =
+    NotifierProvider<DealbreakerAndAssessmentsNotifier, DealbreakerAndAssessmentsState>(
+  DealbreakerAndAssessmentsNotifier.new,
 );
 
 class OnboardingAssessmentItem {
@@ -27,7 +27,7 @@ class OnboardingAssessmentItem {
   final Color iconColor;
 }
 
-class Onboarding4Notifier extends Notifier<Onboarding4State> {
+class DealbreakerAndAssessmentsNotifier extends Notifier<DealbreakerAndAssessmentsState> {
   static const assessments = [
     OnboardingAssessmentItem(
       title: 'Core Personality Assessment',
@@ -67,14 +67,14 @@ class Onboarding4Notifier extends Notifier<Onboarding4State> {
   ];
 
   @override
-  Onboarding4State build() => Onboarding4State.initial();
+  DealbreakerAndAssessmentsState build() => DealbreakerAndAssessmentsState.initial();
 
   void selectDealbreaker(OnboardingDealbreakerType type) {
     state = state.copyWith(selectedDealbreaker: type);
   }
 
   void onBack() {
-    appRouter.go(AppRoutes.onboarding3);
+    appRouter.go(AppRoutes.familyLifestyleValues);
   }
 
   void onAssessmentTap(int index) {

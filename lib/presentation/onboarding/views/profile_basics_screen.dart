@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/core/utils/validators.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_1_provider.dart';
+import 'package:intent_app/presentation/onboarding/providers/profile_basics_provider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_gender_selector.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_labeled_field.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 
-class Onboarding1Screen extends ConsumerStatefulWidget {
-  const Onboarding1Screen({super.key});
+class ProfileBasicsScreen extends ConsumerStatefulWidget {
+  const ProfileBasicsScreen({super.key});
 
   @override
-  ConsumerState<Onboarding1Screen> createState() => _Onboarding1ScreenState();
+  ConsumerState<ProfileBasicsScreen> createState() => _ProfileBasicsScreenState();
 }
 
-class _Onboarding1ScreenState extends ConsumerState<Onboarding1Screen> {
+class _ProfileBasicsScreenState extends ConsumerState<ProfileBasicsScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -69,16 +69,16 @@ class _Onboarding1ScreenState extends ConsumerState<Onboarding1Screen> {
     if (picked == null || !mounted) {
       return;
     }
-    ref.read(onboarding1Provider.notifier).setDateOfBirth(picked);
+    ref.read(profileBasicsProvider.notifier).setDateOfBirth(picked);
     final month = picked.month.toString().padLeft(2, '0');
     final day = picked.day.toString().padLeft(2, '0');
     _dobController.text = '$month/$day/${picked.year}';
-    final age = ref.read(onboarding1Provider).age;
+    final age = ref.read(profileBasicsProvider).age;
     _ageController.text = age?.toString() ?? '';
   }
 
   Future<void> _pickOccupation() async {
-    final occupations = Onboarding1Notifier.occupations;
+    final occupations = ProfileBasicsNotifier.occupations;
     final selected = await showModalBottomSheet<String>(
       context: context,
       backgroundColor: AppColors.white,
@@ -129,14 +129,14 @@ class _Onboarding1ScreenState extends ConsumerState<Onboarding1Screen> {
     if (selected == null || !mounted) {
       return;
     }
-    ref.read(onboarding1Provider.notifier).setOccupation(selected);
+    ref.read(profileBasicsProvider.notifier).setOccupation(selected);
     _occupationController.text = selected;
   }
 
   @override
   Widget build(BuildContext context) {
-    final notifier = ref.read(onboarding1Provider.notifier);
-    final isLoading = ref.watch(onboarding1Provider.select((s) => s.isLoading));
+    final notifier = ref.read(profileBasicsProvider.notifier);
+    final isLoading = ref.watch(profileBasicsProvider.select((s) => s.isLoading));
 
     return FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(

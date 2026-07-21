@@ -45,7 +45,7 @@ class _VerifyScreenState extends ConsumerState<VerifyScreen> {
       verifyProvider.select((s) => s.verificationSucceeded),
       (previous, succeeded) {
         if (succeeded && context.mounted) {
-          context.go(AppRoutes.onboarding1);
+          context.go(AppRoutes.profileBasics);
         }
       },
     );

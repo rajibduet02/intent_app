@@ -9,26 +9,18 @@ abstract final class AppRoutes {
   static const String verify = '/verify';
   static const String forgotPassword = '/forgot-password';
   static const String resetPassword = '/reset-password';
-  static const String onboarding1 = '/onboarding/1';
-  static const String onboarding2 = '/onboarding/2';
-  static const String onboarding3 = '/onboarding/3';
-  static const String onboarding4 = '/onboarding/4';
+  static const String profileBasics = '/onboarding/profile-basics';
+  static const String relationshipIntention = '/onboarding/relationship-intention';
+  static const String familyLifestyleValues = '/onboarding/family-lifestyle-values';
+  static const String dealbreakerAndAssessments = '/onboarding/dealbreaker-and-assessments';
   static const String mbtiAssessment = '/onboarding/mbti';
   static const String mbtiAssessPreview = '/onboarding/mbti/preview';
   static const String intentReflectionsIntro = '/onboarding/intent-reflections';
-  static const String intentReflectionsAssessment =
-      '/onboarding/intent-reflections/questions';
-  static const String intentReflectionsResults =
-      '/onboarding/intent-reflections/results';
+  static const String intentReflectionsAssessment = '/onboarding/intent-reflections/questions';
+  static const String intentReflectionsResults = '/onboarding/intent-reflections/results';
   static const String relationshipStyleIntro = '/onboarding/relationship-style';
-  static const String relationshipStyleAssessment =
-      '/onboarding/relationship-style/questions';
-  static const String relationshipStyleResults =
-      '/onboarding/relationship-style/results';
-  static const String enneagramAssessment = '/onboarding/enneagram';
-  static const String enneagramAssessPreview = '/onboarding/enneagram/preview';
-  static const String attachmentStyle = '/onboarding/attachment';
-  static const String attachmentStylePreview = '/onboarding/attachment/preview';
+  static const String relationshipStyleAssessment = '/onboarding/relationship-style/questions';
+  static const String relationshipStyleResults = '/onboarding/relationship-style/results';
   static const String loveLanguage = '/onboarding/love-language';
   static const String relationshipVibe = '/onboarding/relationship-vibe';
   static const String profileOverview = '/onboarding/profile-overview';

@@ -21,7 +21,7 @@ class MbtiAssessmentNotifier extends Notifier<MbtiAssessmentState> {
   }
 
   void onBack() {
-    appRouter.go(AppRoutes.onboarding4);
+    appRouter.go(AppRoutes.dealbreakerAndAssessments);
   }
 
   Future<void> submit() async {

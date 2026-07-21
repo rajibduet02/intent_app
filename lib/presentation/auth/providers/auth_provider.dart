@@ -75,7 +75,7 @@ class AuthNotifier extends Notifier<AuthState> {
         final complete = await _authRepository.isProfileOnboardingComplete();
         AuthSnackbar.success(title: 'Success', message: 'Login Successfully');
         appRouter.go(
-          complete ? AppRoutes.discover : AppRoutes.onboarding1,
+          complete ? AppRoutes.discover : AppRoutes.profileBasics,
         );
       } else {
         AuthSnackbar.error(result.message ?? 'Something went wrong');

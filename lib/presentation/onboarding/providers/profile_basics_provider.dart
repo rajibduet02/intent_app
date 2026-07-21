@@ -3,14 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/routes/app_router.dart';
 import 'package:intent_app/app/routes/app_routes.dart';
 import 'package:intent_app/core/utils/auth_snackbar.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_1_state.dart';
+import 'package:intent_app/presentation/onboarding/providers/profile_basics_state.dart';
 
-final onboarding1Provider =
-    NotifierProvider<Onboarding1Notifier, Onboarding1State>(
-  Onboarding1Notifier.new,
+final profileBasicsProvider =
+    NotifierProvider<ProfileBasicsNotifier, ProfileBasicsState>(
+  ProfileBasicsNotifier.new,
 );
 
-class Onboarding1Notifier extends Notifier<Onboarding1State> {
+class ProfileBasicsNotifier extends Notifier<ProfileBasicsState> {
   static const occupations = [
     'Student',
     'Healthcare',
@@ -23,7 +23,7 @@ class Onboarding1Notifier extends Notifier<Onboarding1State> {
   ];
 
   @override
-  Onboarding1State build() => Onboarding1State.initial();
+  ProfileBasicsState build() => ProfileBasicsState.initial();
 
   void setGender(OnboardingGender gender) {
     state = state.copyWith(gender: gender);
@@ -73,7 +73,7 @@ class Onboarding1Notifier extends Notifier<Onboarding1State> {
       lastName: lastNameController.text.trim(),
     );
     try {
-      appRouter.go(AppRoutes.onboarding2);
+      appRouter.go(AppRoutes.relationshipIntention);
     } finally {
       state = state.copyWith(isLoading: false);
     }

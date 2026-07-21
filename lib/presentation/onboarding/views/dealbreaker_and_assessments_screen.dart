@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_4_provider.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_4_state.dart';
+import 'package:intent_app/presentation/onboarding/providers/dealbreaker_and_assessments_provider.dart';
+import 'package:intent_app/presentation/onboarding/providers/dealbreaker_and_assessments_state.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_assessment_tile.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_dealbreaker_option.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_header.dart';
 
-class Onboarding4Screen extends ConsumerWidget {
-  const Onboarding4Screen({super.key});
+class DealbreakerAndAssessmentsScreen extends ConsumerWidget {
+  const DealbreakerAndAssessmentsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.read(onboarding4Provider.notifier);
-    final state = ref.watch(onboarding4Provider);
+    final notifier = ref.read(dealbreakerAndAssessmentsProvider.notifier);
+    final state = ref.watch(dealbreakerAndAssessmentsProvider);
     final dealbreakers = OnboardingDealbreakerType.values;
 
     return FixedBackgroundAuthScaffold(
@@ -104,9 +104,9 @@ class Onboarding4Screen extends ConsumerWidget {
               ),
               child: Column(
                 children: [
-                  for (var i = 0; i < Onboarding4Notifier.assessments.length; i++)
+                  for (var i = 0; i < DealbreakerAndAssessmentsNotifier.assessments.length; i++)
                     OnboardingAssessmentTile(
-                      item: Onboarding4Notifier.assessments[i],
+                      item: DealbreakerAndAssessmentsNotifier.assessments[i],
                       onTap: () => notifier.onAssessmentTap(i),
                       isCompleted: (i == 0 && state.corePersonalityCompleted) ||
                           (i == 1 && state.intentReflectionsCompleted) ||
@@ -114,7 +114,7 @@ class Onboarding4Screen extends ConsumerWidget {
                           (i == 3 && state.loveLanguageCompleted) ||
                           (i == 4 && state.vibeSlidersCompleted),
                       showDivider:
-                          i < Onboarding4Notifier.assessments.length - 1,
+                          i < DealbreakerAndAssessmentsNotifier.assessments.length - 1,
                     ),
                 ],
               ),

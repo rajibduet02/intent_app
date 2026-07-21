@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
-import 'package:intent_app/presentation/onboarding/providers/onboarding_2_provider.dart';
+import 'package:intent_app/presentation/onboarding/providers/relationship_intention_provider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_select_sheet.dart';
 import 'package:intent_app/presentation/profile/widgets/edit_profile_sections.dart';
 import 'package:intent_app/presentation/profile/widgets/profile_screen_header.dart';
@@ -324,7 +324,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     value: _religion,
                     onTap: () => _pickOption(
                       title: 'Religion / Belief',
-                      options: Onboarding2Notifier.religionBeliefs,
+                      options: RelationshipIntentionNotifier.religionBeliefs,
                       onSelected: (value) => _religion = value,
                     ),
                   ),
