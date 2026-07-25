@@ -6,10 +6,17 @@ abstract final class RelationshipStyleQuestions {
 
   static const totalQuestions = 16;
 
+  // OLD CLIENT COPY
+  /*
   static const partOneLabel = 'PART I · BUILDING CONNECTION';
   static const partTwoLabel = 'PART II · FEELING SECURE';
   static const partThreeLabel = 'PART III · CONFLICT & UNCERTAINTY';
   static const partFourLabel = 'PART IV · LONG-TERM CONNECTION';
+  */
+  static const partOneLabel = '';
+  static const partTwoLabel = '';
+  static const partThreeLabel = '';
+  static const partFourLabel = '';
 
   static String sectionLabelForIndex(int index) {
     if (index < 4) return partOneLabel;
@@ -43,10 +50,12 @@ abstract final class RelationshipStyleQuestions {
   static final questions = [
     AssessmentQuestion(
       id: 'relationship_q1',
-      title: 'Feeling Emotionally Safe',
+      // title: 'Feeling Emotionally Safe',
+      title: '',
       prompt:
           'As you get to know someone you’re excited about dating, what usually helps you feel comfortable becoming emotionally vulnerable?',
-      sectionLabel: partOneLabel,
+      // sectionLabel: partOneLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q1', [
         'Trust builds for me through consistency. The more someone shows up the same way over time, the easier it is for me to open up.',
         'If I feel a strong connection, I usually want to open up pretty quickly because sharing emotionally helps me feel closer.',
@@ -56,10 +65,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q2',
-      title: 'When Communication Slows Down',
+      // title: 'When Communication Slows Down',
+      title: '',
       prompt:
           'Someone you’ve really enjoyed getting to know tells you they’re going to be extremely busy over the next few days and may not be able to talk very much. As those days go by, what tends to happen internally?',
-      sectionLabel: partOneLabel,
+      // sectionLabel: partOneLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q2', [
         'I miss talking to them, but I can usually trust that we’ll reconnect when life settles down.',
         'I understand they’re busy, but even a small check-in helps me feel connected while we’re not talking as much.',
@@ -69,10 +80,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q3',
-      title: 'Growing Closer',
+      // title: 'Growing Closer',
+      title: '',
       prompt:
           'As a relationship becomes more emotionally serious, what usually feels most natural?',
-      sectionLabel: partOneLabel,
+      // sectionLabel: partOneLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q3', [
         'I like growing closer while still feeling like we both have room to be ourselves.',
         'The more I care about someone, the more I naturally want to share my life with them and feel included in theirs.',
@@ -82,10 +95,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q4',
-      title: 'Leaning on Someone',
+      // title: 'Leaning on Someone',
+      title: '',
       prompt:
           'You’ve had an emotionally exhausting day. What usually feels most natural?',
-      sectionLabel: partOneLabel,
+      // sectionLabel: partOneLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q4', [
         'Talking to someone I trust helps. They don’t have to fix it — sometimes it just feels good not to hold everything alone.',
         'I feel better when I can hear from them or know they’re there. That kind of support helps me feel connected.',
@@ -95,10 +110,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q5',
-      title: 'When Their Energy Changes',
+      // title: 'When Their Energy Changes',
+      title: '',
       prompt:
           'You’ve been dating someone for a couple of months. One evening, they seem quieter than usual and less affectionate than they normally are. When you ask if everything is okay, they say they’re just mentally exhausted from work. As the evening continues, what usually happens inside you?',
-      sectionLabel: partTwoLabel,
+      // sectionLabel: partTwoLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q5', [
         'I believe them and try to stay present instead of assuming it means something about us.',
         'I get that they’re tired, but a little warmth from them helps me not overthink the shift.',
@@ -108,10 +125,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q6',
-      title: 'Feeling Chosen',
+      // title: 'Feeling Chosen',
+      title: '',
       prompt:
           'Your partner is invited to something with friends. You thought you might go together, but they decide to go on their own because they assumed you’d enjoy having a quiet evening to yourself. What thought feels most natural?',
-      sectionLabel: partTwoLabel,
+      // sectionLabel: partTwoLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q6', [
         'I get where they were coming from, but I’d probably tell them I’d rather they ask me next time instead of assuming.',
         'I’d probably feel a little disappointed. Being invited in, even to small things, is one of the ways I feel considered.',
@@ -121,10 +140,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q7',
-      title: 'Letting Someone In',
+      // title: 'Letting Someone In',
+      title: '',
       prompt:
           'You’re going through something important, but you haven’t talked about it with your partner yet. What usually feels most true?',
-      sectionLabel: partTwoLabel,
+      // sectionLabel: partTwoLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q7', [
         'Once I feel ready, sharing it usually makes me feel closer to them.',
         'I want to tell them because feeling emotionally known matters to me, but I may need a little reassurance that it’s okay to bring it up.',
@@ -134,10 +155,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q8',
-      title: 'Consistency',
+      // title: 'Consistency',
+      title: '',
       prompt:
           'You’ve been seeing someone consistently for several months. They treat you well, communicate regularly, and make time for you. As the relationship becomes more stable, what usually happens inside you?',
-      sectionLabel: partTwoLabel,
+      // sectionLabel: partTwoLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q8', [
         'The consistency helps me relax and enjoy the relationship more.',
         'The consistency means a lot to me. It helps me feel closer when someone keeps showing, through small things, that they’re still choosing me.',
@@ -147,10 +170,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q9',
-      title: 'Taking Space',
+      // title: 'Taking Space',
+      title: '',
       prompt:
           'You and your partner have a disagreement. Before continuing the conversation, they say: “I really want to work through this, but I need a little time to clear my head so I can come back in the right mindset.” Which thought feels most natural?',
-      sectionLabel: partThreeLabel,
+      // sectionLabel: partThreeLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q9', [
         'I may not love waiting, but I can respect that they’re trying to come back to the conversation in a better place.',
         'I understand why they need space, but I still feel better once we’ve reconnected and I know we’re okay.',
@@ -160,10 +185,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q10',
-      title: 'Feeling Misunderstood',
+      // title: 'Feeling Misunderstood',
+      title: '',
       prompt:
           'You’re trying to explain why something hurt your feelings, but your partner keeps saying, “That wasn’t my intention.” They seem genuine, but you still don’t feel fully understood. Which thought feels most natural?',
-      sectionLabel: partThreeLabel,
+      // sectionLabel: partThreeLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q10', [
         'I’d probably want us to slow down and try again, because sometimes people miss each other even when they care.',
         'I appreciate that they didn’t mean to hurt me, but I still need them to care about how it landed.',
@@ -173,10 +200,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q11',
-      title: 'Being Seen',
+      // title: 'Being Seen',
+      title: '',
       prompt:
           'Your partner notices you’ve been quieter than usual and gently asks if you’re okay. What feels most natural?',
-      sectionLabel: partThreeLabel,
+      // sectionLabel: partThreeLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q11', [
         'I appreciate that they noticed. If I trust them, it usually feels safe to share what’s going on.',
         'It feels good that they noticed, and I usually feel closer when someone checks in like that.',
@@ -186,10 +215,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q12',
-      title: 'Love During Stress',
+      // title: 'Love During Stress',
+      title: '',
       prompt:
           'Your partner has been under a lot of stress lately. They’re still kind to you, but they’re quieter, less affectionate, and seem emotionally drained. Which thought feels most natural?',
-      sectionLabel: partThreeLabel,
+      // sectionLabel: partThreeLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q12', [
         'I assume they’re carrying a lot right now and try to support them without taking it personally.',
         'I understand they’re stressed, but little signs of connection help me remember we’re still okay.',
@@ -199,10 +230,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q13',
-      title: 'Consistently Loved',
+      // title: 'Consistently Loved',
+      title: '',
       prompt:
           'Over the past several months, your partner has consistently found thoughtful ways to make you feel loved. Not because you asked. Not because they’re making up for something. It’s simply how they naturally love you. What thought feels most natural?',
-      sectionLabel: partFourLabel,
+      // sectionLabel: partFourLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q13', [
         'Honestly, it feels really good. Over time, their consistency makes it easier for me to just receive it without overthinking.',
         'I start thinking, “Okay, how can I make them feel this appreciated too?”',
@@ -212,10 +245,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q14',
-      title: 'Depending on Someone',
+      // title: 'Depending on Someone',
+      title: '',
       prompt:
           'Over time, you realize you’re starting to rely on your partner emotionally more than you expected. One day, you catch yourself thinking...',
-      sectionLabel: partFourLabel,
+      // sectionLabel: partFourLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q14', [
         'I didn’t realize how much lighter life can feel when you don’t have to carry everything alone.',
         'This feels really good. I hope they feel how much I’d show up for them too.',
@@ -225,10 +260,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q15',
-      title: 'Being Loved Well',
+      // title: 'Being Loved Well',
+      title: '',
       prompt:
           'Over the past year, your relationship has been consistently healthy. You feel respected. Arguments get resolved. You trust each other. The relationship feels peaceful. One day, you catch yourself thinking...',
-      sectionLabel: partFourLabel,
+      // sectionLabel: partFourLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q15', [
         'This feels peaceful in a way I didn’t know I needed.',
         'I love this. I just need to keep feeling that we’re both still choosing this.',
@@ -238,10 +275,12 @@ abstract final class RelationshipStyleQuestions {
     ),
     AssessmentQuestion(
       id: 'relationship_q16',
-      title: 'Looking Back',
+      // title: 'Looking Back',
+      title: '',
       prompt:
           'Imagine you’re looking back many years from now on a happy, healthy relationship. When people ask what made it last, which answer feels most like something you’d genuinely say?',
-      sectionLabel: partFourLabel,
+      // sectionLabel: partFourLabel,
+      sectionLabel: '',
       answers: _answers('relationship_q16', [
         'We kept choosing each other, communicating honestly, and growing together.',
         'We never stopped making each other feel wanted, valued, and emotionally safe.',

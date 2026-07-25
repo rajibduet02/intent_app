@@ -5,8 +5,13 @@ abstract final class IntentReflectionsQuestions {
 
   static const totalQuestions = 10;
 
+  // OLD CLIENT COPY
+  /*
   static const partOneLabel = 'PART I · HOW YOU SHOW UP';
   static const partTwoLabel = 'PART II · HOW YOU SEE OTHERS';
+  */
+  static const partOneLabel = '';
+  static const partTwoLabel = '';
 
   static String sectionLabelForIndex(int index) =>
       index < 6 ? partOneLabel : partTwoLabel;
@@ -14,9 +19,11 @@ abstract final class IntentReflectionsQuestions {
   static const questions = [
     AssessmentQuestion(
       id: 'intent_reflection_1',
-      title: 'Accountability',
+      // title: 'Accountability',
+      title: '',
       prompt: 'Which statement feels closest to your view?',
-      sectionLabel: partOneLabel,
+      // sectionLabel: partOneLabel,
+      sectionLabel: '',
       answers: [
         AssessmentAnswer(
           id: 'intent_reflection_1_a',
@@ -42,10 +49,12 @@ abstract final class IntentReflectionsQuestions {
     ),
     AssessmentQuestion(
       id: 'intent_reflection_2',
-      title: 'Emotional Regulation',
+      // title: 'Emotional Regulation',
+      title: '',
       prompt:
           'Your partner says: “I don’t think this conversation is going anywhere right now. Can we take a break and come back to it later?” What’s your first thought?',
-      sectionLabel: partOneLabel,
+      // sectionLabel: partOneLabel,
+      sectionLabel: '',
       answers: [
         AssessmentAnswer(
           id: 'intent_reflection_2_a',
@@ -71,10 +80,12 @@ abstract final class IntentReflectionsQuestions {
     ),
     AssessmentQuestion(
       id: 'intent_reflection_3',
-      title: 'Respect & Validation',
+      // title: 'Respect & Validation',
+      title: '',
       prompt:
           'Your partner says: “I know you didn’t mean to hurt me, but what happened really hurt.” What’s your first instinct?',
-      sectionLabel: partOneLabel,
+      // sectionLabel: partOneLabel,
+      sectionLabel: '',
       answers: [
         AssessmentAnswer(
           id: 'intent_reflection_3_a',
@@ -100,9 +111,11 @@ abstract final class IntentReflectionsQuestions {
     ),
     AssessmentQuestion(
       id: 'intent_reflection_4',
-      title: 'Boundaries',
+      // title: 'Boundaries',
+      title: '',
       prompt: 'Which statement feels closest to your view?',
-      sectionLabel: partOneLabel,
+      // sectionLabel: partOneLabel,
+      sectionLabel: '',
       answers: [
         AssessmentAnswer(
           id: 'intent_reflection_4_a',
@@ -128,9 +141,11 @@ abstract final class IntentReflectionsQuestions {
     ),
     AssessmentQuestion(
       id: 'intent_reflection_5',
-      title: 'Conflict Mindset',
+      // title: 'Conflict Mindset',
+      title: '',
       prompt: 'Which statement feels closest to your view?',
-      sectionLabel: partOneLabel,
+      // sectionLabel: partOneLabel,
+      sectionLabel: '',
       answers: [
         AssessmentAnswer(
           id: 'intent_reflection_5_a',
@@ -156,10 +171,12 @@ abstract final class IntentReflectionsQuestions {
     ),
     AssessmentQuestion(
       id: 'intent_reflection_6',
-      title: 'Repair',
+      // title: 'Repair',
+      title: '',
       prompt:
           'After you’ve both had time to cool down, what’s usually your next move?',
-      sectionLabel: partOneLabel,
+      // sectionLabel: partOneLabel,
+      sectionLabel: '',
       answers: [
         AssessmentAnswer(
           id: 'intent_reflection_6_a',
@@ -185,10 +202,12 @@ abstract final class IntentReflectionsQuestions {
     ),
     AssessmentQuestion(
       id: 'intent_reflection_7',
-      title: 'Relationship Assumptions',
+      // title: 'Relationship Assumptions',
+      title: '',
       prompt:
           'Your best friend tells you: “I’ve been dating this woman for a few months, and honestly, it’s the healthiest relationship I’ve ever had. She’s kind, emotionally mature, we communicate really well, and I genuinely feel at peace with her. The only thing that made me hesitate at first is that she has two children from a previous relationship.” What’s your first instinct?',
-      sectionLabel: partTwoLabel,
+      // sectionLabel: partTwoLabel,
+      sectionLabel: '',
       answers: [
         AssessmentAnswer(
           id: 'intent_reflection_7_a',
@@ -214,10 +233,12 @@ abstract final class IntentReflectionsQuestions {
     ),
     AssessmentQuestion(
       id: 'intent_reflection_8',
-      title: 'Expectations vs. Reality',
+      // title: 'Expectations vs. Reality',
+      title: '',
       prompt:
           'Your friend tells you: “I always said I’d never date someone who had already been married or whose life looked so different from mine. But somehow... I’ve never felt this understood before. I honestly can’t remember the last time I laughed this much or felt this comfortable being myself.” What’s your first instinct?',
-      sectionLabel: partTwoLabel,
+      // sectionLabel: partTwoLabel,
+      sectionLabel: '',
       answers: [
         AssessmentAnswer(
           id: 'intent_reflection_8_a',
@@ -243,10 +264,12 @@ abstract final class IntentReflectionsQuestions {
     ),
     AssessmentQuestion(
       id: 'intent_reflection_9',
-      title: 'Modern Dating',
+      // title: 'Modern Dating',
+      title: '',
       prompt:
           'A friend sends you a dating video that says: “Never settle. If you have to compromise, they’re not your person. The right relationship shouldn’t feel this hard.” They text you: “Honestly... what do you think? Is that actually true?” Which response feels closest to what you’d say?',
-      sectionLabel: partTwoLabel,
+      // sectionLabel: partTwoLabel,
+      sectionLabel: '',
       answers: [
         AssessmentAnswer(
           id: 'intent_reflection_9_a',
@@ -272,10 +295,12 @@ abstract final class IntentReflectionsQuestions {
     ),
     AssessmentQuestion(
       id: 'intent_reflection_10',
-      title: 'Reciprocity',
+      // title: 'Reciprocity',
+      title: '',
       prompt:
           'Your friend says: “I really like the person I’m dating, but lately I feel like I’m always the one making plans, checking in, and keeping the relationship moving. When we’re together everything feels great... but if I don’t reach out first, we can go several days without talking.” What’s your first instinct?',
-      sectionLabel: partTwoLabel,
+      // sectionLabel: partTwoLabel,
+      sectionLabel: '',
       answers: [
         AssessmentAnswer(
           id: 'intent_reflection_10_a',
