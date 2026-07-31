@@ -4,15 +4,24 @@ abstract final class AppRoutes {
 
   static const String splash = '/splash';
   static const String welcome = '/welcome';
+  static const String introDatingIntention = '/intro/dating-with-intention';
+  static const String introConnectionBeforeAttraction =
+      '/intro/connection-before-attraction';
+  static const String introThoughtfulProfile = '/intro/thoughtful-profile';
   static const String auth = '/auth';
   static const String signup = '/signup';
   static const String verify = '/verify';
   static const String forgotPassword = '/forgot-password';
   static const String resetPassword = '/reset-password';
+  static const String phaseAboutYou = '/onboarding/phase/about-you';
+  static const String phaseHowYouConnect = '/onboarding/phase/how-you-connect';
+  static const String phaseCompatibility = '/onboarding/phase/compatibility';
+  static const String phasePrivacySafety = '/onboarding/phase/privacy-safety';
   static const String profileBasics = '/onboarding/profile-basics';
   static const String relationshipIntention = '/onboarding/relationship-intention';
   static const String familyLifestyleValues = '/onboarding/family-lifestyle-values';
   static const String dealbreakerAndAssessments = '/onboarding/dealbreaker-and-assessments';
+  static const String dealbreakers = '/onboarding/dealbreakers';
   static const String mbtiAssessment = '/onboarding/mbti';
   static const String mbtiAssessPreview = '/onboarding/mbti/preview';
   static const String intentReflectionsIntro = '/onboarding/intent-reflections';

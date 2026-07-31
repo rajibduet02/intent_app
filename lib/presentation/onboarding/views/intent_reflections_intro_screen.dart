@@ -28,6 +28,7 @@ class IntentReflectionsIntroScreen extends ConsumerWidget {
           'Choose the answer that feels closest to your honest first instinct. There are no perfect answers.',
       onContinue: notifier.continueFromIntro,
       continueLabel: continueLabel,
+      assessmentIndex: 2,
     );
   }
 }

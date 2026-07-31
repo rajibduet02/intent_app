@@ -12,6 +12,9 @@ abstract final class AppAnimations {
   static const Duration slow = Duration(milliseconds: 600);
   static const Duration pulse = Duration(milliseconds: 1600);
   static const Duration splashMinBranding = Duration(milliseconds: 900);
+  /// Full symbolic splash story (~3.4s) before exit hold.
+  static const Duration splashStory = Duration(milliseconds: 3400);
+  static const Duration splashExitHold = Duration(milliseconds: 400);
   static const Duration authDebounce = Duration(milliseconds: 150);
   static const Duration passwordPeek = Duration(milliseconds: 300);
   static const Duration resendCooldown = Duration(seconds: 90);

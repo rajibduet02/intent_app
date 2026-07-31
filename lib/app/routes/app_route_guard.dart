@@ -15,15 +15,23 @@ abstract final class AppRouteGuard {
     final path = _normalizePath(state);
     if (path == AppRoutes.splash ||
         path == AppRoutes.welcome ||
+        path == AppRoutes.introDatingIntention ||
+        path == AppRoutes.introConnectionBeforeAttraction ||
+        path == AppRoutes.introThoughtfulProfile ||
         path == AppRoutes.auth ||
         path == AppRoutes.signup ||
         path == AppRoutes.verify ||
         path == AppRoutes.forgotPassword ||
         path == AppRoutes.resetPassword ||
+        path == AppRoutes.phaseAboutYou ||
+        path == AppRoutes.phaseHowYouConnect ||
+        path == AppRoutes.phaseCompatibility ||
+        path == AppRoutes.phasePrivacySafety ||
         path == AppRoutes.profileBasics ||
         path == AppRoutes.relationshipIntention ||
         path == AppRoutes.familyLifestyleValues ||
         path == AppRoutes.dealbreakerAndAssessments ||
+        path == AppRoutes.dealbreakers ||
         path == AppRoutes.mbtiAssessment ||
         path == AppRoutes.mbtiAssessPreview ||
         path == AppRoutes.intentReflectionsIntro ||

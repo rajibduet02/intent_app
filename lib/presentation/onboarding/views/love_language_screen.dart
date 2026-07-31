@@ -6,10 +6,12 @@ import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/login/login_brand_header.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/onboarding/data/love_language_options.dart';
+import 'package:intent_app/presentation/onboarding/models/onboarding_phase.dart';
 import 'package:intent_app/presentation/onboarding/providers/love_language_provider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/love_language/love_language_header.dart';
 import 'package:intent_app/presentation/onboarding/widgets/love_language/love_language_option_card.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_sync.dart';
 
 class LoveLanguageScreen extends ConsumerWidget {
   const LoveLanguageScreen({super.key});
@@ -19,7 +21,10 @@ class LoveLanguageScreen extends ConsumerWidget {
     final notifier = ref.read(loveLanguageProvider.notifier);
     final state = ref.watch(loveLanguageProvider);
 
-    return FixedBackgroundAuthScaffold(
+    return OnboardingProgressSync(
+      phase: OnboardingPhase.howYouConnect,
+      questionIndex: 4,
+      child: FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
@@ -36,7 +41,10 @@ class LoveLanguageScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            LoveLanguageHeader(onBack: notifier.onBack),
+            LoveLanguageHeader(
+              onBack: notifier.onBack,
+              questionLabelOverride: 'Assessment 4 of 5',
+            ),
             const SizedBox(height: AppSpacing.xs),
             const Center(child: IntentLogo()),
             const SizedBox(height: AppSpacing.sm),
@@ -83,6 +91,7 @@ class LoveLanguageScreen extends ConsumerWidget {
             const SizedBox(height: 16),
           ],
         ),
+      ),
       ),
     );
   }

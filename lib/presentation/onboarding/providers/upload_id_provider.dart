@@ -28,7 +28,7 @@ class UploadIdNotifier extends Notifier<UploadIdState> {
   }
 
   void onBack() {
-    appRouter.go(AppRoutes.choosePreviewPhotos);
+    appRouter.go(AppRoutes.safetyStarts);
   }
 
   Future<void> submit() async {
@@ -40,7 +40,7 @@ class UploadIdNotifier extends Notifier<UploadIdState> {
     }
     state = state.copyWith(isLoading: true);
     try {
-      appRouter.go(AppRoutes.safetyStarts);
+      appRouter.go(AppRoutes.faceVerification);
     } finally {
       state = state.copyWith(isLoading: false);
     }

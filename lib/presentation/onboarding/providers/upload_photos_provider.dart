@@ -106,7 +106,7 @@ class UploadPhotosNotifier extends Notifier<UploadPhotosState> {
     }
     state = state.copyWith(isLoading: true);
     try {
-      appRouter.go(AppRoutes.uploadId);
+      appRouter.go(AppRoutes.safetyStarts);
     } finally {
       state = state.copyWith(isLoading: false);
     }

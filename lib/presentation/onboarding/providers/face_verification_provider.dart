@@ -46,7 +46,7 @@ class FaceVerificationNotifier extends Notifier<FaceVerificationState> {
   }
 
   void onBack() {
-    appRouter.go(AppRoutes.safetyStarts);
+    appRouter.go(AppRoutes.uploadId);
   }
 
   Future<void> submit() async {

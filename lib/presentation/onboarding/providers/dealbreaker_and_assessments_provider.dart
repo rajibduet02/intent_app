@@ -74,7 +74,7 @@ class DealbreakerAndAssessmentsNotifier extends Notifier<DealbreakerAndAssessmen
   }
 
   void onBack() {
-    appRouter.go(AppRoutes.familyLifestyleValues);
+    appRouter.go(AppRoutes.phaseHowYouConnect);
   }
 
   void onAssessmentTap(int index) {
@@ -115,10 +115,6 @@ class DealbreakerAndAssessmentsNotifier extends Notifier<DealbreakerAndAssessmen
   }
 
   Future<void> submit() async {
-    if (state.selectedDealbreaker == null) {
-      AuthSnackbar.error('Please choose a dealbreaker.');
-      return;
-    }
     if (!state.allAssessmentsCompleted) {
       AuthSnackbar.info(
         'Please complete all required compatibility assessment sections before continuing.',
@@ -127,7 +123,7 @@ class DealbreakerAndAssessmentsNotifier extends Notifier<DealbreakerAndAssessmen
     }
     state = state.copyWith(isLoading: true);
     try {
-      appRouter.go(AppRoutes.profileOverview);
+      appRouter.go(AppRoutes.phaseCompatibility);
     } finally {
       state = state.copyWith(isLoading: false);
     }

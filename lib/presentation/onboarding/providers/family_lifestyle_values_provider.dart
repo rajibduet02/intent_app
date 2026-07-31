@@ -85,7 +85,7 @@ class FamilyLifestyleValuesNotifier extends Notifier<FamilyLifestyleValuesState>
   }
 
   void onBack() {
-    appRouter.go(AppRoutes.relationshipIntention);
+    appRouter.go(AppRoutes.phaseCompatibility);
   }
 
   Future<void> submit() async {
@@ -104,7 +104,7 @@ class FamilyLifestyleValuesNotifier extends Notifier<FamilyLifestyleValuesState>
     }
     state = state.copyWith(isLoading: true);
     try {
-      appRouter.go(AppRoutes.dealbreakerAndAssessments);
+      appRouter.go(AppRoutes.dealbreakers);
     } finally {
       state = state.copyWith(isLoading: false);
     }

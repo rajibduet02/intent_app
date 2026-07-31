@@ -5,11 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/onboarding/data/mbti_questions.dart';
+import 'package:intent_app/presentation/onboarding/models/onboarding_phase.dart';
 import 'package:intent_app/presentation/onboarding/providers/mbti_assessment_provider.dart';
 import 'package:intent_app/presentation/onboarding/widgets/mbti/mbti_assessment_header.dart';
 import 'package:intent_app/presentation/onboarding/widgets/mbti/mbti_question_card.dart';
 import 'package:intent_app/presentation/onboarding/widgets/assessment_pinned_footer.dart';
 import 'package:intent_app/presentation/onboarding/widgets/assessment_progress_indicator.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_sync.dart';
 
 class MbtiAssessmentScreen extends ConsumerWidget {
   const MbtiAssessmentScreen({super.key});
@@ -21,11 +23,13 @@ class MbtiAssessmentScreen extends ConsumerWidget {
     final questions = MbtiQuestions.sections;
     final total = MbtiQuestions.totalSections;
 
-    return FixedBackgroundAuthScaffold(
+    return OnboardingProgressSync(
+      phase: OnboardingPhase.howYouConnect,
+      questionIndex: 1,
+      child: FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: AssessmentPinnedFooter(
-          // submitLabel: 'See MBTI Result',
           submitLabel: 'CONTINUE',
           isLoading: state.isLoading,
           onSubmit: () => unawaited(notifier.submit()),
@@ -42,6 +46,7 @@ class MbtiAssessmentScreen extends ConsumerWidget {
           children: [
             MbtiAssessmentHeader(
               onBack: notifier.onBack,
+              questionLabelOverride: 'Assessment 1 of 5',
             ),
             const SizedBox(height: AppSpacing.xs),
             const _Intro(),
@@ -64,6 +69,7 @@ class MbtiAssessmentScreen extends ConsumerWidget {
             const SizedBox(height: 16),
           ],
         ),
+      ),
       ),
     );
   }

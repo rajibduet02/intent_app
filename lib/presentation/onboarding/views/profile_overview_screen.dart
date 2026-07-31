@@ -6,7 +6,10 @@ import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/login/login_brand_header.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/onboarding/providers/relationship_style_assessment_provider.dart';
+import 'package:intent_app/presentation/onboarding/models/onboarding_phase.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_header.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_sync.dart';
 
 class ProfileOverviewScreen extends ConsumerWidget {
   const ProfileOverviewScreen({super.key});
@@ -21,11 +24,14 @@ class ProfileOverviewScreen extends ConsumerWidget {
         ? null
         : 'With ${relationshipResult!.secondaryLabel!.toLowerCase()} tendencies';
 
-    return FixedBackgroundAuthScaffold(
+    return OnboardingProgressSync(
+      phase: OnboardingPhase.compatibilityPreferences,
+      questionIndex: 3,
+      child: FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
-          onPressed: () => appRouter.go(AppRoutes.photoUnlockIntention),
+          onPressed: () => appRouter.go(AppRoutes.phasePrivacySafety),
         ),
       ),
       child: SingleChildScrollView(
@@ -36,7 +42,10 @@ class ProfileOverviewScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _ProfileOverviewHeader(),
+            OnboardingProgressHeader(
+              onBack: () => appRouter.go(AppRoutes.dealbreakers),
+              questionLabelOverride: 'Compatibility summary',
+            ),
             const SizedBox(height: AppSpacing.xs),
             _HeroIcon(),
             const SizedBox(height: AppSpacing.sm),
@@ -55,23 +64,6 @@ class ProfileOverviewScreen extends ConsumerWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _ProfileOverviewHeader extends StatelessWidget {
-  const _ProfileOverviewHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 48,
-      child: Row(
-        children: [
-          IntentBackButton(
-            onPressed: () => appRouter.go(AppRoutes.loveLanguage),
-          ),
-        ],
       ),
     );
   }

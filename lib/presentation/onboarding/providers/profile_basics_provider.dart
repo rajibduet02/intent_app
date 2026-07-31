@@ -44,7 +44,7 @@ class ProfileBasicsNotifier extends Notifier<ProfileBasicsState> {
   }
 
   void onBack() {
-    appRouter.go(AppRoutes.verify);
+    appRouter.go(AppRoutes.phaseAboutYou);
   }
 
   Future<void> submit({

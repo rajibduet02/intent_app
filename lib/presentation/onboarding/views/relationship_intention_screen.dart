@@ -5,8 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/onboarding/providers/relationship_intention_provider.dart';
+import 'package:intent_app/presentation/onboarding/models/onboarding_phase.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_intent_accent.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_header.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_sync.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_select_field.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_select_sheet.dart';
 
@@ -19,7 +22,10 @@ class RelationshipIntentionScreen extends ConsumerWidget {
     final state = ref.watch(relationshipIntentionProvider);
     final isLoading = state.isLoading;
 
-    return FixedBackgroundAuthScaffold(
+    return OnboardingProgressSync(
+      phase: OnboardingPhase.aboutYou,
+      questionIndex: 2,
+      child: FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: Column(
@@ -47,8 +53,9 @@ class RelationshipIntentionScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            OnboardingProgressHeader(onBack: notifier.onBack),
+            const SizedBox(height: AppSpacing.xs),
             const Center(child: OnboardingIntentAccent()),
-            // const SizedBox(height: 16),
             const SizedBox(height: AppSpacing.sm),
             Text(
               'What are you looking for?',
@@ -99,6 +106,7 @@ class RelationshipIntentionScreen extends ConsumerWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

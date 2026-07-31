@@ -10,7 +10,10 @@ import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_aut
 import 'package:intent_app/presentation/onboarding/providers/face_verification_provider.dart';
 import 'package:intent_app/presentation/onboarding/providers/face_verification_state.dart';
 import 'package:intent_app/presentation/onboarding/services/face_scan_session.dart';
+import 'package:intent_app/presentation/onboarding/models/onboarding_phase.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_header.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_sync.dart';
 
 class FaceVerificationScreen extends ConsumerStatefulWidget {
   const FaceVerificationScreen({super.key});
@@ -140,7 +143,10 @@ class _FaceVerificationScreenState extends ConsumerState<FaceVerificationScreen>
     final state = ref.watch(faceVerificationProvider);
     final scanSession = _scanSession;
 
-    return FixedBackgroundAuthScaffold(
+    return OnboardingProgressSync(
+      phase: OnboardingPhase.privacyAndSafety,
+      questionIndex: 6,
+      child: FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: Column(
@@ -172,7 +178,9 @@ class _FaceVerificationScreenState extends ConsumerState<FaceVerificationScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _FaceVerificationHeader(onBack: () => unawaited(_handleBack())),
+            OnboardingProgressHeader(
+              onBack: () => unawaited(_handleBack()),
+            ),
             const SizedBox(height: AppSpacing.sm),
             Text(
               'Confirm it\'s you',
@@ -181,7 +189,8 @@ class _FaceVerificationScreenState extends ConsumerState<FaceVerificationScreen>
             ),
             const SizedBox(height: AppSpacing.sm),
             Text(
-              'Follow the guide to take a quick selfie.',
+              'A quick selfie verification confirms your ID belongs to you '
+              'and helps keep Intent safer for everyone.',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingSubtitle,
             ),
@@ -198,30 +207,13 @@ class _FaceVerificationScreenState extends ConsumerState<FaceVerificationScreen>
           ],
         ),
       ),
+      ),
     );
   }
 }
 
 double _pinnedFooterHeight(bool showContinue) =>
     showContinue ? 168 : 108;
-
-class _FaceVerificationHeader extends StatelessWidget {
-  const _FaceVerificationHeader({required this.onBack});
-
-  final VoidCallback onBack;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 48,
-      child: Row(
-        children: [
-          IntentBackButton(onPressed: onBack),
-        ],
-      ),
-    );
-  }
-}
 
 class _FaceScanPreview extends StatelessWidget {
   const _FaceScanPreview({

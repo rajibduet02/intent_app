@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intent_app/app/routes/app_router.dart';
+import 'package:intent_app/app/routes/app_routes.dart';
+import 'package:intent_app/presentation/onboarding/models/onboarding_phase.dart';
+import 'package:intent_app/presentation/onboarding/providers/onboarding_progress_provider.dart';
+import 'package:intent_app/presentation/onboarding/widgets/section_intro_page.dart';
+
+class PhaseCompatibilityIntroScreen extends ConsumerWidget {
+  const PhaseCompatibilityIntroScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final phase = OnboardingPhase.compatibilityPreferences;
+    return SectionIntroPage(
+      onBack: () => appRouter.go(AppRoutes.dealbreakerAndAssessments),
+      eyebrow: 'PHASE ${phase.number} OF ${OnboardingPhase.totalPhases}',
+      title: phase.title,
+      subtitle: phase.subtitle,
+      onContinue: () {
+        ref.read(onboardingProgressProvider.notifier).setPhase(phase);
+        appRouter.go(AppRoutes.familyLifestyleValues);
+      },
+    );
+  }
+}

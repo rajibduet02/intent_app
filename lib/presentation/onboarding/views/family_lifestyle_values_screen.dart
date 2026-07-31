@@ -5,8 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/onboarding/providers/family_lifestyle_values_provider.dart';
+import 'package:intent_app/presentation/onboarding/models/onboarding_phase.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
-import 'package:intent_app/presentation/onboarding/widgets/onboarding_header.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_header.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_sync.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_multi_select_sheet.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_select_field.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_select_sheet.dart';
@@ -20,7 +22,10 @@ class FamilyLifestyleValuesScreen extends ConsumerWidget {
     final notifier = ref.read(familyLifestyleValuesProvider.notifier);
     final state = ref.watch(familyLifestyleValuesProvider);
 
-    return FixedBackgroundAuthScaffold(
+    return OnboardingProgressSync(
+      phase: OnboardingPhase.compatibilityPreferences,
+      questionIndex: 1,
+      child: FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
@@ -37,22 +42,16 @@ class FamilyLifestyleValuesScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            OnboardingHeader(
-              currentStep: 3,
-              totalSteps: 5,
-              showLogo: false,
-              showProgressDots: false,
-              onBack: notifier.onBack,
-            ),
+            OnboardingProgressHeader(onBack: notifier.onBack),
             const SizedBox(height: AppSpacing.xs),
             Text(
-              'Family goals',
+              'Lifestyle, values & family',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingTitle,
             ),
             const SizedBox(height: AppSpacing.sm),
             Text(
-              'Tell us more about your future plans and everyday lifestyle '
+              'Share your everyday lifestyle, core values, and family goals '
               'so Intent can show more meaningful matches.',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingSubtitle,
@@ -174,6 +173,7 @@ class FamilyLifestyleValuesScreen extends ConsumerWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

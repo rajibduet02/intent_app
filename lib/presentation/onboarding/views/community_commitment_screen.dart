@@ -6,7 +6,10 @@ import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/onboarding/providers/community_commitment_provider.dart';
 import 'package:intent_app/presentation/onboarding/providers/community_commitment_state.dart';
+import 'package:intent_app/presentation/onboarding/models/onboarding_phase.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_header.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_sync.dart';
 
 class CommunityCommitmentScreen extends ConsumerWidget {
   const CommunityCommitmentScreen({super.key});
@@ -16,7 +19,10 @@ class CommunityCommitmentScreen extends ConsumerWidget {
     final notifier = ref.read(communityCommitmentProvider.notifier);
     final state = ref.watch(communityCommitmentProvider);
 
-    return FixedBackgroundAuthScaffold(
+    return OnboardingProgressSync(
+      phase: OnboardingPhase.privacyAndSafety,
+      questionIndex: 7,
+      child: FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
@@ -33,7 +39,7 @@ class CommunityCommitmentScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _CommunityCommitmentHeader(onBack: notifier.onBack),
+            OnboardingProgressHeader(onBack: notifier.onBack),
             const SizedBox(height: AppSpacing.sm),
             Text(
               'Intent is built on respect',
@@ -42,7 +48,8 @@ class CommunityCommitmentScreen extends ConsumerWidget {
             ),
             const SizedBox(height: AppSpacing.sm),
             Text(
-              'Before you continue, please agree to help keep Intent safe, honest, and intentional.',
+              'Before you continue, please agree to help keep Intent safe, '
+              'honest, and intentional.',
               textAlign: TextAlign.center,
               style: IntentLoginStyles.onboardingSubtitle,
             ),
@@ -58,23 +65,6 @@ class CommunityCommitmentScreen extends ConsumerWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _CommunityCommitmentHeader extends StatelessWidget {
-  const _CommunityCommitmentHeader({required this.onBack});
-
-  final VoidCallback onBack;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 48,
-      child: Row(
-        children: [
-          IntentBackButton(onPressed: onBack),
-        ],
       ),
     );
   }

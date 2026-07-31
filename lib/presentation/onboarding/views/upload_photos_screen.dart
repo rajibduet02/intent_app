@@ -9,7 +9,10 @@ import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/onboarding/providers/upload_photos_provider.dart';
 import 'package:intent_app/presentation/onboarding/providers/upload_photos_state.dart';
+import 'package:intent_app/presentation/onboarding/models/onboarding_phase.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_header.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_sync.dart';
 
 class UploadPhotosScreen extends ConsumerStatefulWidget {
   const UploadPhotosScreen({super.key});
@@ -26,7 +29,10 @@ class _UploadPhotosScreenState extends ConsumerState<UploadPhotosScreen> {
     final notifier = ref.read(uploadPhotosProvider.notifier);
     final state = ref.watch(uploadPhotosProvider);
 
-    return FixedBackgroundAuthScaffold(
+    return OnboardingProgressSync(
+      phase: OnboardingPhase.privacyAndSafety,
+      questionIndex: 2,
+      child: FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
@@ -42,7 +48,7 @@ class _UploadPhotosScreenState extends ConsumerState<UploadPhotosScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _UploadPhotosHeader(onBack: notifier.onBack),
+            OnboardingProgressHeader(onBack: notifier.onBack),
             const SizedBox(height: AppSpacing.sm),
             Text(
               'Upload your photos',
@@ -70,6 +76,7 @@ class _UploadPhotosScreenState extends ConsumerState<UploadPhotosScreen> {
             const _PrivacyInfoBox(),
           ],
         ),
+      ),
       ),
     );
   }
@@ -179,34 +186,6 @@ class _UploadPhotosScreenState extends ConsumerState<UploadPhotosScreen> {
   void _showPickerError(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),
-    );
-  }
-}
-
-class _UploadPhotosHeader extends StatelessWidget {
-  const _UploadPhotosHeader({required this.onBack});
-
-  final VoidCallback onBack;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 48,
-      child: Row(
-        children: [
-          IntentBackButton(onPressed: onBack),
-          const Spacer(),
-          const SizedBox(
-            width: AppSpacing.backButtonSize,
-            height: AppSpacing.backButtonSize,
-            child: Icon(
-              Icons.lock_outline,
-              size: 20,
-              color: AppColors.intentTextSoft,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

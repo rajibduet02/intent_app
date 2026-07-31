@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
+import 'package:intent_app/presentation/onboarding/models/onboarding_phase.dart';
 import 'package:intent_app/presentation/onboarding/providers/dealbreaker_and_assessments_provider.dart';
-import 'package:intent_app/presentation/onboarding/providers/dealbreaker_and_assessments_state.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_assessment_tile.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
-import 'package:intent_app/presentation/onboarding/widgets/onboarding_dealbreaker_option.dart';
-import 'package:intent_app/presentation/onboarding/widgets/onboarding_header.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_header.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_sync.dart';
 
+/// Phase 2 hub: personality assessments only (dealbreakers moved to Phase 3).
 class DealbreakerAndAssessmentsScreen extends ConsumerWidget {
   const DealbreakerAndAssessmentsScreen({super.key});
 
@@ -18,115 +19,92 @@ class DealbreakerAndAssessmentsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(dealbreakerAndAssessmentsProvider.notifier);
     final state = ref.watch(dealbreakerAndAssessmentsProvider);
-    final dealbreakers = OnboardingDealbreakerType.values;
 
-    return FixedBackgroundAuthScaffold(
-      pinnedFooter: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-        child: OnboardingContinueButton(
-          label: 'CONTINUE',
-          isLoading: state.isLoading,
-          onPressed: () => unawaited(notifier.submit()),
+    final completedCount = [
+      state.corePersonalityCompleted,
+      state.intentReflectionsCompleted,
+      state.relationshipStyleCompleted,
+      state.loveLanguageCompleted,
+      state.vibeSlidersCompleted,
+    ].where((done) => done).length;
+
+    final questionIndex = completedCount == 0 ? 1 : completedCount.clamp(1, 5);
+
+    return OnboardingProgressSync(
+      phase: OnboardingPhase.howYouConnect,
+      questionIndex: questionIndex,
+      child: FixedBackgroundAuthScaffold(
+        pinnedFooter: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+          child: OnboardingContinueButton(
+            label: 'CONTINUE',
+            isLoading: state.isLoading,
+            onPressed: () => unawaited(notifier.submit()),
+          ),
         ),
-      ),
-      child: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
-          bottom: 24 + _onboarding4PinnedFooterHeight,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            OnboardingHeader(
-              currentStep: 4,
-              totalSteps: 5,
-              showLogo: false,
-              showProgressDots: false,
-              onBack: notifier.onBack,
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            Text(
-              'Choose your dealbreaker',
-              style: IntentLoginStyles.onboardingTitle,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Dealbreakers help Intent protect your time and show '
-              'stronger matches.',
-              style: IntentLoginStyles.onboardingSubtitle,
-            ),
-            const SizedBox(height: 16),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: AppColors.intentCreamDeep,
-                borderRadius: BorderRadius.circular(16),
+        child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 24).copyWith(
+            bottom: 24 + _onboarding4PinnedFooterHeight,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              OnboardingProgressHeader(
+                onBack: notifier.onBack,
+                questionLabelOverride:
+                    'Assessment ${completedCount.clamp(0, 5)} of 5',
               ),
-              child: Column(
-                children: [
-                  for (var i = 0; i < dealbreakers.length; i++)
-                    OnboardingDealbreakerOption(
-                      label: dealbreakers[i].label,
-                      isSelected: state.selectedDealbreaker == dealbreakers[i],
-                      onTap: () => notifier.selectDealbreaker(dealbreakers[i]),
-                      showDivider: i < dealbreakers.length - 1,
-                    ),
-                ],
+              const SizedBox(height: AppSpacing.sm),
+              Text(
+                'Complete your connection profile',
+                style: IntentLoginStyles.onboardingTitle,
               ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              'Free members can choose 1 dealbreaker.',
-              textAlign: TextAlign.center,
-              style: IntentLoginStyles.onboardingHelper.copyWith(
-                fontStyle: FontStyle.normal,
+              const SizedBox(height: 8),
+              Text(
+                'These short assessments help Intent understand your '
+                'personality, emotional style, and how you connect — '
+                'without asking you to label yourself.',
+                style: IntentLoginStyles.onboardingSubtitle,
               ),
-            ),
-            const SizedBox(height: 8),
-            const OnboardingPlusNote(),
-            const SizedBox(height: 28),
-            Text(
-              "Now let's understand your compatibility style",
-              style: IntentLoginStyles.onboardingTitle,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Answer short guided questions instead of choosing your own '
-              'type. This helps improve accuracy.',
-              style: IntentLoginStyles.onboardingSubtitle,
-            ),
-            const SizedBox(height: 16),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: AppShadows.intentInput,
+              const SizedBox(height: 16),
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: AppShadows.intentInput,
+                ),
+                child: Column(
+                  children: [
+                    for (var i = 0;
+                        i < DealbreakerAndAssessmentsNotifier.assessments.length;
+                        i++)
+                      OnboardingAssessmentTile(
+                        item: DealbreakerAndAssessmentsNotifier.assessments[i],
+                        onTap: () => notifier.onAssessmentTap(i),
+                        isCompleted: (i == 0 &&
+                                state.corePersonalityCompleted) ||
+                            (i == 1 && state.intentReflectionsCompleted) ||
+                            (i == 2 && state.relationshipStyleCompleted) ||
+                            (i == 3 && state.loveLanguageCompleted) ||
+                            (i == 4 && state.vibeSlidersCompleted),
+                        showDivider: i <
+                            DealbreakerAndAssessmentsNotifier.assessments.length -
+                                1,
+                      ),
+                  ],
+                ),
               ),
-              child: Column(
-                children: [
-                  for (var i = 0; i < DealbreakerAndAssessmentsNotifier.assessments.length; i++)
-                    OnboardingAssessmentTile(
-                      item: DealbreakerAndAssessmentsNotifier.assessments[i],
-                      onTap: () => notifier.onAssessmentTap(i),
-                      isCompleted: (i == 0 && state.corePersonalityCompleted) ||
-                          (i == 1 && state.intentReflectionsCompleted) ||
-                          (i == 2 && state.relationshipStyleCompleted) ||
-                          (i == 3 && state.loveLanguageCompleted) ||
-                          (i == 4 && state.vibeSlidersCompleted),
-                      showDivider:
-                          i < DealbreakerAndAssessmentsNotifier.assessments.length - 1,
-                    ),
-                ],
+              const SizedBox(height: 16),
+              Text(
+                'These answers help Intent create more meaningful '
+                'compatibility insights.',
+                textAlign: TextAlign.center,
+                style: IntentLoginStyles.onboardingFooterNote,
               ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'These answers help Intent create more meaningful '
-              'compatibility insights.',
-              textAlign: TextAlign.center,
-              style: IntentLoginStyles.onboardingFooterNote,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

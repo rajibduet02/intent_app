@@ -6,6 +6,8 @@ abstract final class AppAssets {
   static const String appleIcon = 'assets/icons/new_apple.svg';
   static const String googleIcon = 'assets/icons/new_google.svg';
   static const String lovePerson = 'assets/icons/love_person.png';
+  static const String femaleIcon = 'assets/icons/female_icon.png';
+  static const String maleIcon = 'assets/icons/male_icon.png';
   static const String demoPreviewPhoto = 'assets/images/demo_preview_photo.jpg';
   static const String demoGalleryPhoto = 'assets/images/demo_gallery_photo.jpg';
   static const String rkBrand = 'assets/icons/rk.png';

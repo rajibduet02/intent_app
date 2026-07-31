@@ -12,10 +12,10 @@ class IntentionSuccessScreen extends ConsumerWidget {
   const IntentionSuccessScreen({super.key});
 
   static const List<String> _profileIncludes = [
-    'Relationship intentions',
-    'Compatibility preferences',
-    'Personality insights',
-    'Safety and photo privacy',
+    'About You',
+    'Personality',
+    'Compatibility',
+    'Privacy & Safety',
   ];
 
   @override

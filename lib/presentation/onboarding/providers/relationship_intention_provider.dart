@@ -74,7 +74,7 @@ class RelationshipIntentionNotifier extends Notifier<RelationshipIntentionState>
     }
     state = state.copyWith(isLoading: true);
     try {
-      appRouter.go(AppRoutes.familyLifestyleValues);
+      appRouter.go(AppRoutes.phaseHowYouConnect);
     } finally {
       state = state.copyWith(isLoading: false);
     }

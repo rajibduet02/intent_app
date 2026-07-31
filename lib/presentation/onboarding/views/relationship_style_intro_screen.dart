@@ -27,6 +27,7 @@ class RelationshipStyleIntroScreen extends ConsumerWidget {
           'Choose the answer that sounds most like your natural thought or internal reaction. There are no perfect answers.',
       onContinue: notifier.continueFromIntro,
       continueLabel: continueLabel,
+      assessmentIndex: 3,
     );
   }
 }

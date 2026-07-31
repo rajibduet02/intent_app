@@ -63,6 +63,14 @@ import 'package:intent_app/presentation/splash/views/splash_screen.dart';
 import 'package:intent_app/presentation/choose_icon/views/choose_icon_screen.dart';
 import 'package:intent_app/presentation/why_matches/views/why_matches_screen.dart';
 import 'package:intent_app/presentation/welcome/views/welcome_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/intro_dating_intention_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/intro_connection_before_attraction_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/intro_thoughtful_profile_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/phase_about_you_intro_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/phase_how_you_connect_intro_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/phase_compatibility_intro_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/phase_privacy_safety_intro_screen.dart';
+import 'package:intent_app/presentation/onboarding/views/dealbreakers_screen.dart';
 
 CustomTransitionPage<void> _fadePage({
   required LocalKey key,
@@ -100,6 +108,27 @@ final GoRouter appRouter = GoRouter(
           _fadePage(key: state.pageKey, child: const WelcomeScreen()),
     ),
     GoRoute(
+      path: AppRoutes.introDatingIntention,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const IntroDatingIntentionScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.introConnectionBeforeAttraction,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const IntroConnectionBeforeAttractionScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.introThoughtfulProfile,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const IntroThoughtfulProfileScreen(),
+      ),
+    ),
+    GoRoute(
       path: AppRoutes.auth,
       pageBuilder: (context, state) =>
           _fadePage(key: state.pageKey, child: const LoginScreen()),
@@ -129,6 +158,34 @@ final GoRouter appRouter = GoRouter(
       ),
     ),
     GoRoute(
+      path: AppRoutes.phaseAboutYou,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const PhaseAboutYouIntroScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.phaseHowYouConnect,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const PhaseHowYouConnectIntroScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.phaseCompatibility,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const PhaseCompatibilityIntroScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.phasePrivacySafety,
+      pageBuilder: (context, state) => _fadePage(
+        key: state.pageKey,
+        child: const PhasePrivacySafetyIntroScreen(),
+      ),
+    ),
+    GoRoute(
       path: AppRoutes.profileBasics,
       pageBuilder: (context, state) =>
           _fadePage(key: state.pageKey, child: const ProfileBasicsScreen()),
@@ -147,6 +204,11 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.dealbreakerAndAssessments,
       pageBuilder: (context, state) =>
           _fadePage(key: state.pageKey, child: const DealbreakerAndAssessmentsScreen()),
+    ),
+    GoRoute(
+      path: AppRoutes.dealbreakers,
+      pageBuilder: (context, state) =>
+          _fadePage(key: state.pageKey, child: const DealbreakersScreen()),
     ),
     GoRoute(
       path: AppRoutes.mbtiAssessment,

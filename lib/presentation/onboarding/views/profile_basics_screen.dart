@@ -5,9 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/core/utils/validators.dart';
 import 'package:intent_app/presentation/onboarding/providers/profile_basics_provider.dart';
+import 'package:intent_app/presentation/onboarding/models/onboarding_phase.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_gender_selector.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_labeled_field.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_header.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_sync.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 
 class ProfileBasicsScreen extends ConsumerStatefulWidget {
@@ -138,7 +141,10 @@ class _ProfileBasicsScreenState extends ConsumerState<ProfileBasicsScreen> {
     final notifier = ref.read(profileBasicsProvider.notifier);
     final isLoading = ref.watch(profileBasicsProvider.select((s) => s.isLoading));
 
-    return FixedBackgroundAuthScaffold(
+    return OnboardingProgressSync(
+      phase: OnboardingPhase.aboutYou,
+      questionIndex: 1,
+      child: FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
@@ -163,10 +169,7 @@ class _ProfileBasicsScreenState extends ConsumerState<ProfileBasicsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: IntentBackButton(onPressed: notifier.onBack),
-              ),
+              OnboardingProgressHeader(onBack: notifier.onBack),
               const SizedBox(height: AppSpacing.xs),
               Text(
                 "Let's start with the \nbasics",
@@ -258,6 +261,7 @@ class _ProfileBasicsScreenState extends ConsumerState<ProfileBasicsScreen> {
             ],
           ),
         ),
+      ),
       ),
     );
   }

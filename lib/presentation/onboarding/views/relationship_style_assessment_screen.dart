@@ -31,6 +31,7 @@ class RelationshipStyleAssessmentScreen extends ConsumerWidget {
       onContinue: notifier.continueFromQuestion,
       // continueLabel: isLastQuestion ? 'SEE RESULTS' : 'NEXT',
       continueLabel: isLastQuestion ? 'CONTINUE' : 'NEXT',
+      assessmentIndex: 3,
     );
   }
 }

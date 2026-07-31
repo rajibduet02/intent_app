@@ -6,7 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intent_app/app/theme/theme.dart';
 import 'package:intent_app/presentation/auth/widgets/shared/fixed_background_auth_scaffold.dart';
 import 'package:intent_app/presentation/onboarding/providers/upload_photos_provider.dart';
+import 'package:intent_app/presentation/onboarding/models/onboarding_phase.dart';
 import 'package:intent_app/presentation/onboarding/widgets/onboarding_continue_button.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_header.dart';
+import 'package:intent_app/presentation/onboarding/widgets/onboarding_progress_sync.dart';
 
 class ChoosePreviewPhotosScreen extends ConsumerStatefulWidget {
   const ChoosePreviewPhotosScreen({super.key});
@@ -32,7 +35,10 @@ class _ChoosePreviewPhotosScreenState
     final state = ref.watch(uploadPhotosProvider);
     final uploadedPhotos = state.uploadedPhotos;
 
-    return FixedBackgroundAuthScaffold(
+    return OnboardingProgressSync(
+      phase: OnboardingPhase.privacyAndSafety,
+      questionIndex: 3,
+      child: FixedBackgroundAuthScaffold(
       pinnedFooter: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: OnboardingContinueButton(
@@ -51,7 +57,7 @@ class _ChoosePreviewPhotosScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _ChoosePreviewHeader(onBack: notifier.onBackFromPreview),
+            OnboardingProgressHeader(onBack: notifier.onBackFromPreview),
             const SizedBox(height: AppSpacing.sm),
             Text(
               'Choose your preview photo',
@@ -77,33 +83,6 @@ class _ChoosePreviewPhotosScreenState
           ],
         ),
       ),
-    );
-  }
-}
-
-class _ChoosePreviewHeader extends StatelessWidget {
-  const _ChoosePreviewHeader({required this.onBack});
-
-  final VoidCallback onBack;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 48,
-      child: Row(
-        children: [
-          IntentBackButton(onPressed: onBack),
-          const Spacer(),
-          const SizedBox(
-            width: AppSpacing.backButtonSize,
-            height: AppSpacing.backButtonSize,
-            child: Icon(
-              Icons.lock_outline,
-              size: 20,
-              color: AppColors.intentTextSoft,
-            ),
-          ),
-        ],
       ),
     );
   }
