@@ -5,7 +5,7 @@ enum OnboardingPhase {
     title: 'About You',
     subtitle: 'Build your profile foundation.',
     totalQuestions: 2,
-    progressUnit: 'Question',
+    progressUnit: 'Step',
   ),
   howYouConnect(
     number: 2,
