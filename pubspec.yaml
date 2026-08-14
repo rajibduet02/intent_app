@@ -59,8 +59,8 @@ flutter:
     - assets/icons/new_apple.svg
     - assets/icons/new_google.svg
     - assets/icons/love_person.png
-    - assets/icons/female_icon.png
-    - assets/icons/male_icon.png
+    - assets/icons/female-icon2.png
+    - assets/icons/male-icon2.png
     - assets/images/demo_preview_photo.jpg
     - assets/images/demo_gallery_photo.jpg
     - assets/icons/rk.png

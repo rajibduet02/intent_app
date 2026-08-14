@@ -9,6 +9,7 @@ class SilhouettePairGraphic extends StatelessWidget {
     super.key,
     this.height = 180,
     this.dividerOpacity = 1,
+    this.dividerSlideY = 0,
     this.closeness = 0,
     this.particlesOpacity = 0,
     this.particleProgress = 0,
@@ -16,8 +17,11 @@ class SilhouettePairGraphic extends StatelessWidget {
 
   final double height;
 
-  /// 1 = fully visible thin divider; 0 = faded away.
+  /// 1 = fully visible thin divider; 0 = hidden.
   final double dividerOpacity;
+
+  /// Vertical offset applied to the divider (slides downward when animated).
+  final double dividerSlideY;
 
   /// 0 = apart; 1 = slightly closer.
   final double closeness;
@@ -68,9 +72,20 @@ class SilhouettePairGraphic extends StatelessWidget {
               ),
               Positioned.fill(
                 child: IgnorePointer(
+                  child: Transform.translate(
+                    offset: Offset(0, dividerSlideY),
+                    child: CustomPaint(
+                      painter: _DividerPainter(
+                        dividerOpacity: dividerOpacity,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Positioned.fill(
+                child: IgnorePointer(
                   child: CustomPaint(
-                    painter: _PairEffectsPainter(
-                      dividerOpacity: dividerOpacity,
+                    painter: _ParticlesPainter(
                       particlesOpacity: particlesOpacity,
                       particleProgress: particleProgress,
                     ),
@@ -99,47 +114,58 @@ class _BrandIcon extends StatelessWidget {
     return Image.asset(
       asset,
       height: height,
+      width: height,
       fit: BoxFit.contain,
       filterQuality: FilterQuality.high,
-      color: AppColors.intentForest.withValues(alpha: 0.22),
-      colorBlendMode: BlendMode.srcIn,
     );
   }
 }
 
-class _PairEffectsPainter extends CustomPainter {
-  _PairEffectsPainter({
-    required this.dividerOpacity,
+class _DividerPainter extends CustomPainter {
+  _DividerPainter({required this.dividerOpacity});
+
+  final double dividerOpacity;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (dividerOpacity <= 0.01) return;
+
+    final center = Offset(size.width / 2, size.height / 2);
+    final dividerPaint = Paint()
+      ..color = AppColors.intentGold.withValues(alpha: 0.55 * dividerOpacity)
+      ..strokeWidth = 1.2
+      ..strokeCap = StrokeCap.round;
+    final top = center.dy - size.height * 0.28;
+    final bottom = center.dy + size.height * 0.28;
+    canvas.drawLine(
+      Offset(center.dx, top),
+      Offset(center.dx, bottom),
+      dividerPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _DividerPainter oldDelegate) {
+    return oldDelegate.dividerOpacity != dividerOpacity;
+  }
+}
+
+class _ParticlesPainter extends CustomPainter {
+  _ParticlesPainter({
     required this.particlesOpacity,
     required this.particleProgress,
   });
 
-  final double dividerOpacity;
   final double particlesOpacity;
   final double particleProgress;
 
   @override
   void paint(Canvas canvas, Size size) {
+    if (particlesOpacity <= 0.01) return;
+
     final center = Offset(size.width / 2, size.height / 2);
     final particleWidth = size.width * 0.18;
-
-    if (dividerOpacity > 0.01) {
-      final dividerPaint = Paint()
-        ..color = AppColors.intentGold.withValues(alpha: 0.55 * dividerOpacity)
-        ..strokeWidth = 1.2
-        ..strokeCap = StrokeCap.round;
-      final top = center.dy - size.height * 0.28;
-      final bottom = center.dy + size.height * 0.28;
-      canvas.drawLine(
-        Offset(center.dx, top),
-        Offset(center.dx, bottom),
-        dividerPaint,
-      );
-    }
-
-    if (particlesOpacity > 0.01) {
-      _drawParticles(canvas, size, center, particleWidth);
-    }
+    _drawParticles(canvas, size, center, particleWidth);
   }
 
   void _drawParticles(Canvas canvas, Size size, Offset center, double gap) {
@@ -163,9 +189,8 @@ class _PairEffectsPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _PairEffectsPainter oldDelegate) {
-    return oldDelegate.dividerOpacity != dividerOpacity ||
-        oldDelegate.particlesOpacity != particlesOpacity ||
+  bool shouldRepaint(covariant _ParticlesPainter oldDelegate) {
+    return oldDelegate.particlesOpacity != particlesOpacity ||
         oldDelegate.particleProgress != particleProgress;
   }
 }

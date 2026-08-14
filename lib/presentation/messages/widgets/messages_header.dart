@@ -53,12 +53,10 @@ class MessagesHeader extends StatelessWidget {
 class _HeaderActionButton extends StatelessWidget {
   const _HeaderActionButton({
     required this.icon,
-    this.badgeCount,
     this.onTap,
   });
 
   final IconData icon;
-  final int? badgeCount;
   final VoidCallback? onTap;
 
   @override
@@ -66,52 +64,22 @@ class _HeaderActionButton extends StatelessWidget {
     return InkWell(
       onTap: onTap ?? () {},
       borderRadius: BorderRadius.circular(12),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              color: AppColors.white.withValues(alpha: 0.9),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: AppColors.intentInputBorder.withValues(alpha: 0.7),
-              ),
-              boxShadow: AppShadows.intentInput,
-            ),
-            child: Icon(
-              icon,
-              size: 20,
-              color: AppColors.intentText,
-            ),
+      child: Container(
+        width: 44,
+        height: 44,
+        decoration: BoxDecoration(
+          color: AppColors.white.withValues(alpha: 0.9),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: AppColors.intentInputBorder.withValues(alpha: 0.7),
           ),
-          if (badgeCount != null)
-            Positioned(
-              top: -2,
-              right: -2,
-              child: Container(
-                constraints: const BoxConstraints(minWidth: 18),
-                height: 18,
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                decoration: BoxDecoration(
-                  color: AppColors.intentNotificationDot,
-                  borderRadius: BorderRadius.circular(9),
-                  border: Border.all(color: AppColors.white, width: 1.5),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  '$badgeCount',
-                  style: IntentLoginStyles.onboardingSubtitle.copyWith(
-                    fontSize: 9,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.white,
-                    height: 1,
-                  ),
-                ),
-              ),
-            ),
-        ],
+          boxShadow: AppShadows.intentInput,
+        ),
+        child: Icon(
+          icon,
+          size: 20,
+          color: AppColors.intentText,
+        ),
       ),
     );
   }
